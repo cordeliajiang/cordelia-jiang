@@ -4,6 +4,24 @@ import { ArrowRightCircle } from "react-bootstrap-icons";
 import headerImg from '../assets/img/header-img.svg';
 
 export const Banner = () => {
+    const [loopNum, setLoopNum] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const toRotate = [ "Front-end Developer", "Web Developer", "UX Developer" ];
+    const [text, setText] = useState('');
+    const [delta, setDelta] = useState(300 - Math.random() * 100); // speed of next letter comes after previous letter is typed
+    const period = 2000; // amount of time transitioning between each word
+    
+    /* this useEffect will run everytime the text gets updated */
+    /* ticker function takes care of typing or deleting letter */
+    /* delta is the interval */
+    useEffect(() => {
+        let ticker = setInterval(() => {
+            tick();
+        }, delta);
+
+        return () => { clearInterval(ticker) };
+    }, [text])
+
     return(
         <section className="banner" id="home">
             <Container>
