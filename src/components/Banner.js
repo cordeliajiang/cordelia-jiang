@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
-import headerImg from '../assets/img/header-img.svg';
+import headerImg from '../assets/img/header-img2.png';
 
 export const Banner = () => {
     const [loopNum, setLoopNum] = useState(0); // show words to display on screen based on index, index 0 is "Front-end Developer"
