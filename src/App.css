@@ -261,7 +261,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .banner {
   margin-top: 0;
   padding: 260px 0 150px 0;
-  background-image: url('./assets/img/banner-bg4.jpg');
+  background-image: url('./assets/img/banner-bg2.3.jpg');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -542,10 +542,10 @@ stroke-width: 10px;
 
 /************ Projects Css ************/
 .contact {
-  /* background: linear-gradient(90.21deg, #193956 +5.91%, #151c27 100.58%); */
+  /* background: linear-gradient(90.21deg, #191f29 +5.91%, #1a212c 111.58%); */
   /* background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%); */
-  /* background-color: #151922; */
-  background-color: #151c27;
+  background-color: #191f29;
+  /* background-color: #151c27; */
   /* background-color: #0e151f; */
   padding: 60px 0 200px 0;
 }
