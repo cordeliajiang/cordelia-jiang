@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from '../assets/img/logo2.png';
-import navIcon1 from '../assets/img/nav-icon1.svg';
-import navIcon2 from '../assets/img/nav-icon2.svg';
-import navIcon3 from '../assets/img/nav-icon3.svg';
+import logo from '../assets/img/logo.png';
+import navLinkedinIcon from '../assets/img/nav-linkedin-icon.svg';
+import navGithubIcon from '../assets/img/nav-github-icon.svg';
+import navEmailIcon from '../assets/img/nav-email-icon.svg';
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState('home');
@@ -47,11 +47,15 @@ export const NavBar = () => {
           </Nav>
           <span className="navbar-text">
               <div className="social-icon">
-                <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noreferrer"><img src={navIcon1} alt="replace with github url:xxxx"/></a>
-                <a href="https://github.com/cordeliajiang" target="_blank" rel="noreferrer"><img src={navIcon2} alt=""/></a>
-                <a href="#" target="_blank" rel="noreferrer"><img src={navIcon3} alt=""/></a>
+                <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer"><img src={navLinkedinIcon} alt="replace with github url:xxxx"/></a>
+                <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer"><img src={navGithubIcon} alt=""/></a>
+                <a href="mailto:jiangcordelia@gmail.com"><img src={navEmailIcon} alt=""/></a>
               </div>
-              <button className="vvd" onClick={() => console.log('connect')}><span>Contact</span></button>
+              <a href="#connect">
+                <button className="vvd">
+                  <span>Contact</span>
+                </button>
+              </a>
           </span>
         </Navbar.Collapse>
       </Container>
