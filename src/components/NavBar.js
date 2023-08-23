@@ -27,7 +27,7 @@ export const NavBar = () => {
 
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
-  }
+  } 
 
   return (
     <Navbar expand="lg" className={scrolled ? "scrolled": ""}>
@@ -36,8 +36,6 @@ export const NavBar = () => {
             <img src={logo} alt="Logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <span className='navbar-toggle-icon'/>
-        <Navbar.Toggle/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {/* if a link is clicked, highlight it and update the state, otherwise leave it as is */}

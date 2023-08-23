@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import headerImg from '../assets/img/header-img.png';
+import resume from '../assets/pdf/cordelia-jiang-frontend-developer-resume.pdf';
 import 'animate.css';
 import TrackVisibility from "react-on-screen";
 
@@ -57,8 +58,7 @@ export const Banner = () => {
                                 <span className="tagline">Portfolio</span>
                                 <h1>{"Cordelia Jiang "}</h1>
                                 <h1><span className="wrap">{text}</span></h1>
-                                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consectetur a mi a interdum. Donec eget libero ac libero fermentum viverra ac ut urna. Sed id purus dignissim, convallis neque eget, gravida augue. Phasellus ac vestibulum tellus. Mauris egestas scelerisque imperdiet. Donec suscipit dolor vel auctor posuere. Aliquam eget augue magna. Ut vel mollis sapien. Suspendisse pulvinar neque vel enim ultricies malesuada.</p> */}
-                                <a href="#connect"><button>Contact<ArrowRightCircle size={25}/></button></a>
+                                <a href = {resume} target = "_blank"><button>Resume<ArrowRightCircle size={25}/></button></a>
                             </div>}
                         </TrackVisibility>
                     </Col>

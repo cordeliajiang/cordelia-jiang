@@ -101,7 +101,37 @@ nav.navbar.scrolled {
 }
 
 nav.navbar a.navbar-brand {
-    width: 9%;
+  width: 10%;
+}
+
+@media (max-width: 991px){
+  nav.navbar a.navbar-brand {
+    width: 13%;
+  }
+}
+
+@media (max-width: 767px){
+  nav.navbar a.navbar-brand {
+    width: 18%;
+  }
+}
+
+@media (max-width: 592px){
+  nav.navbar a.navbar-brand {
+    width: 21%;
+  }
+}
+
+@media (max-width: 350px){
+  nav.navbar a.navbar-brand {
+    width: 24%;
+  }
+}
+
+@media (max-width: 150px){
+  nav.navbar a.navbar-brand {
+    width: 27%;
+  }
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
