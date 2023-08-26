@@ -3,6 +3,7 @@ import logo from "../assets/img/logo.png";
 import navLinkedinIcon from '../assets/img/nav-linkedin-icon.svg';
 import navGithubIcon from '../assets/img/nav-github-icon.svg';
 import navEmailIcon from '../assets/img/nav-email-icon.svg';
+import './footer.css';
 
 export const Footer = () => {
     return (
