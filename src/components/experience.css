@@ -53,6 +53,7 @@
     text-align: center;
     margin: 2rem 0 -2rem 0;
     color: var(--color-primary);
+    /* border-bottom: groove white; */
 }
 
 .experience__content {

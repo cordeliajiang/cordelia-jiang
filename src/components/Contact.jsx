@@ -1,14 +1,17 @@
 import { useState } from "react"
 import { Container, Row, Col } from "react-bootstrap";
 import './contact.css';
-import contactImg from "../assets/img/contact-img.png";
+import './fadingimagedisplacement.css';
+import contactImg from '../assets/img/contact-img.png';
+import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { FadingImageDisplacement } from "./FadingImageDisplacement";
 
 export const Contact = () => {
     const formInitialDetails = {
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
         message: ''
     }
     
@@ -51,9 +54,15 @@ export const Contact = () => {
             <Container>
                 <Row className="align-items-center">
                     <Col md={6}>
-                        <img src={contactImg} alt="Contact Us"/>
+                        {/* <img src={contactImg} alt="Contact Us"/> */}
+                        <div style={{ width: "60vw", height: "150vh" }}>
+                            <Canvas camera={{ position: [0, 0, 8], fov: 40 }}>
+                                {/* <OrbitControls/> make image 3D, can scroll-in-out, and make rotate */}
+                                <FadingImageDisplacement/>
+                            </Canvas>
+                        </div>
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} style={{ position: "relative" }}>
                         <h2>Get In Touch</h2>
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -63,11 +72,8 @@ export const Contact = () => {
                                 <Col sm={6} className="px-1">
                                     <input type="text" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName', e.target.value)} />
                                 </Col>
-                                <Col sm={6} className="px-1">
+                                <Col sm={12} className="px-1">
                                     <input type="email" value={formDetails.email} placeholder="Email Adress" onChange={(e) => onFormUpdate('email', e.target.value)} />
-                                </Col>
-                                <Col sm={6} className="px-1">
-                                    <input type="phone" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone', e.target.value)} />
                                 </Col>
                                 <Col sm={12} className="px-1">
                                     <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message', e.target.value)} />

@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion"
+// import { useState, useEffect } from "react";
+// import { motion } from "framer-motion"
 import React from 'react';
 import './experience.css';
 import { IoLogoHtml5, IoLogoCss3 } from 'react-icons/io';
@@ -164,7 +164,7 @@ export const Experience = () => {
                     </div>
                 </div>
             </Container>
-            <img className="background-image-left" src={colorSharp} />
+            <img className="background-image-left" src={colorSharp} alt='colorSharp'/>
         </section>
     )
 }
