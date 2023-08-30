@@ -1,9 +1,9 @@
 import { shaderMaterial, useTexture } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import * as THREE from "three";
+// import * as THREE from "three";
 import { easing, geometry } from "maath";
-import { hover } from "@testing-library/user-event/dist/hover";
+// import { hover } from "@testing-library/user-event/dist/hover";
 
 // shaderMaterial is a THREE.js material
 export const ImageFadeMaterial = shaderMaterial(

@@ -1,13 +1,21 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Container, Row, Col } from "react-bootstrap";
 import './contact.css';
-import './fadingimagedisplacement.css';
-import contactImg from '../assets/img/contact-img.png';
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { FadingImageDisplacement } from "./FadingImageDisplacement";
 
 export const Contact = () => {
+    const ref = useRef(null); // use useRef to access the DOM
+    
+    // useEffect is used as it runs as soon as the DOM has rendered / reloads.
+    // without using useEffect, canvas.height and canvas.width will return null, as they are evaluated before DOM is rendered/loaded.
+    // canvas is a DOM element, DOM elements cannot be accessed untill DOM is loaded.
+    useEffect (() => {
+        var canvas = ref.current // use ref instead of document.getElementById as ref is considered a better react practice
+        var heightRatio = 1.78; // height of img 3616 / width of img 2032
+        canvas.height = 200 + canvas.width * heightRatio; // add 200: larger min canvas.width.
+    }, []);
+
     const formInitialDetails = {
         firstName: '',
         lastName: '',
@@ -19,7 +27,7 @@ export const Contact = () => {
     const [buttonTxt, setButtonTxt] = useState('Send');
     const [status, setStatus] = useState({});
 
-    /* only updates the value user entered for its related category, leaving other form details untouched */
+    /* only updates the value user entered for its related category, leaving other form details untouched. */
     const onFormUpdate = (category, value) => {
         setFormDetails({
             ...formDetails,
@@ -54,13 +62,9 @@ export const Contact = () => {
             <Container>
                 <Row className="align-items-center">
                     <Col md={6}>
-                        {/* <img src={contactImg} alt="Contact Us"/> */}
-                        <div style={{ width: "60vw", height: "150vh" }}>
-                            <Canvas camera={{ position: [0, 0, 8], fov: 40 }}>
-                                {/* <OrbitControls/> make image 3D, can scroll-in-out, and make rotate */}
-                                <FadingImageDisplacement/>
-                            </Canvas>
-                        </div>
+                        <Canvas id="responsive-canvas" ref={ref} camera={{ position: [0, 0, 5], fov: 40 }}>
+                            <FadingImageDisplacement/>
+                        </Canvas>
                     </Col>
                     <Col md={6} style={{ position: "relative" }}>
                         <h2>Get In Touch</h2>
