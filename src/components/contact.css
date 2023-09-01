@@ -1,25 +1,35 @@
 #responsive-canvas {
     width: 100%;
+    min-width: 450px; /* without min-width, image will be cropped when resizing screen */
 }
 
 .contact {
     background-color: #191f29;
-    padding: 60px 0 200px 0;
+    padding: 110px 0 150px 0;
 }
 
-.contact img {
-    width: 92%;
-    border-radius: 150px;
+.contact__container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
 
-.contact h2 {
+.contact__content {
+    margin: 115px 0 0 0;
+}
+
+.contact__content > form {
+    margin: 0 130px 0 -30px;
+}
+
+.contact__content > h2 {
     font-size: 45px;
     font-weight: 700;
-    margin-bottom: 30px;
+    margin: 0 0 30px -35px;
 }
 
-.contact form input,
-.contact form textarea {
+.contact__content form input,
+.contact__content form textarea {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -33,26 +43,26 @@
     transition: 0.3s ease-in-out;
 }
 
-.contact form input:focus,
-.contact form textarea:focus {
+.contact__content form input:focus,
+.contact__content form textarea:focus {
     background: rgba(255, 255, 255, 1);
     color: #121212;
 }
 
-.contact form input::placeholder,
-.contact form textarea::placeholder {
+.contact__content form input::placeholder,
+.contact__content form textarea::placeholder {
     font-size: 16px;
     font-weight: 400;
     color: #fff;
 }
 
-.contact form input:focus::placeholder,
-.contact form textarea:focus::placeholder {
+.contact__content form input:focus::placeholder,
+.contact__content form textarea:focus::placeholder {
     color: #121212;
     opacity: 0.8;
 }
 
-.contact form button {
+.contact__content form button {
     font-weight: 700;
     color: #000;
     background-color: #fff;
@@ -63,17 +73,16 @@
     position: relative;
     transition: 0.3s ease-in-out;
 }
-
-.contact form button span {
+.contact__content form button span {
     z-index: 1;
     position: relative;
 }
 
-.contact form button:hover {
+.contact__content form button:hover {
     color: #fff;
 }
 
-.contact form button::before {
+.contact__content form button::before {
     content: "";
     background: #121212;
     width: 0;
@@ -85,6 +94,59 @@
     transition: 0.3s ease-in-out;
 }
 
-.contact form button:hover::before {
+.contact__content form button:hover::before {
     width: 100%;
+}
+
+/* MEDIA QUERIES (MEDIUM DEVICE) */
+@media screen and (max-width: 1399px) {
+    .contact__content > form {
+        margin: 0 80px 0 0;
+    }
+    
+    .contact__content > h2 {
+        margin: 0 0 30px -5px;
+    }
+}
+
+/* MEDIA QUERIES (MEDIUM DEVICE) */
+@media screen and (max-width: 1199px) {
+    .contact__content > form {
+        margin: 0 30px 0 30px;
+    }
+    
+    .contact__content > h2 {
+        margin: 0 0 30px 25px;
+    }
+}
+
+/* MEDIA QUERIES (MEDIUM DEVICE) */
+@media screen and (max-width: 991px) {
+    .contact__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact__content > h2 {
+        margin: 0 0 30px 25px;
+    }
+
+    .contact__content {
+        margin-top: 30px;
+    }
+}
+  
+/* MEDIA QUERIES (SMALL DEVICE) */
+@media screen and (max-width: 767px) {
+
+}
+
+/* MEDIA QUERIES (MEDIUM DEVICE) */
+@media screen and (max-width: 592px) {
+
+}
+
+/* MEDIA QUERIES (MINI DEVICE) */
+@media screen and (max-width: 480px) {
+
 }

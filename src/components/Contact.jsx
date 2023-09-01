@@ -60,13 +60,11 @@ export const Contact = () => {
     return (
         <section className="contact" id="connect">
             <Container>
-                <Row className="align-items-center">
-                    <Col md={6}>
-                        <Canvas id="responsive-canvas" ref={ref} camera={{ position: [0, 0, 5], fov: 40 }}>
-                            <FadingImageDisplacement/>
-                        </Canvas>
-                    </Col>
-                    <Col md={6} style={{ position: "relative" }}>
+                <div className="contact__container">
+                    <Canvas id="responsive-canvas" ref={ref} camera={{ position: [0, 0, 5], fov: 40 }}>
+                        <FadingImageDisplacement/>
+                    </Canvas>
+                    <div className="contact__content">
                         <h2>Get In Touch</h2>
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -93,8 +91,8 @@ export const Contact = () => {
                                 </Col>
                             </Row>
                         </form>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </Container>
         </section>
     )
