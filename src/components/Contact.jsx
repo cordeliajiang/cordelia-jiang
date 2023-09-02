@@ -60,11 +60,11 @@ export const Contact = () => {
     return (
         <section className="contact" id="connect">
             <Container>
-                <div className="contact__container">
+                <div className="contact-container">
                     <Canvas id="responsive-canvas" ref={ref} camera={{ position: [0, 0, 5], fov: 40 }}>
                         <FadingImageDisplacement/>
                     </Canvas>
-                    <div className="contact__content">
+                    <div className="contact-content">
                         <h2>Get In Touch</h2>
                         <form onSubmit={handleSubmit}>
                             <Row>
