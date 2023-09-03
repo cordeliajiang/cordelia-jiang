@@ -1,10 +1,12 @@
 .banner {
-  margin-top: 0;
+  margin: 0 auto;
   padding: 290px 0 160px 0;
   background-image: url('../assets/img/banner-bg.png');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
+  /* max-width: 2000px; */
 }
   
 .banner h1 {
@@ -59,29 +61,25 @@
     }
 }
 
-.txt-rotate > .wrap {
-  border-right: 0.08em solid #666;
-}
 
-
-/* MEDIA QUERIES (MEDIUM DEVICE) */
+/* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px) {
   .banner {
     padding: 360px 0 160px 0;
   }
 }
 
-/* MEDIA QUERIES (SMALL DEVICE) */
+/* MEDIA QUERIES (SM DEVICE) */
 @media screen and (max-width: 767px) {
 
 }
 
-/* MEDIA QUERIES (MEDIUM DEVICE) */
-@media screen and (max-width: 592px) {
+/* MEDIA QUERIES (XS DEVICE) */
+@media screen and (max-width: 575px) {
 
 }
 
 /* MEDIA QUERIES (MINI DEVICE) */
-@media screen and (max-width: 480px) {
-  
+@media screen and (max-width: 450px) {
+
 }

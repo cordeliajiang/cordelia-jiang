@@ -6,6 +6,7 @@
 .contact {
     background-color: #191f29;
     padding: 110px 0 130px 0;
+    z-index: 2;
 }
 
 .contact-container {
@@ -98,7 +99,7 @@
     width: 100%;
 }
 
-/* MEDIA QUERIES (XXL DEVICE) */
+/* MEDIA QUERIES (XL DEVICE) */
 @media screen and (max-width: 1399px) {
     .contact-content > form {
         margin: 0 80px 0 0;
@@ -109,7 +110,7 @@
     }
 }
 
-/* MEDIA QUERIES (XL DEVICE) */
+/* MEDIA QUERIES (LG DEVICE) */
 @media screen and (max-width: 1199px) {
     .contact-content > form {
         margin: 0 30px 0 30px;
@@ -125,7 +126,7 @@
     
 }
 
-/* MEDIA QUERIES (LARGE DEVICE) */
+/* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px) {
     .contact-container {
         display: flex;
@@ -142,5 +143,15 @@
 
     #responsive-canvas {
         margin-left: -5px;
+    }
+}
+
+/* MEDIA QUERIES (MINI DEVICE) */
+@media screen and (max-width: 450px) {
+    #responsive-canvas {
+        margin: 0 0;
+        width: 100%;
+        min-width: 100px; /* without min-width, image will be cropped when resizing screen */
+        max-width: 400px;
     }
 }

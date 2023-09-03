@@ -32,7 +32,7 @@
     white-space: nowrap;
 }
 
-/* MEDIA QUERIES (MEDIUM DEVICE) */
+/* MEDIA QUERIES (XS DEVICE) */
 @media screen and (max-width: 575px) {
     .footer-container {
         flex-direction: column;
