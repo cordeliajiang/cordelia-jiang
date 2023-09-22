@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import './contact.css';
 import { Canvas } from "@react-three/fiber";
 import { FadingImageDisplacement } from "./FadingImageDisplacement";
+import { useForm } from "react-hook-form";
 
 export const Contact = () => {
     const ref = useRef(null); // use useRef to access the DOM
@@ -18,32 +19,39 @@ export const Contact = () => {
 
 
     /*************************** FORM ***************************/
-    // const formInitialDetails = {
-    //     fullName: '',
-    //     email: '',
-    //     message: ''
-    // };
+    const formInitialDetails = {
+        fullName: '',
+        email: '',
+        message: ''
+    };
 
     const [fullName, setFullName] = useState("");
-    // const [email, setEmail] = useState("");
+    const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const [fullNameError, setFullNameError] = useState();
+
+    const [formDetails, setFormDetails] = useState(formInitialDetails);
+    const [buttonTxt, setButtonTxt] = useState('Send');
+    const [status, setStatus] = useState({});
+
+    const [fullNameError, setFullNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
-    const [messageError, setMessageError] = useState();
+    const [messageError, setMessageError] = useState(false);
 
-    const [email, setEmail] = useState('');
-    // const [error, setError] = useState(false);
 
-    const onKeyDown = (e) => {
-        if (e.code === 'Space') e.preventDefault()
-    }
+    /* only updates the value user entered for its related category, leaving other form details untouched. */
+    /* field names are the category, value is entered by users */
+    const onFormUpdate = (category, value) => {
+        setFormDetails({
+            ...formDetails,
+            [category]: value,
+        });
+    };
 
+    /*************************** INPUT SANITIZATION ***************************/
     const sanitizeEmail = (e) => {
-        const email = e.target.value.trim();
+        const email = e.target.value;
         console.log(email);
-
-        // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
-        const sanitizeEmailValue = email.replace(/[^-@.A-Za-z0-9]/g, '');
+        const sanitizeEmailValue = email.replace(/[^-@.A-Za-z0-9]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
 
         setEmail(sanitizeEmailValue);
 
@@ -53,14 +61,14 @@ export const Contact = () => {
         } else {
             setEmailError(false);
         }
+
+        console.log(sanitizeEmailValue)
     };
 
     const sanitizeFullName = (e) => {
         const fullName = e.target.value;
         console.log(fullName);
-
-        // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
-        const sanitizeFullNameValue = fullName.replace(/[^-.a-zA-Z\s]/g, '');
+        const sanitizeFullNameValue = fullName.replace(/[^-.a-zA-Z\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
 
         setFullName(sanitizeFullNameValue);
 
@@ -75,9 +83,7 @@ export const Contact = () => {
     const sanitizeMessage = (e) => {
         const message = e.target.value;
         console.log(message);
-
-        // a regex used to remove special chars (except for lower and upper case letters, numbers, - + & @ ? ! ' : / ( ) , . and whitespace (\s))
-        const sanitizeMessageValue = message.replace(/[^-+&@?!':/(),.a-zA-Z0-9\s]/g, '');
+        const sanitizeMessageValue = message.replace(/[^-@?!':/,.a-zA-Z0-9\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
 
         setMessage(sanitizeMessageValue);
 
@@ -89,22 +95,11 @@ export const Contact = () => {
         }
     };
 
-    // const [formDetails, setFormDetails] = useState(formInitialDetails);
-    const [buttonTxt, setButtonTxt] = useState('Send');
-    const [status, setStatus] = useState({});
-
-    /* only updates the value user entered for its related category, leaving other form details untouched. */
-    /* field names are the category, value is entered by users */
-    // const onFormUpdate = (category, value) => {
-    //     setFormDetails({
-    //         ...formDetails,
-    //         [category] : value,
-    //     });
-    // };
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     /* async() as making request to API */
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // do not want page reloaded when user submits the form
+    const submitHandler = async (e) => {
+        // e.preventDefault(); // do not want page reloaded when user submits the form
         setButtonTxt('Sending...');
 
         let response = await fetch("/api/contact", {
@@ -112,13 +107,13 @@ export const Contact = () => {
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
             },
-            // body: JSON.stringify(formDetails)
+            body: JSON.stringify(formDetails)
         });
 
         let result = await response.json();
 
         setButtonTxt("Send");
-        // setFormDetails(formDetails);
+        setFormDetails(formDetails);
 
         if (result.code === 200) {
             setStatus({ success: true, message: "Message Sent Successfully." });
@@ -126,7 +121,9 @@ export const Contact = () => {
             setStatus({ success: false, message: "Something Went Wrong, Please Try Again Later." });
         }
 
-        // setFormDetails(formInitialDetails);
+        setFormDetails(formInitialDetails);
+
+        // return false;
     }
 
     return (
@@ -138,51 +135,106 @@ export const Contact = () => {
                     </Canvas>
                     <div className="contact-content">
                         <h2>Get In Touch</h2>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit(submitHandler)}>
                             <Row>
                                 {/* full name */}
                                 <Col sm={12} className="px-1">
                                     <input
-                                        required
-                                        minLength={2}
-                                        maxLength={128}
                                         type="text"
+                                        name="fullName"
                                         placeholder="Full Name"
+                                        {...register("fullName", {
+                                            required: "Full name is required.",
+                                            minLength: {
+                                                value: 4,
+                                                message: 'Full name needs 4 or more characters.',
+                                            },
+                                            maxLength: {
+                                                value: 128,
+                                                message: 'Full name cannot exceed 128 characters.',
+                                            }
+                                        })
+                                        }
                                         value={fullName}
-                                        onChange={sanitizeFullName}
-                                    // value={formDetails.fullName} 
-                                    // onChange={(e) => onFormUpdate("fullName", e.target.value)} 
+                                        // onChange={sanitizeFullName}
+                                        // value={formDetails.fullName}
+                                        onChange={(e) => {
+                                            onFormUpdate("fullName", e.target.value);
+                                            sanitizeFullName(e);
+                                        }}
                                     />
-                                    {fullNameError && <span style={{ color: 'red' }}>Special characters are not allowed.</span>}
+                                    {/* HTML ESCAPE CHARACTER CODES: 
+                                        &#91; is [ , &#93; is ]
+                                        &#40; is ( , &#41; is )
+                                        &#123; is { , &#125; is }
+                                        &lt; is < , &gt; is > 
+                                    */}
+                                    {/* Full name cannot contain any of the following: 0-9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
+                                    {fullNameError && <span style={{ color: 'red' }}>Full name cannot contain any of the following: 0-9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
+                                    {errors.fullName && <span style={{ color: 'red' }}>{errors.fullName?.message}</span>} {/* check message only when fullName exists */}
                                 </Col>
                                 {/* email */}
                                 <Col sm={12} className="px-1">
                                     <input
-                                        required
-                                        type="email"
-                                        maxLength={320}
+                                        // type="email"
+                                        name="email"
+                                        {...register("email", {
+                                            required: "Email address is required.",
+                                            maxLength: {
+                                                value: 320,
+                                                message: 'Email address cannot exceed 320 characters.',
+                                            },
+                                            pattern: {
+                                                // value: ".+@.+\..+[A-Za-z]+$",
+                                                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                message: "Please enter your email address in format e.g. yourname@domain.com"
+                                            },
+                                        })}
                                         placeholder="Email Address"
                                         value={email}
-                                        onChange={sanitizeEmail}
-                                    // value={formDetails.email}
-                                    // onChange={(e) => onFormUpdate("email", e.target.value)}
+                                        // onChange={sanitizeEmail}
+
+                                        // value={formDetails.email}
+                                        onChange={(e) => {
+                                            onFormUpdate("email", e.target.value);
+                                            sanitizeEmail(e);
+                                        }}
                                     />
-                                    {emailError && <span style={{ color: 'red' }}>Special characters are not allowed.</span>}
+                                    {/* Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
+                                    {emailError && <span style={{ color: 'red' }}>Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
+                                    {errors.email && <span style={{ color: 'red' }}>{errors.email?.message}</span>}
                                 </Col>
                                 {/* message */}
                                 <Col sm={12} className="px-1">
                                     <textarea
-                                        required
-                                        minLength={5}
-                                        maxLength={265}
                                         rows="6"
+                                        name="message"
+                                        {...register("message", {
+                                            required: "Message is required.",
+                                            minLength: {
+                                                value: 5,
+                                                message: 'Message needs 5 or more characters.',
+                                            },
+                                            maxLength: {
+                                                value: 250,
+                                                message: 'Message cannot exceed 250 characters.',
+                                            }
+                                        })
+                                        }
                                         placeholder="Message"
                                         value={message}
-                                        onChange={sanitizeMessage}
-                                    // value={formDetails.message}
-                                    // onChange={(e) => onFormUpdate("message", e.target.value)} 
+                                        // onChange={sanitizeMessage}
+
+                                        // value={formDetails.message}
+                                        // onChange={(e) => onFormUpdate("message", e.target.value)}
+                                        onChange={(e) => {
+                                            onFormUpdate("message", e.target.value);
+                                            sanitizeMessage(e);
+                                        }}
                                     />
-                                    {messageError && <span style={{ color: 'red' }}>Special characters are not allowed.</span>}
+                                    {/* Message cannot contain any of the following: ` = &#91; &#93; \ ; ~ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | " &lt; &gt; */}
+                                    {messageError && <span style={{ color: 'red' }}>Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
+                                    {errors.message && <span style={{ color: 'red' }}>{errors.message?.message}</span>}
                                 </Col>
                                 {/* submit button */}
                                 <Col sm={12} className="px-1">
