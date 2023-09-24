@@ -19,81 +19,96 @@ export const Contact = () => {
 
 
     /*************************** FORM ***************************/
-    const formInitialDetails = {
-        fullName: '',
-        email: '',
-        message: ''
-    };
+    const [formDetails, setFormDetails] = useState({ 
+        fullName: '', 
+        email: '', 
+        message: '' 
+    }); 
 
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
+    /* only updates the value user entered for its related category, leaving other form details untouched. */
+    /* e.target.name are the category, e.target.value is entered by users */
+    const onFormUpdate = (e) => {
+        setFormDetails({
+            ...formDetails, 
+            [e.target.name]: e.target.value})
+    }
 
-    const [formDetails, setFormDetails] = useState(formInitialDetails);
     const [buttonTxt, setButtonTxt] = useState('Send');
     const [status, setStatus] = useState({});
+
+
+    /*************************** INPUT SANITIZATION ***************************/
+    const [sanitizedFullName, setSanitizedFullName] = useState('');
+    const [sanitizedEmail, setSanitizedEmail] = useState('');
+    const [sanitizedMessage, setSanitizedMessage] = useState('');
 
     const [fullNameError, setFullNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [messageError, setMessageError] = useState(false);
 
-
-    /* only updates the value user entered for its related category, leaving other form details untouched. */
-    /* field names are the category, value is entered by users */
-    const onFormUpdate = (category, value) => {
-        setFormDetails({
-            ...formDetails,
-            [category]: value,
-        });
-    };
-
-    /*************************** INPUT SANITIZATION ***************************/
-    const sanitizeEmail = (e) => {
-        const email = e.target.value;
-        console.log(email);
-        const sanitizeEmailValue = email.replace(/[^-@.A-Za-z0-9]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
-
-        setEmail(sanitizeEmailValue);
-
-        // check if the original value differs from the sanitized value
-        if (email !== sanitizeEmailValue) {
-            setEmailError(true);
-        } else {
-            setEmailError(false);
-        }
-
-        console.log(sanitizeEmailValue)
-    };
-
     const sanitizeFullName = (e) => {
-        const fullName = e.target.value;
-        console.log(fullName);
-        const sanitizeFullNameValue = fullName.replace(/[^-.a-zA-Z\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
+        const sanitizedFullName = e.target.value;
+        const sanitizedFullNameValue = sanitizedFullName.replace(/[^-.a-zA-Z\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
 
-        setFullName(sanitizeFullNameValue);
+        // value displayed on full name input field
+        setSanitizedFullName(sanitizedFullNameValue);
+
+        // form details display on email
+        setFormDetails({
+            ...formDetails, 
+            [e.target.name]: sanitizedFullNameValue
+        })
 
         // check if the original value differs from the sanitized value
-        if (fullName !== sanitizeFullNameValue) {
+        if (sanitizedFullName !== sanitizedFullNameValue) {
             setFullNameError(true);
         } else {
             setFullNameError(false);
         }
     };
 
-    const sanitizeMessage = (e) => {
-        const message = e.target.value;
-        console.log(message);
-        const sanitizeMessageValue = message.replace(/[^-@?!':/,.a-zA-Z0-9\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
+    const sanitizeEmail = (e) => {
+        const sanitizedEmail = e.target.value;
+        const sanitizedEmailValue = sanitizedEmail.replace(/[^-@.A-Za-z0-9]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
 
-        setMessage(sanitizeMessageValue);
+        // value displayed on email input field
+        setSanitizedEmail(sanitizedEmailValue);
+
+        // form details display on email
+        setFormDetails({
+            ...formDetails, 
+            [e.target.name]: sanitizedEmailValue
+        })
 
         // check if the original value differs from the sanitized value
-        if (message !== sanitizeMessageValue) {
+        if (sanitizedEmail !== sanitizedEmailValue) {
+            setEmailError(true);
+        } else {
+            setEmailError(false);
+        }
+    };
+
+    const sanitizeMessage = (e) => {
+        const sanitizedMessage = e.target.value;
+        const sanitizedMessageValue = sanitizedMessage.replace(/[^-@?!':/,.a-zA-Z0-9\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
+        
+        // value displayed on email input field
+        setSanitizedMessage(sanitizedMessageValue);
+
+        // form details display on email
+        setFormDetails({
+            ...formDetails, 
+            [e.target.name]: sanitizedMessageValue
+        })
+
+        // check if the original value differs from the sanitized value
+        if (sanitizedMessage !== sanitizedMessageValue) {
             setMessageError(true);
         } else {
             setMessageError(false);
         }
     };
+
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -110,9 +125,8 @@ export const Contact = () => {
             body: JSON.stringify(formDetails)
         });
 
-        let result = await response.json();
-
         setButtonTxt("Send");
+        let result = await response.json();
         setFormDetails(formDetails);
 
         if (result.code === 200) {
@@ -120,10 +134,8 @@ export const Contact = () => {
         } else {
             setStatus({ success: false, message: "Something Went Wrong, Please Try Again Later." });
         }
-
-        setFormDetails(formInitialDetails);
-
-        // return false;
+    
+        return false;
     }
 
     return (
@@ -141,9 +153,9 @@ export const Contact = () => {
                                 <Col sm={12} className="px-1">
                                     <input
                                         type="text"
-                                        name="fullName"
+                                        name="sanitizedFullName"
                                         placeholder="Full Name"
-                                        {...register("fullName", {
+                                        {...register("sanitizedFullName", {
                                             required: "Full name is required.",
                                             minLength: {
                                                 value: 4,
@@ -155,11 +167,11 @@ export const Contact = () => {
                                             }
                                         })
                                         }
-                                        value={fullName}
+                                        // value={fullName}
                                         // onChange={sanitizeFullName}
-                                        // value={formDetails.fullName}
+                                        value={sanitizedFullName}
                                         onChange={(e) => {
-                                            onFormUpdate("fullName", e.target.value);
+                                            onFormUpdate(e);
                                             sanitizeFullName(e);
                                         }}
                                     />
@@ -171,7 +183,7 @@ export const Contact = () => {
                                     */}
                                     {/* Full name cannot contain any of the following: 0-9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
                                     {fullNameError && <span style={{ color: 'red' }}>Full name cannot contain any of the following: 0-9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
-                                    {errors.fullName && <span style={{ color: 'red' }}>{errors.fullName?.message}</span>} {/* check message only when fullName exists */}
+                                    {errors.sanitizedFullName && <span style={{ color: 'red' }}>{errors.fullName?.message}</span>} {/* check message only when fullName exists */}
                                 </Col>
                                 {/* email */}
                                 <Col sm={12} className="px-1">
@@ -191,12 +203,12 @@ export const Contact = () => {
                                             },
                                         })}
                                         placeholder="Email Address"
-                                        value={email}
+                                        // value={email}
                                         // onChange={sanitizeEmail}
 
-                                        // value={formDetails.email}
+                                        value={sanitizedEmail}
                                         onChange={(e) => {
-                                            onFormUpdate("email", e.target.value);
+                                            onFormUpdate(e);
                                             sanitizeEmail(e);
                                         }}
                                     />
@@ -222,18 +234,18 @@ export const Contact = () => {
                                         })
                                         }
                                         placeholder="Message"
-                                        value={message}
+                                        value={sanitizedMessage}
                                         // onChange={sanitizeMessage}
 
                                         // value={formDetails.message}
                                         // onChange={(e) => onFormUpdate("message", e.target.value)}
                                         onChange={(e) => {
-                                            onFormUpdate("message", e.target.value);
+                                            onFormUpdate(e);
                                             sanitizeMessage(e);
                                         }}
                                     />
                                     {/* Message cannot contain any of the following: ` = &#91; &#93; \ ; ~ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | " &lt; &gt; */}
-                                    {messageError && <span style={{ color: 'red' }}>Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
+                                    {messageError && <span style={{ color: 'red' }}>Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
                                     {errors.message && <span style={{ color: 'red' }}>{errors.message?.message}</span>}
                                 </Col>
                                 {/* submit button */}
