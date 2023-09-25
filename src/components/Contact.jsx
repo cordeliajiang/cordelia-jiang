@@ -19,18 +19,20 @@ export const Contact = () => {
 
 
     /*************************** FORM ***************************/
-    const [formDetails, setFormDetails] = useState({ 
-        fullName: '', 
-        email: '', 
-        message: '' 
-    }); 
+    // used to compare with sanitized form details for displaying error messages
+    const [formDetails, setFormDetails] = useState({
+        fullName: '',
+        email: '',
+        message: ''
+    });
 
     /* only updates the value user entered for its related category, leaving other form details untouched. */
     /* e.target.name are the category, e.target.value is entered by users */
     const onFormUpdate = (e) => {
         setFormDetails({
-            ...formDetails, 
-            [e.target.name]: e.target.value})
+            ...formDetails,
+            [e.target.name]: e.target.value
+        })
     }
 
     const [buttonTxt, setButtonTxt] = useState('Send');
@@ -48,14 +50,19 @@ export const Contact = () => {
 
     const sanitizeFullName = (e) => {
         const sanitizedFullName = e.target.value;
-        const sanitizedFullNameValue = sanitizedFullName.replace(/[^-.a-zA-Z\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
+        const fullNameRegex = /[^-.a-zA-Z\s]/g;
+        const oneSpaceOnlyRegex = /  +/g;
+        const sanitizedFullNameValue = sanitizedFullName.replace(fullNameRegex, '').replace(oneSpaceOnlyRegex, " "); // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
+
+        // display error message if oneSpaceOnlyRegex is active
+
 
         // value displayed on full name input field
         setSanitizedFullName(sanitizedFullNameValue);
 
         // form details display on email
         setFormDetails({
-            ...formDetails, 
+            ...formDetails,
             [e.target.name]: sanitizedFullNameValue
         })
 
@@ -69,14 +76,16 @@ export const Contact = () => {
 
     const sanitizeEmail = (e) => {
         const sanitizedEmail = e.target.value;
-        const sanitizedEmailValue = sanitizedEmail.replace(/[^-@.A-Za-z0-9]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
+        const emailRegex = /[^-@.A-Za-z0-9]/g;
+        const oneSpaceOnlyRegex = /\s\s+/g;
+        const sanitizedEmailValue = sanitizedEmail.replace(emailRegex, '').replace(oneSpaceOnlyRegex, " "); // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
 
         // value displayed on email input field
         setSanitizedEmail(sanitizedEmailValue);
 
         // form details display on email
         setFormDetails({
-            ...formDetails, 
+            ...formDetails,
             [e.target.name]: sanitizedEmailValue
         })
 
@@ -90,14 +99,19 @@ export const Contact = () => {
 
     const sanitizeMessage = (e) => {
         const sanitizedMessage = e.target.value;
-        const sanitizedMessageValue = sanitizedMessage.replace(/[^-@?!':/,.a-zA-Z0-9\s]/g, ''); // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
+        const messageRegex = /[^-@?!':/,.a-zA-Z0-9\s]/g;
+        const twoSpaceNewLineOnlyRegex = /\s{4,}/g;
+        const sanitizedMessageValue = sanitizedMessage.replace(messageRegex, '').replace(twoSpaceNewLineOnlyRegex, ' '); // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
+
+        // display error message if twoSpaceNewLineOnlyRegex is active
         
+
         // value displayed on email input field
         setSanitizedMessage(sanitizedMessageValue);
 
         // form details display on email
         setFormDetails({
-            ...formDetails, 
+            ...formDetails,
             [e.target.name]: sanitizedMessageValue
         })
 
@@ -112,9 +126,9 @@ export const Contact = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+
     /* async() as making request to API */
     const submitHandler = async (e) => {
-        // e.preventDefault(); // do not want page reloaded when user submits the form
         setButtonTxt('Sending...');
 
         let response = await fetch("/api/contact", {
@@ -127,15 +141,22 @@ export const Contact = () => {
 
         setButtonTxt("Send");
         let result = await response.json();
-        setFormDetails(formDetails);
 
         if (result.code === 200) {
             setStatus({ success: true, message: "Message Sent Successfully." });
+
+            // clear sanitized form inputs and related error messages
+            setSanitizedFullName("");
+            setSanitizedEmail("");
+            setSanitizedMessage("")
+            setFullNameError(false);
+            setEmailError(false);
+            setMessageError(false);
         } else {
             setStatus({ success: false, message: "Something Went Wrong, Please Try Again Later." });
         }
-    
-        return false;
+
+        return false; // do not want page reloaded when user submits the form
     }
 
     return (
@@ -167,8 +188,6 @@ export const Contact = () => {
                                             }
                                         })
                                         }
-                                        // value={fullName}
-                                        // onChange={sanitizeFullName}
                                         value={sanitizedFullName}
                                         onChange={(e) => {
                                             onFormUpdate(e);
@@ -181,31 +200,26 @@ export const Contact = () => {
                                         &#123; is { , &#125; is }
                                         &lt; is < , &gt; is > 
                                     */}
-                                    {/* Full name cannot contain any of the following: 0-9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
-                                    {fullNameError && <span style={{ color: 'red' }}>Full name cannot contain any of the following: 0-9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
-                                    {errors.sanitizedFullName && <span style={{ color: 'red' }}>{errors.fullName?.message}</span>} {/* check message only when fullName exists */}
+                                    {/* Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
+                                    {errors.sanitizedFullName && <p className="danger">{errors.sanitizedFullName?.message}</p>} {/* check message only when fullName exists */}
+                                    {fullNameError && <p className="danger">Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
                                 </Col>
                                 {/* email */}
                                 <Col sm={12} className="px-1">
                                     <input
-                                        // type="email"
-                                        name="email"
-                                        {...register("email", {
+                                        name="sanitizedEmail"
+                                        {...register("sanitizedEmail", {
                                             required: "Email address is required.",
                                             maxLength: {
                                                 value: 320,
                                                 message: 'Email address cannot exceed 320 characters.',
                                             },
                                             pattern: {
-                                                // value: ".+@.+\..+[A-Za-z]+$",
                                                 value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                                 message: "Please enter your email address in format e.g. yourname@domain.com"
                                             },
                                         })}
                                         placeholder="Email Address"
-                                        // value={email}
-                                        // onChange={sanitizeEmail}
-
                                         value={sanitizedEmail}
                                         onChange={(e) => {
                                             onFormUpdate(e);
@@ -213,15 +227,15 @@ export const Contact = () => {
                                         }}
                                     />
                                     {/* Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
-                                    {emailError && <span style={{ color: 'red' }}>Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
-                                    {errors.email && <span style={{ color: 'red' }}>{errors.email?.message}</span>}
+                                    {emailError && <p className="danger">Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
+                                    {errors.sanitizedEmail && <p className="danger">{errors.sanitizedEmail?.message}</p>}
                                 </Col>
                                 {/* message */}
                                 <Col sm={12} className="px-1">
                                     <textarea
                                         rows="6"
-                                        name="message"
-                                        {...register("message", {
+                                        name="sanitizedMessage"
+                                        {...register("sanitizedMessage", {
                                             required: "Message is required.",
                                             minLength: {
                                                 value: 5,
@@ -235,18 +249,14 @@ export const Contact = () => {
                                         }
                                         placeholder="Message"
                                         value={sanitizedMessage}
-                                        // onChange={sanitizeMessage}
-
-                                        // value={formDetails.message}
-                                        // onChange={(e) => onFormUpdate("message", e.target.value)}
                                         onChange={(e) => {
                                             onFormUpdate(e);
                                             sanitizeMessage(e);
                                         }}
                                     />
                                     {/* Message cannot contain any of the following: ` = &#91; &#93; \ ; ~ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | " &lt; &gt; */}
-                                    {messageError && <span style={{ color: 'red' }}>Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</span>}
-                                    {errors.message && <span style={{ color: 'red' }}>{errors.message?.message}</span>}
+                                    {messageError && <p className="danger">Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
+                                    {errors.sanitizedMessage && <p className="danger">{errors.sanitizedMessage?.message}</p>}
                                 </Col>
                                 {/* submit button */}
                                 <Col sm={12} className="px-1">
