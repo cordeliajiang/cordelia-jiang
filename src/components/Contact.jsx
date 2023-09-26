@@ -19,7 +19,7 @@ export const Contact = () => {
 
 
     /*************************** FORM ***************************/
-    // used to compare with sanitized form details for displaying error messages
+    // original form details from user input, used to compare with sanitized form details for displaying error messages
     const [formDetails, setFormDetails] = useState({
         fullName: '',
         email: '',
@@ -48,48 +48,57 @@ export const Contact = () => {
     const [emailError, setEmailError] = useState(false);
     const [messageError, setMessageError] = useState(false);
 
+    const [fullNameSpaceError, setFullNameSpaceError] = useState(false);
+    const [messageSpaceNewLineError, setMessageSpaceNewLineError] = useState(false);
+
     const sanitizeFullName = (e) => {
         const sanitizedFullName = e.target.value;
-        const fullNameRegex = /[^-.a-zA-Z\s]/g;
+        const fullNameRegex = /[^-.a-zA-Z\s]/g; // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
         const oneSpaceOnlyRegex = /  +/g;
-        const sanitizedFullNameValue = sanitizedFullName.replace(fullNameRegex, '').replace(oneSpaceOnlyRegex, " "); // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
-
-        // display error message if oneSpaceOnlyRegex is active
-
+        const sanitizedFullNameValue = sanitizedFullName.replace(fullNameRegex, '');
+        const sanitizedFullNameValueLimitSpace = sanitizedFullNameValue.replace(oneSpaceOnlyRegex, " ");
 
         // value displayed on full name input field
         setSanitizedFullName(sanitizedFullNameValue);
 
-        // form details display on email
+        // form details display on email sent
         setFormDetails({
             ...formDetails,
             [e.target.name]: sanitizedFullNameValue
         })
 
-        // check if the original value differs from the sanitized value
+        // display error message if the original input value differs from the sanitized value
         if (sanitizedFullName !== sanitizedFullNameValue) {
             setFullNameError(true);
         } else {
             setFullNameError(false);
         }
+
+        // display error message if there are 2 consecutive spaces in sanitized full name
+        if (sanitizedFullNameValue !== sanitizedFullNameValueLimitSpace) {
+            setFullNameSpaceError(true);
+            setSanitizedFullName(sanitizedFullNameValueLimitSpace);
+        } else {
+            setFullNameSpaceError(false);
+        }
     };
 
     const sanitizeEmail = (e) => {
         const sanitizedEmail = e.target.value;
-        const emailRegex = /[^-@.A-Za-z0-9]/g;
+        const emailRegex = /[^-@.A-Za-z0-9]/g; // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
         const oneSpaceOnlyRegex = /\s\s+/g;
-        const sanitizedEmailValue = sanitizedEmail.replace(emailRegex, '').replace(oneSpaceOnlyRegex, " "); // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
+        const sanitizedEmailValue = sanitizedEmail.replace(emailRegex, '').replace(oneSpaceOnlyRegex, " "); 
 
         // value displayed on email input field
         setSanitizedEmail(sanitizedEmailValue);
 
-        // form details display on email
+        // form details display on email sent
         setFormDetails({
             ...formDetails,
             [e.target.name]: sanitizedEmailValue
         })
 
-        // check if the original value differs from the sanitized value
+        // display error message if the original value differs from the sanitized value
         if (sanitizedEmail !== sanitizedEmailValue) {
             setEmailError(true);
         } else {
@@ -99,27 +108,33 @@ export const Contact = () => {
 
     const sanitizeMessage = (e) => {
         const sanitizedMessage = e.target.value;
-        const messageRegex = /[^-@?!':/,.a-zA-Z0-9\s]/g;
-        const twoSpaceNewLineOnlyRegex = /\s{4,}/g;
-        const sanitizedMessageValue = sanitizedMessage.replace(messageRegex, '').replace(twoSpaceNewLineOnlyRegex, ' '); // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
-
-        // display error message if twoSpaceNewLineOnlyRegex is active
-        
+        const messageRegex = /[^-@?!':/,.a-zA-Z0-9\s]/g; // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
+        const twoSpaceNewLineOnlyRegex = /\s{3,}/g;
+        const sanitizedMessageValue = sanitizedMessage.replace(messageRegex, '')
+        const sanitizedMessageValueLimitSpaceNewLine = sanitizedMessageValue.replace(twoSpaceNewLineOnlyRegex, ' '); 
 
         // value displayed on email input field
         setSanitizedMessage(sanitizedMessageValue);
 
-        // form details display on email
+        // form details display on email sent
         setFormDetails({
             ...formDetails,
             [e.target.name]: sanitizedMessageValue
         })
 
-        // check if the original value differs from the sanitized value
+        // display error message if the original value differs from the sanitized value
         if (sanitizedMessage !== sanitizedMessageValue) {
             setMessageError(true);
         } else {
             setMessageError(false);
+        }
+
+        // display error message if there are more than 2 consecutive spaces or more than 2 consecutive new lines (enter/return key)
+        if (sanitizedMessageValue !== sanitizedMessageValueLimitSpaceNewLine) {
+            setMessageSpaceNewLineError(true);
+            setSanitizedMessage(sanitizedMessageValueLimitSpaceNewLine);
+        } else {
+            setMessageSpaceNewLineError(false);
         }
     };
 
@@ -152,6 +167,8 @@ export const Contact = () => {
             setFullNameError(false);
             setEmailError(false);
             setMessageError(false);
+            setFullNameSpaceError(false);
+            setMessageSpaceNewLineError(false);
         } else {
             setStatus({ success: false, message: "Something Went Wrong, Please Try Again Later." });
         }
@@ -200,9 +217,9 @@ export const Contact = () => {
                                         &#123; is { , &#125; is }
                                         &lt; is < , &gt; is > 
                                     */}
-                                    {/* Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
                                     {errors.sanitizedFullName && <p className="danger">{errors.sanitizedFullName?.message}</p>} {/* check message only when fullName exists */}
                                     {fullNameError && <p className="danger">Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
+                                    {fullNameSpaceError && <p className="danger">Full name cannot contain 2 or more consecutive spaces.</p>}
                                 </Col>
                                 {/* email */}
                                 <Col sm={12} className="px-1">
@@ -226,7 +243,6 @@ export const Contact = () => {
                                             sanitizeEmail(e);
                                         }}
                                     />
-                                    {/* Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
                                     {emailError && <p className="danger">Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
                                     {errors.sanitizedEmail && <p className="danger">{errors.sanitizedEmail?.message}</p>}
                                 </Col>
@@ -254,9 +270,12 @@ export const Contact = () => {
                                             sanitizeMessage(e);
                                         }}
                                     />
-                                    {/* Message cannot contain any of the following: ` = &#91; &#93; \ ; ~ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | " &lt; &gt; */}
+                                    {/* HTML ESCAPE CHARACTER CODES:
+                                        &#40; is ( , &#41; is )
+                                    */}
                                     {messageError && <p className="danger">Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
                                     {errors.sanitizedMessage && <p className="danger">{errors.sanitizedMessage?.message}</p>}
+                                    {messageSpaceNewLineError && <p className="danger">Message cannot contain more than 2 consecutive spaces or more than 2 consecutive new lines &#40; enter / return key &#41;.</p>}
                                 </Col>
                                 {/* submit button */}
                                 <Col sm={12} className="px-1">
