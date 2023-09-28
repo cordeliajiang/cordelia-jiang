@@ -80,8 +80,18 @@ input:focus, textarea:focus, select:focus {
 
 p.success {
 	color: green;
+  width: 490px;
 }
 
 p.danger {
 	color: red;
+  width: 500px;
+}
+
+.validInput {
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.invalidInput {
+  border: 2px solid #ff0000 !important;
 }

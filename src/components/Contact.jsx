@@ -51,6 +51,9 @@ export const Contact = () => {
     const [fullNameSpaceError, setFullNameSpaceError] = useState(false);
     const [messageSpaceNewLineError, setMessageSpaceNewLineError] = useState(false);
 
+    const [invalidInputStatus, setInvalidInputStatus] = useState(false);
+    const [invalidInputSpaceNewLineStatus, setInvalidInputSpaceNewLineStatus] = useState(false);
+
     const sanitizeFullName = (e) => {
         const sanitizedFullName = e.target.value;
         const fullNameRegex = /[^-.a-zA-Z\s]/g; // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
@@ -70,16 +73,20 @@ export const Contact = () => {
         // display error message if the original input value differs from the sanitized value
         if (sanitizedFullName !== sanitizedFullNameValue) {
             setFullNameError(true);
+            setInvalidInputStatus({ invalidFullName: true });
         } else {
             setFullNameError(false);
+            setInvalidInputStatus({ invalidFullName: false });
         }
 
-        // display error message if there are 2 consecutive spaces in sanitized full name
+        // display error message if there are 2 or more consecutive spaces in sanitized full name
         if (sanitizedFullNameValue !== sanitizedFullNameValueLimitSpace) {
             setFullNameSpaceError(true);
+            setInvalidInputSpaceNewLineStatus({ invalidFullNameSpace: true });
             setSanitizedFullName(sanitizedFullNameValueLimitSpace);
         } else {
             setFullNameSpaceError(false);
+            setInvalidInputSpaceNewLineStatus({ invalidFullNameSpace: false });
         }
     };
 
@@ -101,15 +108,17 @@ export const Contact = () => {
         // display error message if the original value differs from the sanitized value
         if (sanitizedEmail !== sanitizedEmailValue) {
             setEmailError(true);
+            setInvalidInputStatus({ invalidEmail: true });
         } else {
             setEmailError(false);
+            setInvalidInputStatus({ invalidEmail: false });
         }
     };
 
     const sanitizeMessage = (e) => {
         const sanitizedMessage = e.target.value;
         const messageRegex = /[^-@?!':/,.a-zA-Z0-9\s]/g; // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
-        const twoSpaceNewLineOnlyRegex = /\s{3,}/g;
+        const twoSpaceNewLineOnlyRegex = /\s{4,}/g;
         const sanitizedMessageValue = sanitizedMessage.replace(messageRegex, '')
         const sanitizedMessageValueLimitSpaceNewLine = sanitizedMessageValue.replace(twoSpaceNewLineOnlyRegex, ' '); 
 
@@ -125,16 +134,20 @@ export const Contact = () => {
         // display error message if the original value differs from the sanitized value
         if (sanitizedMessage !== sanitizedMessageValue) {
             setMessageError(true);
+            setInvalidInputStatus({ invalidMessage: true });
         } else {
             setMessageError(false);
+            setInvalidInputStatus({ invalidMessage: false });
         }
 
-        // display error message if there are more than 2 consecutive spaces or more than 2 consecutive new lines (enter/return key)
+        // display error message if there are more than 3 consecutive spaces or more than 3 consecutive new lines (enter/return key)
         if (sanitizedMessageValue !== sanitizedMessageValueLimitSpaceNewLine) {
             setMessageSpaceNewLineError(true);
+            setInvalidInputSpaceNewLineStatus({ invalidMessageSpaceNewLine: true });
             setSanitizedMessage(sanitizedMessageValueLimitSpaceNewLine);
         } else {
             setMessageSpaceNewLineError(false);
+            setInvalidInputSpaceNewLineStatus({ invalidMessageSpaceNewLine: false });
         }
     };
 
@@ -169,6 +182,8 @@ export const Contact = () => {
             setMessageError(false);
             setFullNameSpaceError(false);
             setMessageSpaceNewLineError(false);
+            setInvalidInputStatus(false);
+            setInvalidInputSpaceNewLineStatus(false);
         } else {
             setStatus({ success: false, message: "Something Went Wrong, Please Try Again Later." });
         }
@@ -190,6 +205,7 @@ export const Contact = () => {
                                 {/* full name */}
                                 <Col sm={12} className="px-1">
                                     <input
+                                        className= {`${invalidInputStatus.invalidFullName === true ? "invalidInput" : ""} ${invalidInputSpaceNewLineStatus.invalidFullNameSpace === true ? "invalidInput" : ""}`}
                                         type="text"
                                         name="sanitizedFullName"
                                         placeholder="Full Name"
@@ -224,12 +240,13 @@ export const Contact = () => {
                                 {/* email */}
                                 <Col sm={12} className="px-1">
                                     <input
+                                        className={invalidInputStatus.invalidEmail === true ? "invalidInput" : ""}
                                         name="sanitizedEmail"
                                         {...register("sanitizedEmail", {
                                             required: "Email address is required.",
                                             maxLength: {
-                                                value: 320,
-                                                message: 'Email address cannot exceed 320 characters.',
+                                                value: 254,
+                                                message: 'Email address cannot exceed 254 characters.',
                                             },
                                             pattern: {
                                                 value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -243,12 +260,13 @@ export const Contact = () => {
                                             sanitizeEmail(e);
                                         }}
                                     />
-                                    {emailError && <p className="danger">Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
                                     {errors.sanitizedEmail && <p className="danger">{errors.sanitizedEmail?.message}</p>}
+                                    {emailError && <p className="danger">Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
                                 </Col>
                                 {/* message */}
                                 <Col sm={12} className="px-1">
                                     <textarea
+                                        className={`${invalidInputStatus.invalidMessage === true ? "invalidInput" : "validInput"} ${invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLine === true ? "invalidInput" : "validInput" }`}
                                         rows="6"
                                         name="sanitizedMessage"
                                         {...register("sanitizedMessage", {
@@ -273,9 +291,9 @@ export const Contact = () => {
                                     {/* HTML ESCAPE CHARACTER CODES:
                                         &#40; is ( , &#41; is )
                                     */}
-                                    {messageError && <p className="danger">Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
                                     {errors.sanitizedMessage && <p className="danger">{errors.sanitizedMessage?.message}</p>}
-                                    {messageSpaceNewLineError && <p className="danger">Message cannot contain more than 2 consecutive spaces or more than 2 consecutive new lines &#40; enter / return key &#41;.</p>}
+                                    {messageError && <p className="danger">Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
+                                    {messageSpaceNewLineError && <p className="danger">Message cannot contain more than 3 consecutive spaces or more than 3 consecutive new lines &#40; enter / return key &#41;.</p>}
                                 </Col>
                                 {/* submit button */}
                                 <Col sm={12} className="px-1">
