@@ -1,6 +1,7 @@
 #responsive-canvas {
     width: 100%;
     min-width: 450px; /* without min-width, image will be cropped when resizing screen */
+    margin: 0 0 0 100px;
 }
 
 .contact {
@@ -16,32 +17,31 @@
 }
 
 .contact-content {
-    margin: 115px 0 0 0;
-}
-
-.contact-content > form {
-    margin: 0 130px 0 -30px;
+    margin: 95px 0 0 0;
 }
 
 .contact-content > h2 {
     font-size: 45px;
     font-weight: 700;
-    margin: 0 0 30px -35px;
+    margin: 0 0 15px 0px;
 }
 
+
+/* -------------------------- FORM INPUT & TEXTAREA --------------------------- */
 .contact-content form input,
 .contact-content form textarea {
-    width: 100%;
+    width: 450px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     color: #fff;
-    margin: 0 0 8px 0;
-    padding: 18px 26px;
+    margin: 15px 0 10px 0;
+    padding: 16px 24px;
     font-weight: 500;
-    font-size: 18px;
-    letter-spacing: 0.8px;
+    font-size: 16px;
+    letter-spacing: 0.6px;
     transition: 0.3s ease-in-out;
+    resize: none;
 }
 
 .contact-content form input:focus,
@@ -67,8 +67,8 @@
     font-weight: 700;
     color: #000;
     background-color: #fff;
-    padding: 14px 48px;
-    font-size: 18px;
+    padding: 12px 48px;
+    font-size: 16px;
     margin-top: 25px;
     border-radius: 0;
     position: relative;
@@ -99,31 +99,27 @@
     width: 100%;
 }
 
+
 /* MEDIA QUERIES (XL DEVICE) */
 @media screen and (max-width: 1399px) {
-    .contact-content > form {
-        margin: 0 80px 0 0;
+    #responsive-canvas {
+        margin: 0 0 0 50px;
     }
-    
-    .contact-content > h2 {
-        margin: 0 0 30px -5px;
+
+    .contact-container {
+        gap: 4rem;
     }
 }
 
 /* MEDIA QUERIES (LG DEVICE) */
 @media screen and (max-width: 1199px) {
-    .contact-content > form {
-        margin: 0 30px 0 30px;
-    }
-    
-    .contact-content > h2 {
-        margin: 0 0 30px 25px;
+    #responsive-canvas {
+        margin: 0 0 0 -30px;
     }
 
-    .contact {
-        padding: 110px 0 150px 0;
+    .contact-container {
+        gap: 4rem;
     }
-    
 }
 
 /* MEDIA QUERIES (MD DEVICE) */
@@ -133,25 +129,52 @@
         flex-direction: column;
     }
 
-    .contact-content > h2 {
-        margin: 0 0 30px 25px;
+    #responsive-canvas {
+        margin: 0 0 0 -10px;
     }
 
     .contact-content {
-        margin-top: 30px;
+        margin: 0 0 0 130px;
+    }
+}
+
+/* MEDIA QUERIES (SM DEVICE) */
+@media screen and (max-width: 767px) {
+    .contact-content {
+        margin: 0 0 0 40px;
+    }
+}
+
+/* MEDIA QUERIES (XS DEVICE) */
+@media screen and (max-width: 575px) {
+    .contact-content {
+        margin: 0 0 0 60px;
     }
 
-    #responsive-canvas {
-        margin-left: -5px;
+    .contact-content form input,
+    .contact-content form textarea {
+        width: 73vw;
+    }
+}
+
+/* MEDIA QUERIES (XSS DEVICE) */
+@media screen and (max-width: 500px) {
+    .contact-content form input,
+    .contact-content form textarea {
+        width: 70vw;
     }
 }
 
 /* MEDIA QUERIES (MINI DEVICE) */
 @media screen and (max-width: 450px) {
     #responsive-canvas {
-        margin: 0 0;
+        margin: 0 auto;
         width: 100%;
-        min-width: 100px; /* without min-width, image will be cropped when resizing screen */
-        max-width: 400px;
+        min-width: 50px;/* without min-width, image will be cropped when resizing screen */
+        max-width: 350px;
+    }
+
+    .contact-content {
+        margin: 0 0 0 11vw;
     }
 }

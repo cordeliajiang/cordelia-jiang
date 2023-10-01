@@ -205,7 +205,7 @@ export const Contact = () => {
                                 {/* full name */}
                                 <Col sm={12} className="px-1">
                                     <input
-                                        className= {`${invalidInputStatus.invalidFullName === true ? "invalidInput" : ""} ${invalidInputSpaceNewLineStatus.invalidFullNameSpace === true ? "invalidInput" : ""}`}
+                                        className= {`${errors.sanitizedFullName?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidFullName === true ? "invalidInput" : ""} ${invalidInputSpaceNewLineStatus.invalidFullNameSpace === true ? "invalidInput" : ""}`}
                                         type="text"
                                         name="sanitizedFullName"
                                         placeholder="Full Name"
@@ -240,7 +240,7 @@ export const Contact = () => {
                                 {/* email */}
                                 <Col sm={12} className="px-1">
                                     <input
-                                        className={invalidInputStatus.invalidEmail === true ? "invalidInput" : ""}
+                                        className={ `${errors.sanitizedEmail?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidEmail === true ? "invalidInput" : ""} `}
                                         name="sanitizedEmail"
                                         {...register("sanitizedEmail", {
                                             required: "Email address is required.",
@@ -266,7 +266,7 @@ export const Contact = () => {
                                 {/* message */}
                                 <Col sm={12} className="px-1">
                                     <textarea
-                                        className={`${invalidInputStatus.invalidMessage === true ? "invalidInput" : "validInput"} ${invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLine === true ? "invalidInput" : "validInput" }`}
+                                        className={`${errors.sanitizedMessage?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidMessage === true ? "invalidInput" : "validInput"} ${invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLine === true ? "invalidInput" : "validInput" }`}
                                         rows="6"
                                         name="sanitizedMessage"
                                         {...register("sanitizedMessage", {
