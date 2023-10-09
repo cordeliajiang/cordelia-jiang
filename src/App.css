@@ -80,18 +80,27 @@ input:focus, textarea:focus, select:focus {
 
 p.success {
 	color: green;
-  width: 490px;
+  width: 27rem;
 }
 
 p.danger {
-	color: red;
-  width: 500px;
-}
-
-.validInput {
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+	color: #ff0000;
+  width: 27rem;
+  font-size: 12px;
+  margin-bottom: 0.3rem;
 }
 
 .invalidInput {
-  border: 2px solid #ff0000 !important;
+  border: 1.5px solid #ff0000 !important;
+}
+
+/* MEDIA QUERIES (XS DEVICE) */
+@media screen and (max-width: 575px) {
+  p.success {
+    width: 70vw;
+  }
+  
+  p.danger {
+    width: 70vw;
+  }
 }
