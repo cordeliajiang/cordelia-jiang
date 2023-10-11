@@ -1,9 +1,3 @@
-#responsive-canvas {
-    width: 100%;
-    min-width: 450px; /* without min-width, image will be cropped when resizing screen */
-    margin: 0 0 0 100px;
-}
-
 .contact {
     background-color: #191f29;
     padding: 110px 0 130px 0;
@@ -16,12 +10,19 @@
     gap: 1rem;
 }
 
+.canvas-container {
+    width: 100%;
+    min-width: 450px; /* without min-width, image will be cropped when resizing screen */
+    height: 750px; /* this will get image size fixed (for largest screen size) even after back from resizing to smaller window screen*/
+    margin: 0 0 0 110px;
+}
+
 .contact-content {
-    margin: 95px 0 0 0;
+    margin: 130px 0 0 0;
 }
 
 .contact-content > h2 {
-    font-size: 45px;
+    font-size: 2.8rem;
     font-weight: 700;
     margin: 0 0 15px 0px;
 }
@@ -30,15 +31,15 @@
 /* -------------------------- FORM INPUT & TEXTAREA --------------------------- */
 .contact-content form input,
 .contact-content form textarea {
-    width: 450px;
+    width: 28rem;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     color: #fff;
     margin: 15px 0 10px 0;
-    padding: 16px 24px;
+    padding: 1rem 1.5rem;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
     letter-spacing: 0.6px;
     transition: 0.3s ease-in-out;
     resize: none;
@@ -52,7 +53,7 @@
 
 .contact-content form input::placeholder,
 .contact-content form textarea::placeholder {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     color: #fff;
 }
@@ -67,13 +68,14 @@
     font-weight: 700;
     color: #000;
     background-color: #fff;
-    padding: 12px 48px;
-    font-size: 16px;
+    padding: 0.75rem 3rem;
+    font-size: 1rem;
     margin-top: 25px;
     border-radius: 0;
     position: relative;
     transition: 0.3s ease-in-out;
 }
+
 .contact-content form button span {
     z-index: 1;
     position: relative;
@@ -99,26 +101,45 @@
     width: 100%;
 }
 
-
 /* MEDIA QUERIES (XL DEVICE) */
 @media screen and (max-width: 1399px) {
-    #responsive-canvas {
-        margin: 0 0 0 50px;
+    .contact-container {
+        gap: 3rem;
     }
 
-    .contact-container {
-        gap: 4rem;
+    .canvas-container {
+        max-height: 730px;
+        margin: 0 0 0 70px;
+    }
+    
+    .contact-content > h2 {
+        font-size: 2.5rem;
+    }
+
+    .contact-content form input,
+    .contact-content form textarea {
+        width: 27.5rem;
     }
 }
 
 /* MEDIA QUERIES (LG DEVICE) */
 @media screen and (max-width: 1199px) {
-    #responsive-canvas {
-        margin: 0 0 0 -30px;
+    .contact-content {
+        margin: 120px 0 0 0;
     }
 
-    .contact-container {
-        gap: 4rem;
+    .canvas-container {
+        max-height: 700px;
+        margin: 0 0 0 20px;
+    }
+    
+    .contact-content > h2 {
+        font-size: 2.4rem;
+    }
+
+    .contact-content form input,
+    .contact-content form textarea {
+        width: 21.5rem;
     }
 }
 
@@ -129,31 +150,42 @@
         flex-direction: column;
     }
 
-    #responsive-canvas {
+    .canvas-container {
+        max-height: 600px;
         margin: 0 0 0 -10px;
     }
 
     .contact-content {
-        margin: -30px 0 0 130px;
+        margin: 0 0 0 125px;
     }
+
+    .contact-content form input,
+    .contact-content form textarea {
+        width: 29rem;
+    }    
 }
 
 /* MEDIA QUERIES (SM DEVICE) */
 @media screen and (max-width: 767px) {
     .contact-content {
-        margin: 0 0 0 40px;
+        margin: 0 0 0 65px;
     }
+
+    .contact-content form input,
+    .contact-content form textarea {
+        width: 25rem;
+    }    
 }
 
 /* MEDIA QUERIES (XS DEVICE) */
 @media screen and (max-width: 575px) {
     .contact-content {
-        margin: 0 0 0 60px;
+        margin: 0 0 0 80px;
     }
 
     .contact-content form input,
     .contact-content form textarea {
-        width: 73vw;
+        width: 69vw;
     }
 }
 
@@ -161,20 +193,25 @@
 @media screen and (max-width: 500px) {
     .contact-content form input,
     .contact-content form textarea {
-        width: 70vw;
+        width: 66vw;
     }
 }
 
 /* MEDIA QUERIES (MINI DEVICE) */
 @media screen and (max-width: 450px) {
-    #responsive-canvas {
+    .canvas-container {
         margin: 0 auto;
         width: 100%;
-        min-width: 50px;/* without min-width, image will be cropped when resizing screen */
+        min-width: 50px;
         max-width: 350px;
     }
 
     .contact-content {
-        margin: 0 0 0 11vw;
+        margin: 0 0 0 17vw;
+    }
+
+    .contact-content h2{
+        font-size: 1.6rem;
+        margin: 0 0;
     }
 }
