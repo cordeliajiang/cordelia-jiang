@@ -9,6 +9,9 @@ import navEmailIcon from '../assets/img/nav-email-icon.svg';
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [navbarToggled, setNavbarToggled] = useState(false);
+
+  const handleNavbarCollapse = () => setNavbarToggled(!navbarToggled);
 
   // scroll condition based on scroll Y
   useEffect(() => {
@@ -36,8 +39,8 @@ export const NavBar = () => {
         <Navbar.Brand href="#home">
             <img src={logo} alt="Logo"/>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle onClick={handleNavbarCollapse} aria-expanded={!navbarToggled ? "false" : "true"}/>
+        <Navbar.Collapse>
           <Nav className="me-auto">
             {/* if a link is clicked, highlight it and update the state, otherwise leave it as is */}
             <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
