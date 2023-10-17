@@ -1,0 +1,26 @@
+.proj-imgbx > .proj-txtx button{
+    /* position: relative; */
+    /* text-align: center; */
+    /* margin: 20px 0 0 160px; */
+    margin: auto;
+    display: flex;
+    padding: 20px 0 0 0;
+    /* border-top: 1px solid white;  */
+    /* box-shadow: 0 0 0 white, 0 -3px 0 rgba(0,0,0,0.5); */
+    /* position: absolute; */
+}
+
+.proj-imgbx > .proj-txtx button a {
+    border-color: white;
+    background-color: transparent;
+    color: white;
+    border-radius: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.proj-imgbx > .proj-txtx button a:hover {
+    border-color: white;
+    background-color: white;
+    color: #191f29;
+    border-radius: 50px;
+}
