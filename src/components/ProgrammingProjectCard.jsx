@@ -1,6 +1,5 @@
 import { Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import './programmingprojectcard.css';
 
 export const ProgrammingProjectCard = ({ title, description, imgUrl, website }) => {
     const [websiteButtonStatus, setWebsiteButtonStatus] = useState(website);
@@ -22,9 +21,11 @@ export const ProgrammingProjectCard = ({ title, description, imgUrl, website }) 
                 <div className="proj-txtx">
                     <h4>{title}</h4>
                     <span>{description}</span>
-                    {websiteButtonStatus && <button><a className="btn btn-primary" href={website} target="_blank">Visit Website</a></button>}
-                    {/* <button><a className="btn btn-primary" href={github} target="_blank">Github</a></button> */}
-                    {/* <a className="btn btn-primary" href="https://github.com/cordeliajiang/react-portfolio" target="_blank">Github</a> */}
+                    <div className="proj-btn">
+                        {websiteButtonStatus && <button><a className="btn btn-primary" href={website} target="_blank">Visit Website</a></button>}
+                        {/* <button><a className="btn btn-primary" href={github} target="_blank">Github</a></button> */}
+                        {/* <a className="btn btn-primary" href="https://github.com/cordeliajiang/react-portfolio" target="_blank">Github</a> */}
+                    </div>
                 </div>
             </div>
         </Col>
