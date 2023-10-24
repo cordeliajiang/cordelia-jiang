@@ -95,11 +95,22 @@
 
 
 /************ PROJECT COVER IMAGE ************/
+/* .proj-container {
+    display: grid;
+    grid-template-columns: 1fr;
+} */
+
+.proj-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1.3rem;
+}
+
 .proj-imgbx {
     position: relative;
     border-radius: 30px;
     overflow: hidden;
-    margin-bottom: 24px;
+    margin: 0 auto 1.5rem auto; /* 24px */
     width: 26rem; /* 518mm */
     height: 19rem; /* 380mm */
 }
@@ -189,22 +200,72 @@
 }
 
 
+/* MEDIA QUERIES (XL DEVICE) */
+@media screen and (max-width: 1399px) {
+    .proj-imgbx {
+        margin-bottom: 1.3rem;
+        width: 22.5rem; /* original 26rem */
+        height: 15.5rem; /* original 19rem */
+    }
+}
+
+/* MEDIA QUERIES (LG DEVICE) */
+@media screen and (max-width: 1199px) {
+    .proj-imgbx {
+        margin-bottom: 1.1rem;
+        width: 18.9rem;
+        height: 11.9rem;
+    }
+
+    .proj-content {
+        column-gap: 1.3rem;
+    }
+}
+
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px) {
+    .proj-imgbx {
+        width: 21.1rem;
+        height: 14.1rem; 
+    }
 
+    .proj-content {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 /* MEDIA QUERIES (SM DEVICE) */
 @media screen and (max-width: 767px) {
+    .proj-content {
+        grid-template-columns: 1fr;
+    }
 
+    .proj-imgbx {
+        width: 32.3rem; 
+        height: 25.3rem; 
+    }
 }
 
 /* MEDIA QUERIES (XS DEVICE) */
 @media screen and (max-width: 575px) {
+    .proj-imgbx {
+        width: 26rem; 
+        height: 19rem;
+    }
+}
 
+/* MEDIA QUERIES (XSS DEVICE) */
+@media screen and (max-width: 500px) {
+    .proj-imgbx {
+        width: 23rem;
+        height: 16rem;
+    }
 }
 
 /* MEDIA QUERIES (MINI DEVICE) */
 @media screen and (max-width: 450px) {
-
+    .proj-imgbx {
+        width: 19rem; 
+        height: 12rem; 
+    }
 }

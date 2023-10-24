@@ -117,24 +117,28 @@ export const Projects = () => {
                             <Tab.Content>
                                 <Tab.Pane eventKey="first">
                                     <Row>
-                                        {
-                                            programmingProjects.map((project, index) => {
-                                                return(
-                                                    <ProgrammingProjectCard key={index}{...project}/>
-                                                )
-                                            })
-                                        }
+                                        <div className='proj-content'>
+                                            {
+                                                programmingProjects.map((project, index) => {
+                                                    return(
+                                                        <ProgrammingProjectCard key={index}{...project}/>
+                                                    )
+                                                })
+                                            }
+                                        </div>
                                     </Row>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
                                     <Row>
-                                        {
-                                            designProjects.map((project, index) => {
-                                                return(
-                                                    <DesignProjectCard key={index}{...project}/>
-                                                )
-                                            })
-                                        }
+                                        <div className='proj-content'>
+                                            {
+                                                designProjects.map((project, index) => {
+                                                    return(
+                                                        <DesignProjectCard key={index}{...project}/>
+                                                    )
+                                                })
+                                            }
+                                        </div>
                                     </Row>
                                 </Tab.Pane>
                                 {/* <Tab.Pane eventKey="third">
