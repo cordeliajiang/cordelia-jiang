@@ -110,7 +110,7 @@
     position: relative;
     border-radius: 30px;
     overflow: hidden;
-    margin: 0 auto 1.5rem auto; /* 24px */
+    margin: 0 auto 1.5rem auto; /* 1.5rem = 24px */
     width: 26rem; /* 518mm */
     height: 19rem; /* 380mm */
 }
@@ -167,6 +167,7 @@
     font-weight: bold;
     line-height: 2rem;
     width: 9rem;
+    font-size: 16px;
 }
 
 .proj-txtx button a:hover {
@@ -181,12 +182,13 @@
     font-weight: 700;
     letter-spacing: 0.8px;
     line-height: 1.1em;
+    margin-bottom: 1rem;
 }
 
 .proj-txtx span {
     font-style: italic;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 0.8px;
 }
 
@@ -204,8 +206,25 @@
 @media screen and (max-width: 1399px) {
     .proj-imgbx {
         margin-bottom: 1.3rem;
-        width: 22.5rem; /* original 26rem */
-        height: 15.5rem; /* original 19rem */
+        width: 22.5rem; /* initial 26rem */
+        height: 15.5rem; /* initial 19rem */
+    }
+    
+    
+    .proj-txtx h4 {
+        font-size: 26px; /* initial 30px */
+        margin-bottom: 0.5rem; /* initial 1rem */
+    }
+    
+    .proj-txtx span {
+        font-size: 12px; /* initial 14px */
+    }
+
+    .proj-txtx button a {
+        margin: 1.5rem 0.5rem 0 0.5rem; /* initial 2rem 0.5rem 0 0.5rem */
+        line-height: 1.5rem; /* initial 2rem */
+        width: 8rem; /* initial 9rem */
+        font-size: 14px; /* initial 16px */
     }
 }
 
@@ -220,17 +239,50 @@
     .proj-content {
         column-gap: 1.3rem;
     }
+
+    .proj-txtx h4 {
+        font-size: 21.5px; /* initial 30px */
+        margin-bottom: 0.5rem; /* initial 1rem */
+    }
+    
+    .proj-txtx span {
+        font-size: 10px; /* initial 14px */
+    }
+
+    .proj-txtx button a {
+        margin: 1rem 0.5rem 0 0.5rem; /* initial 2rem 0.5rem 0 0.5rem */
+        line-height: 1.2rem; /* initial 2rem */
+        width: 7rem; /* initial 9rem */
+        font-size: 12px; /* initial 16px */
+    }
 }
 
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px) {
+    .proj-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
     .proj-imgbx {
         width: 21.1rem;
         height: 14.1rem; 
     }
 
-    .proj-content {
-        grid-template-columns: 1fr 1fr;
+
+    .proj-txtx h4 {
+        font-size: 24px; /* initial 30px */
+        margin-bottom: 0.4rem; /* initial 1rem */
+    }
+    
+    .proj-txtx span {
+        font-size: 11px; /* initial 14px */
+    }
+
+    .proj-txtx button a {
+        margin: 1.4rem 0.5rem 0 0.5rem; /* initial 2rem 0.5rem 0 0.5rem */
+        line-height: 1.4rem; /* initial 2rem */
+        width: 7rem; /* initial 9rem */
+        font-size: 13px; /* initial 16px */
     }
 }
 
@@ -242,8 +294,25 @@
 
     .proj-imgbx {
         width: 32.3rem; 
-        height: 25.3rem; 
+        height: 23.3rem; 
     }
+
+    
+    .proj-txtx button a {
+        margin: 2.5rem 0.5rem 0 0.5rem;
+        line-height: 2.5rem;
+        width: 11rem;
+        font-size: 20px;
+    }
+    
+    .proj-txtx h4 {
+        font-size: 36px;
+        margin-bottom: 1rem;
+    }
+
+    .proj-txtx span {
+        font-size: 18px;
+    }    
 }
 
 /* MEDIA QUERIES (XS DEVICE) */
@@ -251,6 +320,24 @@
     .proj-imgbx {
         width: 26rem; 
         height: 19rem;
+    }
+
+
+    .proj-txtx button a {
+        margin: 2rem 0.5rem 0 0.5rem;
+        line-height: 2rem;
+        width: 9rem;
+        font-size: 16px;
+    }
+    
+    .proj-txtx h4 {
+        font-size: 30px;
+        margin-bottom: 1rem;
+    }
+
+    .proj-txtx span {
+        font-size: 14px;
+        letter-spacing: 0.8px;
     }
 }
 
@@ -260,6 +347,22 @@
         width: 23rem;
         height: 16rem;
     }
+
+    .proj-txtx h4 {
+        font-size: 26px; /* initial 30px */
+        margin-bottom: 0.5rem; /* initial 1rem */
+    }
+    
+    .proj-txtx span {
+        font-size: 12px; /* initial 14px */
+    }
+
+    .proj-txtx button a {
+        margin: 1.5rem 0.5rem 0 0.5rem; /* initial 2rem 0.5rem 0 0.5rem */
+        line-height: 1.5rem; /* initial 2rem */
+        width: 8rem; /* initial 9rem */
+        font-size: 14px; /* initial 16px */
+    }
 }
 
 /* MEDIA QUERIES (MINI DEVICE) */
@@ -267,5 +370,22 @@
     .proj-imgbx {
         width: 19rem; 
         height: 12rem; 
+    }
+
+    
+    .proj-txtx h4 {
+        font-size: 21.5px; /* initial 30px */
+        margin-bottom: 0.5rem; /* initial 1rem */
+    }
+    
+    .proj-txtx span {
+        font-size: 10px; /* initial 14px */
+    }
+
+    .proj-txtx button a {
+        margin: 1rem 0.5rem 0 0.5rem; /* initial 2rem 0.5rem 0 0.5rem */
+        line-height: 1.2rem; /* initial 2rem */
+        width: 7rem; /* initial 9rem */
+        font-size: 12px; /* initial 16px */
     }
 }
