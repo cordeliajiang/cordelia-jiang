@@ -8,27 +8,29 @@
   position: relative;
   /* max-width: 2000px; */
 }
-  
+
 .banner h1 {
-  font-size: 65px;
+  font-size: 67px;
   font-weight: 700px;
   letter-spacing: 0.8px;
   line-height: 1;
-  margin-bottom: 20px;
+  margin: 0 0 1.3rem 2rem;
   display: block;
   /* border-bottom: solid antiquewhite; */
 }
 
 .banner h2 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: lighter;
+  margin: 0 0 2rem 2rem;
 }
 
 .banner button {
   color: #fff;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 22px;
   margin-top: 60px;
+  margin: 3.75rem 0 0 2rem;
   letter-spacing: 0.8px;
   align-items: center;
   padding-bottom: 30px;
@@ -50,15 +52,17 @@
 }
 
 @keyframes updown {
-    0% {
-        transform: translateY(-20px);
-    }
-    50% {
-        transform: translateY(20px);
-    }
-    100% {
-        transform: translateY(-20px);
-    }
+  0% {
+    transform: translateY(-20px);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
 }
 
 
@@ -70,16 +74,10 @@
 }
 
 /* MEDIA QUERIES (SM DEVICE) */
-@media screen and (max-width: 767px) {
-
-}
+@media screen and (max-width: 767px) {}
 
 /* MEDIA QUERIES (XS DEVICE) */
-@media screen and (max-width: 575px) {
-
-}
+@media screen and (max-width: 575px) {}
 
 /* MEDIA QUERIES (MINI DEVICE) */
-@media screen and (max-width: 450px) {
-
-}
+@media screen and (max-width: 450px) {}
