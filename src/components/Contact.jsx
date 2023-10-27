@@ -4,6 +4,7 @@ import './contact.css';
 import { Canvas } from "@react-three/fiber";
 import { FadingImageDisplacement } from "./FadingImageDisplacement";
 import { useForm } from "react-hook-form";
+import { BiSolidErrorCircle } from 'react-icons/bi';
 
 export const Contact = () => {
     const ref = useRef(null); // use useRef to access the DOM
@@ -12,7 +13,7 @@ export const Contact = () => {
     // without using useEffect, canvas.height and canvas.width will return null, as they are evaluated before DOM is rendered/loaded.
     // canvas is a DOM element, DOM elements cannot be accessed untill DOM is loaded.
     useEffect(() => {
-        var canvas = ref.current // use ref instead of document.getElementById as ref is considered a better react practice
+        var canvas = ref.current; // use ref instead of document.getElementById as ref is considered a better react practice
         var heightRatio = 1.78; // height of img 3616 / width of img 2032
         canvas.height = 200 + canvas.width * heightRatio; // add 200: larger min canvas.width.
     }, []);
@@ -73,7 +74,7 @@ export const Contact = () => {
         // display error message if the original input value differs from the sanitized value
         if (sanitizedFullName !== sanitizedFullNameValue) {
             setFullNameError(true);
-            setInvalidInputStatus({ invalidFullName: true });
+            setInvalidInputStatus({ invalidFullName: true, invalidFullNameMessage: "Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = [ ] \\ ; ' , / ~ ! @ # $ % ^ & * ( ) _ + { } | : \" < > ?" }); /* \ backslash used to escape characters */
         } else {
             setFullNameError(false);
             setInvalidInputStatus({ invalidFullName: false });
@@ -82,7 +83,7 @@ export const Contact = () => {
         // display error message if there are 2 or more consecutive spaces in sanitized full name
         if (sanitizedFullNameValue !== sanitizedFullNameValueLimitSpace) {
             setFullNameSpaceError(true);
-            setInvalidInputSpaceNewLineStatus({ invalidFullNameSpace: true });
+            setInvalidInputSpaceNewLineStatus({ invalidFullNameSpace: true, invalidFullNameSpaceMessage: "Full name cannot contain 2 or more consecutive spaces." });
             setSanitizedFullName(sanitizedFullNameValueLimitSpace);
         } else {
             setFullNameSpaceError(false);
@@ -108,7 +109,7 @@ export const Contact = () => {
         // display error message if the original value differs from the sanitized value
         if (sanitizedEmail !== sanitizedEmailValue) {
             setEmailError(true);
-            setInvalidInputStatus({ invalidEmail: true });
+            setInvalidInputStatus({ invalidEmail: true, invalidEmailMessage: "Email cannot contain any of the following: ` = [ ] \\ ; ' , / ~ ! # $ % ^ & * ( ) _ + { } | : \" < > ?" });
         } else {
             setEmailError(false);
             setInvalidInputStatus({ invalidEmail: false });
@@ -134,7 +135,7 @@ export const Contact = () => {
         // display error message if the original value differs from the sanitized value
         if (sanitizedMessage !== sanitizedMessageValue) {
             setMessageError(true);
-            setInvalidInputStatus({ invalidMessage: true });
+            setInvalidInputStatus({ invalidMessage: true, invalidMessageMessage: "Message cannot contain any of the following: ` = [ ] \\ ; ' , / ~ ! # $ % ^ & * ( ) _ + { } | : \" < > ?" });
         } else {
             setMessageError(false);
             setInvalidInputStatus({ invalidMessage: false });
@@ -143,7 +144,7 @@ export const Contact = () => {
         // display error message if there are more than 3 consecutive spaces or more than 3 consecutive new lines (enter/return key)
         if (sanitizedMessageValue !== sanitizedMessageValueLimitSpaceNewLine) {
             setMessageSpaceNewLineError(true);
-            setInvalidInputSpaceNewLineStatus({ invalidMessageSpaceNewLine: true });
+            setInvalidInputSpaceNewLineStatus({ invalidMessageSpaceNewLine: true, invalidMessageSpaceNewLineMessage: "Message cannot contain more than 3 consecutive spaces or more than 3 consecutive new lines ( enter / return key )." });
             setSanitizedMessage(sanitizedMessageValueLimitSpaceNewLine);
         } else {
             setMessageSpaceNewLineError(false);
@@ -235,9 +236,10 @@ export const Contact = () => {
                                         &#123; is { , &#125; is }
                                         &lt; is < , &gt; is > 
                                     */}
+                                    {/* Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
                                     {errors.sanitizedFullName && <p className="danger">{errors.sanitizedFullName?.message}</p>} {/* check message only when fullName exists */}
-                                    {fullNameError && <p className="danger">Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
-                                    {fullNameSpaceError && <p className="danger">Full name cannot contain 2 or more consecutive spaces.</p>}
+                                    {fullNameError && <p className="danger">{invalidInputStatus.invalidFullNameMessage}</p>}
+                                    {fullNameSpaceError && <p className="danger">{invalidInputSpaceNewLineStatus.invalidFullNameSpaceMessage}</p>}
                                 </Col>
                                 {/* email */}
                                 <Col sm={12} className="px-1">
@@ -262,13 +264,15 @@ export const Contact = () => {
                                             sanitizeEmail(e);
                                         }}
                                     />
+                                    {/* Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
+                                    <BiSolidErrorCircle className="error-icon" /> 
                                     {errors.sanitizedEmail && <p className="danger">{errors.sanitizedEmail?.message}</p>}
-                                    {emailError && <p className="danger">Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
+                                    {emailError && <p className="danger">{invalidInputStatus.invalidEmailMessage}</p>}
                                 </Col>
                                 {/* message */}
                                 <Col sm={12} className="px-1">
                                     <textarea
-                                        className={`${errors.sanitizedMessage?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidMessage === true ? "invalidInput" : "validInput"} ${invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLine === true ? "invalidInput" : "validInput" }`}
+                                        className={`${errors.sanitizedMessage?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidMessage === true ? "invalidInput" : ""} ${invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLine === true ? "invalidInput" : "" }`}
                                         rows="6"
                                         name="sanitizedMessage"
                                         {...register("sanitizedMessage", {
@@ -293,14 +297,15 @@ export const Contact = () => {
                                     {/* HTML ESCAPE CHARACTER CODES:
                                         &#40; is ( , &#41; is )
                                     */}
+                                    {/* Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
+                                    {/* Message cannot contain more than 3 consecutive spaces or more than 3 consecutive new lines &#40; enter / return key &#41;. */}
                                     {errors.sanitizedMessage && <p className="danger">{errors.sanitizedMessage?.message}</p>}
-                                    {messageError && <p className="danger">Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ?</p>}
-                                    {messageSpaceNewLineError && <p className="danger">Message cannot contain more than 3 consecutive spaces or more than 3 consecutive new lines &#40; enter / return key &#41;.</p>}
+                                    {messageError && <p className="danger">{invalidInputStatus.invalidMessageMessage}</p>}
+                                    {messageSpaceNewLineError && <p className="danger">{invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLineMessage}</p>}
                                 </Col>
                                 {/* submit button */}
                                 <Col sm={12} className="px-1">
-                                    <button type="submit"><span>{buttonTxt}</span>
-                                    </button>
+                                    <button type="submit"><span>{buttonTxt}</span></button>
                                     {status.message && (
                                         <div className="row">
                                             <p className={status.success === false ? "danger" : "success"}>
