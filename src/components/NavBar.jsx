@@ -41,24 +41,26 @@ export const NavBar = () => {
         </Navbar.Brand>
         <Navbar.Toggle onClick={handleNavbarCollapse} aria-expanded={!navbarToggled ? "false" : "true"}/>
         <Navbar.Collapse>
-          <Nav className="me-auto">
-            {/* if a link is clicked, highlight it and update the state, otherwise leave it as is */}
-            <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
-            <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
-            <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
-          </Nav>
-          <span className="navbar-text">
-              <div className="social-icon">
-                <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer"><img src={navLinkedinIcon} alt="replace with github url:xxxx"/></a>
-                <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer"><img src={navGithubIcon} alt=""/></a>
-                <a href="mailto:jiangcordelia@gmail.com"><img src={navEmailIcon} alt=""/></a>
-              </div>
-              <a href="#connect">
-                <button className="vvd">
-                  <span>Contact</span>
-                </button>
-              </a>
-          </span>
+          {/* <div className="burger-menu"> */}
+            <Nav className="me-auto">
+              {/* if a link is clicked, highlight it and update the state, otherwise leave it as is */}
+              <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
+              <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
+              <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
+              <span className="navbar-text">
+                  <div className="social-icon">
+                    <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer"><img src={navLinkedinIcon} alt="replace with github url:xxxx"/></a>
+                    <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer"><img src={navGithubIcon} alt=""/></a>
+                    <a href="mailto:jiangcordelia@gmail.com"><img src={navEmailIcon} alt=""/></a>
+                  </div>
+                  <a href="#connect">
+                    <button className="vvd">
+                      <span>Contact</span>
+                    </button>
+                  </a>
+              </span>
+            </Nav>
+          {/* </div> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
