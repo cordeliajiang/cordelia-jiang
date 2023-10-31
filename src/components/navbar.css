@@ -22,6 +22,10 @@ nav.navbar a.navbar-brand {
     min-width: 8.125rem;
 }
 
+.burger-menu-logo { 
+    display: none;
+}
+
 nav.navbar .navbar-nav .nav-link.navbar-link {
     font-weight: 400;
     color: #fff !important;
@@ -205,8 +209,31 @@ nav.navbar .navbar-toggler[aria-expanded="true"] {
 }
 
 
+/* MEDIA QUERIES (XL DEVICE) */
+@media screen and (max-width: 1399px) {
+    span.navbar-text {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 24vw;
+    }
+}
+
+/* MEDIA QUERIES (LG DEVICE) */
+@media screen and (max-width: 1199px) {
+    span.navbar-text {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 12vw;
+    }
+}
+
+/* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px){
-    .me-auto {    
+    .navbar-nav {
+        margin: 0 auto;
+    }
+
+    .navbar-collapse {    
         background-color: black;
         position: fixed;
         left: 0;
@@ -218,7 +245,61 @@ nav.navbar .navbar-toggler[aria-expanded="true"] {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        overflow: hidden;
-        transform: translateY(0);
+    }
+
+    .burger-menu-logo { 
+        display: flex;
+        margin: 1rem auto;
+        width: 10rem;
+        min-width: 10rem;
+    }
+
+    /* Burger Menu: Home, Skills, Projects Button */
+    nav.navbar .navbar-nav .nav-link.navbar-link {
+        font-weight: 400;
+        color: #fff !important;
+        letter-spacing: 0.8px;
+        padding: 0 25px;
+        font-size: 28px;
+        opacity: 0.75;
+        margin-top: 2rem;
+    }
+
+    span.navbar-text {
+        margin: 0 auto;
+        flex-direction: column;
+        flex-flow: column-reverse; /* put Contact button in front of social icons */
+    }
+
+    /* Contact Button */
+    .navbar-text button {
+        font-weight: 400;
+        color: #fff !important;
+        letter-spacing: 0.8px;
+        padding: 0 25px;
+        font-size: 28px;
+        opacity: 0.75;
+        margin: 2rem 0 0 0;
+        border: none;
+        padding: auto;
+        transition: none;
+    }
+
+    .navbar-text button:hover,
+    .navbar-text button.active {
+        opacity: 1;
+    }
+    
+    .navbar-text button::before {
+        background-color: transparent;
+        transition: none;
+    }
+
+    .social-icon {
+        display: inline-flex;
+        margin-left: 0;
+        z-index: 2;
+        margin-top: 7rem;
+        gap: 1rem;
     }
 }

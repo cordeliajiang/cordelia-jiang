@@ -43,6 +43,7 @@ export const NavBar = () => {
         <Navbar.Collapse>
           {/* <div className="burger-menu"> */}
             <Nav className="me-auto">
+              <div className="burger-menu-logo"><img src={logo} alt="Logo"/></div>
               {/* if a link is clicked, highlight it and update the state, otherwise leave it as is */}
               <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
               <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
