@@ -249,7 +249,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] {
 
     .burger-menu-logo { 
         display: flex;
-        margin: 1rem auto;
+        margin: 1rem auto 2rem auto;
         width: 10rem;
         min-width: 10rem;
     }
@@ -299,7 +299,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] {
         display: inline-flex;
         margin-left: 0;
         z-index: 2;
-        margin-top: 7rem;
+        margin-top: 6rem;
         gap: 1rem;
     }
 }

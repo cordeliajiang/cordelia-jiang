@@ -10,27 +10,27 @@ export const Footer = () => {
         <footer className="footer">
             <Container>
                 <div className="footer-container">
-                    <Row>
-                        <Col sm={6}>
-                            <div id="footer-logo">
-                                <a href="#home">
-                                    <img src={logo} alt="Logo"/>
-                                </a>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={6}> {/* end aligned text on small viewport sizes */}
-                            <div className="footer-content">
-                                <div className="social-icon">
+                    <Col sm={6}>
+                        <div id="footer-logo">
+                            <a href="#home">
+                                <img src={logo} alt="Logo"/>
+                            </a>
+                        </div>
+                    </Col>
+                    <Col sm={6}> {/* end aligned text on small viewport sizes */}
+                        <div className="footer-content">
+                            <Row>
+                                <div className="footer-social-icon">
                                     <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer"><img src={navLinkedinIcon} alt="replace with github url:xxxx"/></a>
                                     <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer"><img src={navGithubIcon} alt=""/></a>
                                     <a href="mailto:jiangcordelia@gmail.com"><img src={navEmailIcon} alt=""/></a>
                                 </div>
+                            </Row>
+                            <Row>
                                 <p>© Cordelia Jiang, 2023</p>
-                            </div>
-                        </Col>
-                    </Row>
+                            </Row>
+                        </div>
+                    </Col>
                 </div>
             </Container>
         </footer>
