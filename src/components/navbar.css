@@ -47,6 +47,37 @@ span.navbar-text {
     margin-left: 34vw;
 }
 
+/* .hideBurgerMenu {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.showBurgerMenu {
+    visibility: show;
+    opacity: 100;
+} */
+
+.navbar-collapse.collapsing {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s ease-in-out;
+}
+
+/* .navbar-collapse.collapsing::before {
+    transition: 0.32s ease-in-out;
+} */
+
+
+/* .hideBurgerMenuBackground {
+    background-color: transparent !important;
+}
+
+.showBurgerMenuBackground {
+    background-color: black !important;
+} */
+
+
+
 .social-icon {
     display: inline-flex;
     margin-left: 14px;
@@ -193,7 +224,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /* .navbar-nav, .navbar-text{     */
 nav.navbar .navbar-toggler[aria-expanded="true"] {
-    background-color: black;
+    /* background-color: black; */
     /* position: fixed;
     top: 0;
     width: 100%;
@@ -207,7 +238,6 @@ nav.navbar .navbar-toggler[aria-expanded="true"] {
     transform: translateY(0); */
     /* z-index: 2; */
 }
-
 
 /* MEDIA QUERIES (XL DEVICE) */
 @media screen and (max-width: 1399px) {
