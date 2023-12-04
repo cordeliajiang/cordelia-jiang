@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import React, { useEffect, useState } from 'react'; // import useEffect, so the API can be called just when the page loads
 import './App.css';
 import { NavBar } from './components/NavBar';
 import { Banner } from './components/Banner';
@@ -9,10 +10,20 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 function App() {
+  const [scrollLocked, setScrollLocked] = useState(false);
+
+  useEffect(() => {
+    fetch("/api") // since proxy is added to package.json, path before /api is omitted.
+    .then((res) => res.json())
+    .then((data) => { console.log(data) })
+  }, []);
+
+
   return (
-    <div className="App">
-      <NavBar/>
+    <div className={`${scrollLocked ? "scrollLocked": ''} ${"App"}`}>
+      <NavBar scrollLocked = {scrollLocked} setScrollLocked = {setScrollLocked}/>
       <Banner/>
       {/* <Skills/> */}
       <Experience/>

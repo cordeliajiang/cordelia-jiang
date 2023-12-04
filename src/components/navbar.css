@@ -47,36 +47,15 @@ span.navbar-text {
     margin-left: 34vw;
 }
 
-/* .hideBurgerMenu {
-    visibility: hidden;
-    opacity: 0;
-}
-
-.showBurgerMenu {
-    visibility: show;
-    opacity: 100;
-} */
-
 .navbar-collapse.collapsing {
     visibility: hidden;
     opacity: 0;
-    transition: 0.2s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 
-/* .navbar-collapse.collapsing::before {
-    transition: 0.32s ease-in-out;
-} */
-
-
-/* .hideBurgerMenuBackground {
-    background-color: transparent !important;
+.navbar-collapse {
+    transition: 0.3s ease-in-out;
 }
-
-.showBurgerMenuBackground {
-    background-color: black !important;
-} */
-
-
 
 .social-icon {
     display: inline-flex;
@@ -220,23 +199,6 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     border-color: transparent;
-}
-
-/* .navbar-nav, .navbar-text{     */
-nav.navbar .navbar-toggler[aria-expanded="true"] {
-    /* background-color: black; */
-    /* position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100vh;  */
-    /* padding: 6.4rem 0 6.4rem 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* overflow: hidden;
-    transform: translateY(0); */
-    /* z-index: 2; */
 }
 
 /* MEDIA QUERIES (XL DEVICE) */
