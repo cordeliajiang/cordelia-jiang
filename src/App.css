@@ -45,6 +45,17 @@ h1, h2, h3, h4, h5, h6 {
   line-height: normal;
 }
 
+/* 2.2vh is equal to 2.2% of the viewport height. */
+/* vmin is viewport minimum, it's based on the smaller dimension of the viewport. 
+if vh < vw, value of 2vmin = 2% of the vh. if vw < vh, value of 2vmin = 2% of the vw */
+h1 {
+  font-size: calc(2.2vw + 2.2vh + 2vmin) !important;
+}
+
+h3 {
+  font-size: calc(0.9vw + 0.9vh + 0.9vmin) !important;
+}
+
 p, a, li, button, ul {
   margin: 0;
   padding: 0;
@@ -95,8 +106,6 @@ p.danger {
 }
 
 .scrollLocked {
-  overflow: hidden;
-  touch-action: none;
   position: fixed;
   right: 0;
   left: 0;

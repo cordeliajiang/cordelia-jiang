@@ -10,8 +10,8 @@
 }
 
 .banner h1 {
-  font-size: 67px;
-  font-weight: 700px;
+  /* font-size: 65px;
+  font-weight: 700px; */
   letter-spacing: 0.8px;
   line-height: 1;
   margin: 0 0 1.3rem 2rem;
@@ -19,17 +19,17 @@
   /* border-bottom: solid antiquewhite; */
 }
 
-.banner h2 {
-  font-size: 28px;
+.banner h3 {
+  /* font-size: 26px; */
   font-weight: lighter;
-  margin: 0 0 2rem 2rem;
+  margin-left: 2rem;
 }
 
 .banner button {
   color: #fff;
   font-weight: 700;
-  font-size: 22px;
-  margin-top: 60px;
+  font-size: calc(0.67vw + 0.67vh + 0.67vmin) !important;
+  /* font-size: 20px; */
   margin: 3.75rem 0 0 2rem;
   letter-spacing: 0.8px;
   align-items: center;
@@ -37,14 +37,16 @@
 }
 
 .banner button svg {
-  font-size: 25px;
-  margin-left: 10px;
+  /* font-size: 25px; */
+  width: calc(0.8vw + 0.8vh + 0.8vmin) !important;
+  height: auto;
+  margin-left: calc(0.4vw + 0.4vh + 0.4vmin) !important; /* 10px */
   transition: 0.3s ease-in-out;
-  line-height: 1;
+  line-height: 1; 
 }
 
 .banner button:hover svg {
-  margin-left: 25px;
+  margin-left: calc(0.8vw + 0.8vh + 0.8vmin) !important; /* 1.5rem 25px */
 }
 
 .banner img {
@@ -53,28 +55,54 @@
 
 @keyframes updown {
   0% {
-    transform: translateY(-20px);
+    /* transform: translateY(-20px); */
+    transform: translateY(-5%);
   }
 
   50% {
-    transform: translateY(20px);
+    /* transform: translateY(20px); */
+    transform: translateY(5%);
   }
 
   100% {
-    transform: translateY(-20px);
+    /* transform: translateY(-20px); */
+    transform: translateY(-5%);
   }
 }
 
+@media screen and (min-width: 2500px) {
+  .banner img {
+    /* width: 350%; */
+    width: calc(100% + 22.5vw);
+    /* margin-left: -200px; */
+    /* margin: auto -300px; */
+    /* margin: auto -5vw; */
+    margin: auto calc(100% + -14.5vw);
+  }
+
+  .banner .container .row {
+    display: grid; 
+    grid-template-rows: 1fr 1fr;
+  }
+}
 
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px) {
   .banner {
     padding: 360px 0 160px 0;
   }
+
+  /* .banner img {
+    width: 120%;
+  } */
 }
 
 /* MEDIA QUERIES (SM DEVICE) */
-@media screen and (max-width: 767px) {}
+@media screen and (max-width: 767px) {
+  /* .banner img {
+    width: 100%;
+  } */
+}
 
 /* MEDIA QUERIES (XS DEVICE) */
 @media screen and (max-width: 575px) {}

@@ -27,7 +27,7 @@ export const Banner = () => {
                         {({ isVisible }) =>
                             <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                                 <h1>{"Cordelia Jiang "}</h1>
-                                <h2><span className="wrap"> Front-end Developer </span></h2>
+                                <h3><span className="wrap"> Front-end Developer </span></h3>
                                 <a href = {resume} target = "_blank"><button>Resume<ArrowRightCircle size={25}/></button></a>
                             </div>}
                         </TrackVisibility>
