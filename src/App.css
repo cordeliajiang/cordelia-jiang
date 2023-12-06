@@ -105,11 +105,14 @@ p.danger {
   border: 1.5px solid #ff0000 !important;
 }
 
-.scrollLocked {
-  position: fixed;
-  right: 0;
-  left: 0;
+@media (max-width:991px) {
+	.scrollLocked {
+    position: fixed;
+    right: 0;
+    left: 0;
+  }
 }
+
 
 /* .error-icon {
   display: none;

@@ -140,6 +140,10 @@ span.navbar-text {
     position: absolute;
 }
 
+nav.navbar .navbar-toggler {
+    border: none;
+}
+
 nav.navbar .navbar-toggler:active,
 nav.navbar .navbar-toggler:focus {
     outline: none;
@@ -200,6 +204,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     border-color: transparent;
 }
+
 
 /* MEDIA QUERIES (XL DEVICE) */
 @media screen and (max-width: 1399px) {

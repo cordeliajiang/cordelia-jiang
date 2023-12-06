@@ -46,8 +46,25 @@ export const NavBar = ({ scrollLocked, setScrollLocked }) => {
     }
   }
   )
-  console.log(navbarToggled, activeLink)
 
+  // useEffect(() => {
+  //   const onResize = () => {
+  //     if(window.innerWidth > 991){
+  //       setScrollLocked(true);
+  //       // setNavbarToggled(true);
+  //     }else{
+  //       setScrollLocked(false);
+  //       // setNavbarToggled(false);
+  //     }
+  //   }
+
+  //   console.log(window.innerWidth, navbarToggled)
+    
+  //   window.addEventListener("resize", onResize);
+
+  //   return () => window.removeEventListener("resize", onResize);
+  // }, []
+  // )
 
   return (
     <Navbar expand="lg" expanded={navbarToggled} className= {scrolled ? "scrolled": ''}>
@@ -55,8 +72,7 @@ export const NavBar = ({ scrollLocked, setScrollLocked }) => {
         <Navbar.Brand href="#home">
             <img src={logo} alt="Logo"/>
         </Navbar.Brand>
-        {/* <Navbar.Toggle onClick={() => setNavbarToggled(navbarToggled ? false : "navbarToggled")} aria-expanded={!navbarToggled ? "false" : "true"}/> */}
-        <Navbar.Toggle onClick={handleNavbarCollapse} aria-expanded={!navbarToggled ? "false" : "true"}/>
+        <Navbar.Toggle onClick={handleNavbarCollapse} aria-expanded={!navbarToggled ? false : true}/>
           <Navbar.Collapse>
             {/* <div className="burger-menu"> */}
               <Nav className="me-auto">
