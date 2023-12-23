@@ -1,16 +1,13 @@
 /************ NAVBAR GENERAL ************/
 .navbar-container {
     position: absolute;
-    top: 10%;
-    left: 5%;
-    display: flex;
+    margin-top: calc(-3.2vw + -3.2vh + -3.2vmin);
 }
 
-nav.navbar {    
+nav.navbar {
     height: 15vh;
     position: fixed;
     width: 100%;
-    /* width: 100vw; */
 
     z-index: 9999;
     transition: 0.11s ease-in-out;
@@ -18,10 +15,7 @@ nav.navbar {
 }
 
 nav.navbar.scrolled {
-    /* background-color: #121212; */
     backdrop-filter: blur(100px);
-    
-    /* border-bottom: 1px solid rgba(245,238,230,.5); */
 }
 
 .brand-logo {
@@ -30,32 +24,27 @@ nav.navbar.scrolled {
     min-width: 8.125rem;
     min-width: calc(4.3vw + 4.3vh + 4.3vmin);
 
-    margin-top: calc(0.1vw + 0.1vh + 0.1vmin);
-    /* position: absolute; */
     position: fixed;
-    /* position: relative; */
-    /* top: 5%; */
+
+    margin-top: calc(3.1vw + 3.1vh + 3.1vmin);
+    
+    left: 5%;
 }
 
 /************ NAVBAR LEFT PORTION ************/
 span.navbar-link-left {
     display: inline-flex;
 
-    /* position: absolute; */
     position: fixed;
-    /* position: relative; */
 
     margin-top: 1.7rem;
-    margin-top: calc(0.9vw + 0.9vh + 0.9vmin);
     margin-top: calc(1.2vw + 1.2vh + 1.2vmin);
-    /* margin-top: calc(-0.22vw + -0.22vh + -0.22vmin); */
 
-    /* margin-left: calc(4vw + 4vh + 4vmin); */
-    left: 14.6%;
+    margin-left: calc(2vw + 2vh + 2vmin);
+    left: 10%;
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
-    /* font-weight: 400; */
     color: #fff !important;
     opacity: 0.75;
     
@@ -63,16 +52,13 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
     letter-spacing: 0.05rem;
     letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
 
-    /* padding: 0 25px; */
+    padding: 0 25px;
     padding: 0 1.5625rem;
-    padding: 0 calc(0.83vw + 0.83vh + 0.83vmin);
+    padding: 0 calc(0.7vw + 0.7vh + 0.7vmin);
 
     font-size: 18px; /* px here is a fallback for browsers which do not support the rem unit */
     font-size: 1.125rem;
     font-size: calc(0.6vw + 0.6vh + 0.6vmin);
-
-    /* margin-top: 1.7rem;
-    margin-top: calc(0.87vw + 0.87vh + 0.87vmin); */
 }
 
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
@@ -86,26 +72,16 @@ span.navbar-link-right {
     display: inline-flex;
     align-items: center;
 
-    /* margin-left: 30rem; */
-    /* margin-left: calc(15.9vw + 15.9vh + 15.9vmin); */
-    /* margin-left: calc(17.5vw + 17.5vh + 17.5vmin); */
-
     margin-top: 0.5rem;
-    margin-top: calc(0.27vw + 0.27vh + 0.27vmin);
     margin-top: calc(0.6vw + 0.6vh + 0.6vmin);
-    /* margin-top: calc(-0.85vw + -0.85vh + -0.85vmin); */
-
-    /* position: absolute; */
+    
     position: fixed;
-    right: 8%;
+    
+    right: 9%;
 }
 
 .social-icon {
     display: inline-flex;
-
-    /* margin-left: 14px;
-    margin-left: 0.875rem; */
-
     z-index: 2;
 }
 
@@ -119,10 +95,11 @@ span.navbar-link-right {
     line-height: 1;
     border: 1px solid rgba(255, 255, 255, 0.5);
 
-    /* width: 42px; */
+    width: 42px;
     width: 2.625rem;
     width: calc(1.4vw + 1.4vh + 1.4vmin);
-    /* height: 42px; */
+
+    height: 42px;
     height: 2.625rem;
     height: calc(1.4vw + 1.4vh + 1.4vmin);
 
@@ -133,10 +110,11 @@ span.navbar-link-right {
 .social-icon a::before {
     content: "";
 
-    /* width: 42px; */
+    width: 42px;
     width: 2.625rem;
     width: calc(1.4vw + 1.4vh + 1.4vmin);
-    /* height: 42px; */
+
+    height: 42px;
     height: 2.625rem;
     height: calc(1.4vw + 1.4vh + 1.4vmin);
 
@@ -167,16 +145,15 @@ span.navbar-link-right {
     color: #fff;
     border: 1px solid;
 
-    /* padding: 18px 34px; */
+    padding: 18px 34px;
     padding: 1.125rem 2.125rem;
     padding: calc(0.59vw + 0.59vh + 0.59vmin) calc(1.14vw + 1.14vh + 1.14vmin);
 
-    /* font-size: 18px; */
+    font-size: 18px;
     font-size: 1.125rem;
     font-size: calc(0.6vw + 0.6vh + 0.6vmin);
 
-
-    /* margin-left: 18px; */
+    margin-left: 18px;
     margin-left: 1.125rem;
     margin-left: calc(0.6vw + 0.6vh + 0.6vmin);
 
@@ -243,17 +220,23 @@ nav.navbar .navbar-toggler:focus {
 
 /* bottom bar of burger icon */
 nav.navbar .navbar-toggler-icon {
-    /* width: 30px; */
+    width: 30px;
     width: 1.875rem;
-    /* height: 24px; */
+    width: calc(1.2vw + 1.2vh + 1.2vmin);
+
+    height: 24px;
     height: 1.5rem;
+    height: calc(0.9vw + 0.9vh + 0.9vmin);
+
     background-image: none;
-    position: relative;
     border-bottom: 0.125rem solid #fff;
     transition: all 300ms linear;
-    /* top: -2px; */
-    top: -0.125rem;
     z-index: 3;
+
+    position: fixed;
+    margin-top: calc(1.1vw + 1.1vh + 1.1vmin);
+
+    right: 9%;
 }
 
 nav.navbar .navbar-toggler-icon:focus {
@@ -263,14 +246,19 @@ nav.navbar .navbar-toggler-icon:focus {
 /* top & middle bar of burger icon */
 nav.navbar .navbar-toggler-icon:after,
 nav.navbar .navbar-toggler-icon:before {
-    /* width: 30px; */
+    width: 30px;
     width: 1.875rem;
+    width: calc(1.2vw + 1.2vh + 1.2vmin);
+
     position: absolute;
-    /* height: 2px; */
-    height: 0.125rem;
+
+    height: 2px;
+    height: 0.125rem; /* thickness of line */
+
     background-color: #fff;
-    /* top: 0; */
+
     left: 0;
+    top: 0;
     content: '';
     z-index: 2;
     transition: all 300ms linear;
@@ -278,56 +266,37 @@ nav.navbar .navbar-toggler-icon:before {
 
 /* positioning of middle bar of burger icon */
 nav.navbar .navbar-toggler-icon:after {
-    /* top: 11px; */
-    top: 0.6875rem;
+    margin-top: calc(0.4vw + 0.4vh + 0.4vmin);
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
     transform: rotate(45deg);
     background-color: #fff;
-    /* height: 2px; */
-    height: 0.125rem;
-    /* width: 40px; */
+
+    width: 40px;
     width: 2.5rem;
-    /* left: -20px; */
-    left: -0.625rem;
+    width: calc(1.6vw + 1.6vh + 1.6vmin);
+
+    left: -49%;
+
+    margin-top: 0.65rem;
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
     transform: translateY(10px) rotate(-45deg);
     background-color: #fff;
-    /* height: 2px; */
-    height: 0.125rem;
-    /* width: 40px; */
+
+    width: 40px;
     width: 2.5rem;
-    /* left: -20px; */
-    left: -0.625rem;
+    width: calc(1.6vw + 1.6vh + 1.6vmin);
+
+    left: -49%;
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     border-color: transparent;
 }
 
-
-/* MEDIA QUERIES (XL DEVICE) */
-/* @media screen and (max-width: 1399px) {
-    span.navbar-link-right {
-        display: inline-flex;
-        align-items: center;
-        margin-left: 24vw;
-        margin-left: 19rem;
-    }
-} */
-
-/* MEDIA QUERIES (LG DEVICE) */
-/* @media screen and (max-width: 1199px) {
-    span.navbar-link-right {
-        display: inline-flex;
-        align-items: center;
-        margin-left: 12vw;
-        margin-left: 8rem;
-    }
-} */
 
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px){
@@ -356,15 +325,16 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         min-width: 10rem;
     }
 
+
     /* Burger Menu: Home, Skills, Projects Button */
     nav.navbar .navbar-nav .nav-link.navbar-link {
         font-weight: 400;
         color: #fff !important;
         letter-spacing: 0.8px;
-        /* padding: 0 25px; */
-        padding: 0 1.563rem;
-        /* font-size: 28px; */
-        font-size: 1.75rem;
+        
+        padding: 0 1.563rem; 
+        
+        font-size: 1.75rem;  
         opacity: 0.75;
         margin-top: 2rem;
     }
@@ -372,19 +342,24 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     span.navbar-link-right {
         margin: 0 auto;
         flex-direction: column;
-        flex-flow: column-reverse; /* put Contact button in front of social icons */
+
+        flex-flow: column-reverse;  /* put Contact button in front of social icons */
     }
 
     /* Contact Button */
     .navbar-link-right button {
         font-weight: 400;
         color: #fff !important;
-        /* letter-spacing: 0.8px; */
-        letter-spacing: 0.05rem;
-        /* padding: 0 25px; */
-        padding: 0 1.563rem;
-        /* font-size: 28px; */
-        font-size: 1.75rem;
+       
+        letter-spacing: 0.8px;
+        letter-spacing: 0.05rem; 
+       
+        padding: 0 25px;
+        padding: 0 1.563rem; 
+     
+        font-size: 28px;
+        font-size: 1.75rem;  
+
         opacity: 0.75;
         margin: 2rem 0 0 0;
         border: none;
@@ -405,8 +380,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     .social-icon {
         display: inline-flex;
         margin-left: 0;
-        z-index: 2;
         margin-top: 6rem;
+        z-index: 2;
         gap: 1rem;
     }
 }

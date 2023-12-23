@@ -31,7 +31,7 @@
   color: #fff;
   font-weight: 700;
   font-size: 1.25rem;
-  font-size: calc(0.67vw + 0.67vh + 0.67vmin) !important;
+  font-size: calc(0.67vw + 0.67vh + 0.67vmin);
   
   margin: 9.5% 0 0 0.5%;
   margin: calc(1.5vw + 1.5vh + 1.5vmin) 0 0 calc(0.07vw + 0.07vh + 0.07vmin);
@@ -42,17 +42,17 @@
 
 .banner button svg {
   width: 1.3rem;
-  width: calc(0.8vw + 0.8vh + 0.8vmin) !important;
+  width: calc(0.8vw + 0.8vh + 0.8vmin);
   height: auto;
   margin-left: 0.6rem; /* 10px */
-  margin-left: calc(0.4vw + 0.4vh + 0.4vmin) !important; 
+  margin-left: calc(0.4vw + 0.4vh + 0.4vmin); 
   transition: 0.3s ease-in-out;
   line-height: 1; 
 }
 
 .banner button:hover svg {
   margin-left: 1.3rem;
-  margin-left: calc(0.8vw + 0.8vh + 0.8vmin) !important; /* 1.5rem 25px */
+  margin-left: calc(0.8vw + 0.8vh + 0.8vmin); /* 1.5rem 25px */
 }
 
 .banner img {
@@ -78,11 +78,18 @@
 }
 
 @media screen and (max-width: 991px) {
+  .banner-content {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
   .banner img {
-    animation: updown 3s linear infinite;
-    width: calc(18vw + 18vh + 18vmin);
-    position: absolute;
-    top: 31%;
-    right: 3%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    top: 53%;
+    left: 3%;
   }
 }
