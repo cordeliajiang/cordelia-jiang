@@ -16,13 +16,16 @@
 .banner h1 {
   letter-spacing: 0.05rem;
   letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+
   line-height: 1;
+
   margin-bottom: 3.2%;
   margin-bottom: calc(0.5vw + 0.5vh + 0.5vmin);
 }
 
 .banner h3 {
   font-weight: lighter;
+
   margin-left: 0.5%;
   margin-left: calc(0.07vw + 0.07vh + 0.07vmin);
 }
@@ -30,6 +33,7 @@
 .banner button {
   color: #fff;
   font-weight: 700;
+
   font-size: 1.25rem;
   font-size: calc(0.67vw + 0.67vh + 0.67vmin);
   
@@ -43,9 +47,10 @@
 .banner button svg {
   width: 1.3rem;
   width: calc(0.8vw + 0.8vh + 0.8vmin);
-  height: auto;
+
   margin-left: 0.6rem; /* 10px */
   margin-left: calc(0.4vw + 0.4vh + 0.4vmin); 
+
   transition: 0.3s ease-in-out;
   line-height: 1; 
 }
@@ -79,16 +84,14 @@
 
 @media screen and (max-width: 991px) {
   .banner-content {
-    top: 40%;
+    top: 40.3%;
     left: 50%;
     transform: translate(-50%, -50%);
     white-space: nowrap;
   }
 
   .banner img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     top: 53%;
     left: 3%;
   }
