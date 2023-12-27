@@ -201,11 +201,9 @@ span.navbar-link-right {
     transition: 0.3s ease-in-out;
 }
 
-
 .burger-menu-logo { 
     display: none;
 }
-
 
 nav.navbar .navbar-toggler {
     border: none;
@@ -234,7 +232,7 @@ nav.navbar .navbar-toggler-icon {
     z-index: 3;
 
     position: fixed;
-    margin-top: calc(1.1vw + 1.1vh + 1.1vmin);
+    margin-top: calc(1.2vw + 1.2vh + 1.2vmin);
 
     right: 9%;
 }
@@ -242,6 +240,7 @@ nav.navbar .navbar-toggler-icon {
 nav.navbar .navbar-toggler-icon:focus {
     border-bottom: 2px solid #fff;
 }
+
 
 /* top & middle bar of burger icon */
 nav.navbar .navbar-toggler-icon:after,
@@ -264,6 +263,7 @@ nav.navbar .navbar-toggler-icon:before {
     transition: all 300ms linear;
 }
 
+
 /* positioning of middle bar of burger icon */
 nav.navbar .navbar-toggler-icon:after {
     margin-top: calc(0.4vw + 0.4vh + 0.4vmin);
@@ -275,11 +275,12 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
 
     width: 40px;
     width: 2.5rem;
-    width: calc(1.6vw + 1.6vh + 1.6vmin);
+    width: calc(1.5vw + 1.5vh + 1.5vmin);
 
-    left: -49%;
+    top: -5%;
+    left: -30%;
 
-    margin-top: 0.65rem;
+    margin: 0.6rem -0.55rem;
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
@@ -288,9 +289,12 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
 
     width: 40px;
     width: 2.5rem;
-    width: calc(1.6vw + 1.6vh + 1.6vmin);
+    width: calc(1.5vw + 1.5vh + 1.5vmin);
 
-    left: -49%;
+    top: -5%;
+    left: -30%;
+
+    margin: -0.05rem -0.55rem;
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
@@ -300,10 +304,6 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px){
-    .navbar-nav {
-        margin: 0 auto;
-    }
-
     .navbar-collapse {    
         background-color: black;
         position: fixed;
@@ -311,60 +311,70 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         top: 0;
         width: 100%;
         height: 100vh;  
-        padding: 6.4rem 0 6.4rem 0;
+        padding: 6.4rem 0;
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
     }
 
     .burger-menu-logo { 
         display: flex;
+
         margin: 1rem auto 2rem auto;
         width: 10rem;
-        min-width: 10rem;
     }
-
 
     /* Burger Menu: Home, Skills, Projects Button */
     nav.navbar .navbar-nav .nav-link.navbar-link {
-        font-weight: 400;
-        color: #fff !important;
         letter-spacing: 0.8px;
         
-        padding: 0 1.563rem; 
+        padding: 0 1.563rem;
         
-        font-size: 1.75rem;  
+        font-size: 1.75rem;
+        font-size: calc(1.1vw + 1.1vh + 1.1vmin); 
+   
         opacity: 0.75;
-        margin-top: 2rem;
+
+        margin-bottom: 2rem;
+    }
+
+    span.navbar-link-left {
+        margin: auto auto;
+        flex-direction: column;
+
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -5%);
     }
 
     span.navbar-link-right {
-        margin: 0 auto;
         flex-direction: column;
+        flex-flow: column-reverse; /* put Contact button in front of social icons */
 
-        flex-flow: column-reverse;  /* put Contact button in front of social icons */
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, 113%);
     }
 
     /* Contact Button */
     .navbar-link-right button {
+        margin: auto 2rem;
         font-weight: 400;
         color: #fff !important;
        
         letter-spacing: 0.8px;
         letter-spacing: 0.05rem; 
-       
-        padding: 0 25px;
-        padding: 0 1.563rem; 
+        letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
      
         font-size: 28px;
         font-size: 1.75rem;  
+        font-size: calc(1.1vw + 1.1vh + 1.1vmin);
 
         opacity: 0.75;
-        margin: 2rem 0 0 0;
+
         border: none;
-        padding: auto;
         transition: none;
+        padding: 0
     }
 
     .navbar-link-right button:hover,
@@ -378,10 +388,27 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     }
 
     .social-icon {
-        display: inline-flex;
-        margin-left: 0;
-        margin-top: 6rem;
-        z-index: 2;
+        margin-top: 5rem;
         gap: 1rem;
+    }
+
+    .social-icon a {
+        width: 44px;
+        width: 2.725rem;
+        width: calc(1.7vw + 1.7vh + 1.7vmin);
+    
+        height: 44px;
+        height: 2.725rem;
+        height: calc(1.7vw + 1.7vh + 1.7vmin);
+    }
+    
+    .social-icon a::before {
+        width: 44px;
+        width: 2.725rem;
+        width: calc(1.7vw + 1.7vh + 1.7vmin);
+    
+        height: 44px;
+        width: 2.725rem;
+        height: calc(1.7vw + 1.7vh + 1.7vmin);
     }
 }
