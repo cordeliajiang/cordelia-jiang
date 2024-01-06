@@ -5,7 +5,7 @@ import { IoLogoHtml5, IoLogoCss3 } from 'react-icons/io';
 import { DiJavascript } from 'react-icons/di';
 import { BsGit } from 'react-icons/bs';
 import { FaReact, FaNodeJs, FaPython, FaLaravel } from 'react-icons/fa';
-import { SiBootstrap, SiPhp, SiMysql, SiSqlite, SiAdobexd, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiArchicad } from 'react-icons/si';
+import { SiBootstrap, SiPhp, SiMysql, SiSqlite, SiPostman, SiAdobexd, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiArchicad } from 'react-icons/si';
 import { TbBrandThreejs } from 'react-icons/tb';
 import colorSharp from "../assets/img/color-sharp.png";
 
@@ -17,10 +17,11 @@ export const Experience = () => {
     })
 
     return (
-        <section>
+        <section className="skills" id="skills">
             <Container>
                 <div className="spotlight"></div>
                 <div className="container experience-container">
+                    <div class="square"></div>
                     <h2>Programming & Design Skills</h2>
                     <div className='experience-content'>
                         <article className='experience-details'>
@@ -99,6 +100,12 @@ export const Experience = () => {
                             <BsGit className='experience-details-icon'/>
                             <div>
                                 <h5>Git</h5>
+                            </div>
+                        </article>
+                        <article className='experience-details'>
+                            <SiPostman className='experience-details-icon'/>
+                            <div>
+                                <h5>Postman</h5>
                             </div>
                         </article>
                         <article className='experience-details'>
