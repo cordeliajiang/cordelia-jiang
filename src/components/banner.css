@@ -1,7 +1,71 @@
-.banner-content {
+.banner-container {
+  width: 100%;
+  max-width: 100%;
   position: absolute;
-  top: 43%;
-  left: 7%;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* justify-content: space-between; */
+
+  margin-top: 15vh;
+  height: 85vh;
+
+  left: 0;
+  right: 0;
+}
+
+.banner-content {
+  display: flex;
+  justify-content: center;
+  /* height: 50%; */
+
+  width: 35%;
+  /* width: calc(17vw + 17vh + 17vmin); */
+
+  position: relative;
+  /* margin-top: calc(11vw + 11vh + 11vmin); */
+
+  /* margin-left: calc(3.5vw + 3.5vh + 3.5vmin); */
+  /* margin-left: 5%; */
+
+  /* align-items: center; */
+
+  margin-left: auto;
+  margin-left: calc(3.5vw + 3.5vh + 3.5vmin);
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  /* left: 7%; */
+}
+
+.banner-header-img {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+
+  animation: updown 3s linear infinite;
+
+  width: 65%;
+  max-width: calc(18vw + 18vh + 18vmin);
+  
+  height: fit-content;
+
+  position: relative;
+
+  /* margin-top: calc(7vw + 7vh + 7vmin); */
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-right: calc(2vw + 2vh + 2vmin);
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  /* right: 3.5%; */
 }
 
 .banner {
@@ -48,6 +112,8 @@
   width: 1.3rem;
   width: calc(0.8vw + 0.8vh + 0.8vmin);
 
+  height: auto;
+
   margin-left: 0.6rem; /* 10px */
   margin-left: calc(0.4vw + 0.4vh + 0.4vmin); 
 
@@ -58,14 +124,6 @@
 .banner button:hover svg {
   margin-left: 1.3rem;
   margin-left: calc(0.8vw + 0.8vh + 0.8vmin); /* 1.5rem 25px */
-}
-
-.banner img {
-  animation: updown 3s linear infinite;
-  width: calc(18vw + 18vh + 18vmin);
-  position: absolute;
-  top: 31%;
-  right: 3%;
 }
 
 @keyframes updown {
@@ -83,16 +141,28 @@
 }
 
 @media screen and (max-width: 991px) {
-  .banner-content {
-    top: 40.3%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
+  .banner-container {
+    flex-direction: column;
   }
+}
 
-  .banner img {
-    margin: 0 auto;
-    top: 53%;
-    left: 3%;
+@media screen and (max-width: 575px) {
+  .banner-content {
+    white-space: nowrap;
+    margin-left: auto;
+    
+    /* left: auto; */
+    
+    /* margin-top: calc(8vw + 8vh + 8vmin); */
+  }
+  
+  .banner-header-img {
+    width: 100%;
+    /* margin-top: auto; */
+
+    margin-top: calc(2vw + 2vh + 2vmin);
+
+    /* right: auto; */
+    margin-right: auto;
   }
 }
