@@ -1,47 +1,59 @@
 /************ NAVBAR GENERAL ************/
-.navbar-container {
+/* .navbar-container { */
+.navbar>.container {
+    width: 100%;
+    max-width: 100%;
     position: absolute;
-    margin-top: calc(-3.2vw + -3.2vh + -3.2vmin);
+    display: flex;
+    top: 0;
+
+    left: 0;
+    right: 0;
 }
 
 nav.navbar {
+    flex-direction: column;
     height: 15vh;
     position: fixed;
     width: 100%;
+    max-width: 100%;
 
     z-index: 9999;
     transition: 0.11s ease-in-out;
     background-color: transparent;
+
+    display: flex;
+
+    flex-wrap: wrap;
 }
 
 nav.navbar.scrolled {
     backdrop-filter: blur(100px);
 }
 
-.brand-logo {
-    width: 8.125rem; /* 130px */
+/* .brand-logo { */
+.navbar-brand {
+    display: flex;
+    width: 8.125rem; 
     width: calc(4.3vw + 4.3vh + 4.3vmin);
     min-width: 8.125rem;
     min-width: calc(4.3vw + 4.3vh + 4.3vmin);
 
-    position: fixed;
-
-    margin-top: calc(3.1vw + 3.1vh + 3.1vmin);
-    
-    left: 5%;
+    position: relative;
 }
 
 /************ NAVBAR LEFT PORTION ************/
 span.navbar-link-left {
-    display: inline-flex;
+    width: 50%;
+    height: 15vh;
+    position: absolute;
 
-    position: fixed;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
 
-    margin-top: 1.7rem;
-    margin-top: calc(1.2vw + 1.2vh + 1.2vmin);
-
-    margin-left: calc(2vw + 2vh + 2vmin);
-    left: 10%;
+    left: 0;
+    left: 3%;
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
@@ -69,15 +81,18 @@ nav.navbar .navbar-nav a.nav-link.navbar-link.active {
 
 /************ NAVBAR RIGHT PORTION ************/
 span.navbar-link-right {
-    display: inline-flex;
+    width: 50%;
+    height: 15vh;
+    position: absolute;
+    justify-content: flex-end;
+
+    right: 0;
+    right: 5%;
+
     align-items: center;
 
-    margin-top: 0.5rem;
-    margin-top: calc(0.6vw + 0.6vh + 0.6vmin);
-    
-    position: fixed;
-    
-    right: 9%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .social-icon {
@@ -304,6 +319,22 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px){
+    /* .navbar-container {
+        flex-direction: column;
+        align-items: center;
+    } */
+
+    .navbar-link-left {
+        flex-direction: column;
+    }
+
+    .navbar-link-right {
+        /* flex-direction: column; */
+        flex-flow: column-reverse;
+        margin: auto;
+    }
+
+
     .navbar-collapse {    
         background-color: black;
         position: fixed;
@@ -317,6 +348,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         flex-direction: column;
     }
 
+    
     .burger-menu-logo { 
         display: flex;
 
@@ -325,7 +357,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     }
 
     /* Burger Menu: Home, Skills, Projects Button */
-    nav.navbar .navbar-nav .nav-link.navbar-link {
+    /* nav.navbar .navbar-nav .nav-link.navbar-link {
         letter-spacing: 0.8px;
         
         padding: 0 1.563rem;
@@ -344,16 +376,16 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
         top: 40%;
         left: 50%;
-        transform: translate(-50%, -5%);
-    }
+        transform: translate(-50%, -10%);
+    } */
 
     span.navbar-link-right {
-        flex-direction: column;
-        flex-flow: column-reverse; /* put Contact button in front of social icons */
+        /* flex-direction: column; */
+        /* flex-flow: column-reverse; /* put Contact button in front of social icons */
 
-        top: 40%;
+        /* top: 40%;
         left: 50%;
-        transform: translate(-50%, 113%);
+        transform: translate(-50%, 108%); */
     }
 
     /* Contact Button */
@@ -366,9 +398,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         letter-spacing: 0.05rem; 
         letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
      
-        font-size: 28px;
+        /* font-size: 28px;
         font-size: 1.75rem;  
-        font-size: calc(1.1vw + 1.1vh + 1.1vmin);
+        font-size: calc(1.1vw + 1.1vh + 1.1vmin); */
 
         opacity: 0.75;
 
@@ -377,6 +409,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         padding: 0
     }
 
+    
     .navbar-link-right button:hover,
     .navbar-link-right button.active {
         opacity: 1;
@@ -387,7 +420,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         transition: none;
     }
 
-    .social-icon {
+    /* .social-icon {
         margin-top: 5rem;
         gap: 1rem;
     }
@@ -410,5 +443,5 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         height: 44px;
         width: 2.725rem;
         height: calc(1.7vw + 1.7vh + 1.7vmin);
-    }
+    } */
 }
