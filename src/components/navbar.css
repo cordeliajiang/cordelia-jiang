@@ -1,10 +1,10 @@
 /************ NAVBAR GENERAL ************/
-/* .navbar-container { */
 .navbar>.container {
     width: 100%;
     max-width: 100%;
     position: absolute;
     display: flex;
+
     top: 0;
 
     left: 0;
@@ -13,7 +13,8 @@
 
 nav.navbar {
     flex-direction: column;
-    height: 15vh;
+    /* height: 15vh; */
+    min-height: 15vh;
     position: fixed;
     width: 100%;
     max-width: 100%;
@@ -31,7 +32,8 @@ nav.navbar.scrolled {
     backdrop-filter: blur(100px);
 }
 
-/* .brand-logo { */
+
+/************ NAVBAR LEFT PORTION ************/
 .navbar-brand {
     display: flex;
     width: 8.125rem; 
@@ -42,7 +44,10 @@ nav.navbar.scrolled {
     position: relative;
 }
 
-/************ NAVBAR LEFT PORTION ************/
+.burger-navbar-logo { 
+    display: none;
+}
+
 span.navbar-link-left {
     width: 50%;
     height: 15vh;
@@ -204,24 +209,30 @@ span.navbar-link-right {
     position: absolute;
 }
 
+/* navbar burger icon toggler */
+.burger-menu-icon-container {
+    width: 50%;
+    height: 15vh !important;
 
-/************ BURGER MENU ************/
-.navbar-collapse.collapsing {
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s ease-in-out;
-}
+    position: absolute;
 
-.navbar-collapse {
-    transition: 0.3s ease-in-out;
-}
+    right: 0;
+    right: 7%;
+    top: 0;
 
-.burger-menu-logo { 
-    display: none;
+    align-items: center;
+    justify-content: flex-end;
+
+    /* display: block; */
+    display: flex;
+    flex-wrap: wrap;
 }
 
 nav.navbar .navbar-toggler {
     border: none;
+    position: relative;
+    padding: 0;
+    /* line-height: 0; */
 }
 
 nav.navbar .navbar-toggler:active,
@@ -230,9 +241,9 @@ nav.navbar .navbar-toggler:focus {
     box-shadow: none;
 }
 
-
 /* bottom bar of burger icon */
 nav.navbar .navbar-toggler-icon {
+    display: block;
     width: 30px;
     width: 1.875rem;
     width: calc(1.2vw + 1.2vh + 1.2vmin);
@@ -240,39 +251,44 @@ nav.navbar .navbar-toggler-icon {
     height: 24px;
     height: 1.5rem;
     height: calc(0.9vw + 0.9vh + 0.9vmin);
+    height: 33.33%;
 
     background-image: none;
-    border-bottom: 0.125rem solid #fff;
+
+    /* border-top: 0.07rem solid #fff; */
+    border-bottom: calc(0.07vw + 0.07vh + 0.07vmin) solid #fff;
+    /* border-radius: 0.3rem; */
+
     transition: all 300ms linear;
     z-index: 3;
 
-    position: fixed;
-    margin-top: calc(1.2vw + 1.2vh + 1.2vmin);
-
-    right: 9%;
+    position: relative;
 }
 
 nav.navbar .navbar-toggler-icon:focus {
-    border-bottom: 2px solid #fff;
+    /* border-bottom: 2px solid #fff; */
 }
 
 
 /* top & middle bar of burger icon */
 nav.navbar .navbar-toggler-icon:after,
 nav.navbar .navbar-toggler-icon:before {
+    display: block;
     width: 30px;
     width: 1.875rem;
     width: calc(1.2vw + 1.2vh + 1.2vmin);
 
-    position: absolute;
+    position: relative;
 
-    height: 2px;
-    height: 0.125rem; /* thickness of line */
+    border-bottom: 0.07rem solid #fff;
+    border-bottom: calc(0.07vw + 0.07vh + 0.07vmin) solid #fff;
+    /* border-radius: 0.3rem; */
 
     background-color: #fff;
 
     left: 0;
     top: 0;
+
     content: '';
     z-index: 2;
     transition: all 300ms linear;
@@ -280,8 +296,16 @@ nav.navbar .navbar-toggler-icon:before {
 
 
 /* positioning of middle bar of burger icon */
-nav.navbar .navbar-toggler-icon:after {
-    margin-top: calc(0.4vw + 0.4vh + 0.4vmin);
+nav.navbar .navbar-toggler-icon::before {
+    /* margin-top: calc(0.35vw + 0.35vh + 0.35vmin); */
+    /* margin-bottom: calc(0.35vw + 0.35vh + 0.35vmin); */
+    margin-bottom: 33.33%;
+}
+
+nav.navbar .navbar-toggler-icon::after {
+    /* margin-bottom: calc(0.35vw + 0.35vh + 0.35vmin); */
+    margin-bottom: 33.33%;
+    /* margin-bottom: calc(0.35vw + 0.35vh + 0.35vmin); */
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
@@ -291,25 +315,27 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
     width: 40px;
     width: 2.5rem;
     width: calc(1.5vw + 1.5vh + 1.5vmin);
-
-    top: -5%;
+    
     left: -30%;
 
     margin: 0.6rem -0.55rem;
+    margin: calc(-0.07vw + -0.07vh + -0.07vmin) calc(-0.35vw + -0.35vh + -0.35vmin);
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
-    transform: translateY(10px) rotate(-45deg);
+    margin-bottom: 50%;
+    
+    transform: rotate(-45deg);
     background-color: #fff;
 
     width: 40px;
     width: 2.5rem;
     width: calc(1.5vw + 1.5vh + 1.5vmin);
 
-    top: -5%;
     left: -30%;
 
-    margin: -0.05rem -0.55rem;
+    margin: -0.6rem -0.55rem;
+    margin: auto calc(-0.35vw + -0.35vh + -0.35vmin);
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
@@ -319,96 +345,154 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /* MEDIA QUERIES (MD DEVICE) */
 @media screen and (max-width: 991px){
-    /* .navbar-container {
-        flex-direction: column;
+    /************ BURGER MENU NAVBAR ************/
+    .burger-navbar-logo { 
+        display: flex;
+        width: 8.125rem; 
+        width: calc(4.3vw + 4.3vh + 4.3vmin);
+        min-width: 8.125rem;
+        min-width: calc(4.3vw + 4.3vh + 4.3vmin);
+
+        position: relative;
+    }
+
+    .burger-navbar-logo-container {
+        width: 50%;
+        height: 15vh;
+        position: absolute;
+
         align-items: center;
-    } */
+        justify-content: flex-start;
+        display: flex;
+        flex-wrap: wrap;
 
-    .navbar-link-left {
-        flex-direction: column;
+        left: 0;
+        left: 3%;
+
+        top: 0;
     }
 
-    .navbar-link-right {
-        /* flex-direction: column; */
-        flex-flow: column-reverse;
-        margin: auto;
+    /************ BURGER MENU ************/
+    .navbar-nav {
+        margin: 15vh auto;
+        top: 0;
+        width: 100%;
+        height: 85vh;
     }
-
 
     .navbar-collapse {    
         background-color: black;
         position: fixed;
+
         left: 0;
         top: 0;
+
         width: 100%;
         height: 100vh;  
-        padding: 6.4rem 0;
+
+        /* padding: 6.4rem 0; */
         text-align: center;
-        display: flex;
-        flex-direction: column;
+
+        /* display: flex;
+        flex-direction: column; */
+
+        transition: 0.3s ease-in-out;
     }
 
-    
-    .burger-menu-logo { 
+    .navbar-collapse.collapsing {
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+    }
+
+    .navbar-brand {
         display: flex;
 
-        margin: 1rem auto 2rem auto;
+        margin: 0 !important;
+        margin: 1rem 0 2rem 0 !important;
+        
         width: 10rem;
-    }
 
-    /* Burger Menu: Home, Skills, Projects Button */
-    /* nav.navbar .navbar-nav .nav-link.navbar-link {
-        letter-spacing: 0.8px;
-        
-        padding: 0 1.563rem;
-        
-        font-size: 1.75rem;
-        font-size: calc(1.1vw + 1.1vh + 1.1vmin); 
-   
-        opacity: 0.75;
-
-        margin-bottom: 2rem;
+        pointer-events: none;
     }
 
     span.navbar-link-left {
-        margin: auto auto;
-        flex-direction: column;
+        /* height: 50vh; */
+        
+        position: relative;
+        height: auto;
+        width: 50%;
+        left: 0;
 
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -10%);
-    } */
+        flex-direction: column;
+        flex-wrap: nowrap !important;
+
+        margin: 0 auto;
+
+        gap: 1rem;
+    }
+
+    /* Burger Menu: Home, Skills, Projects Button */
+    nav.navbar .navbar-nav .nav-link.navbar-link {
+        font-weight: 400;
+        color: #fff !important;
+        letter-spacing: 0.8px;
+        
+        padding: 0 25px;
+        padding: 0 1.563rem;
+
+        font-size: 28px;
+        font-size: 1.75rem;  
+        font-size: calc(1.1vw + 1.1vh + 1.1vmin);
+
+        opacity: 0.75;
+        /* margin-top: 2rem; */
+    }
 
     span.navbar-link-right {
-        /* flex-direction: column; */
-        /* flex-flow: column-reverse; /* put Contact button in front of social icons */
+        /* height: 50vh; */
+        position: relative;
+        height: auto;
+        width: 50%;
+        left: 0;
+        flex-flow: column-reverse;
 
-        /* top: 40%;
-        left: 50%;
-        transform: translate(-50%, 108%); */
+        margin: 0 auto;
+
+        /* justify-content: flex-start !important; */
+
+        /* margin-top: 14vh; */
     }
 
     /* Contact Button */
     .navbar-link-right button {
-        margin: auto 2rem;
+        margin: auto;
         font-weight: 400;
         color: #fff !important;
        
         letter-spacing: 0.8px;
         letter-spacing: 0.05rem; 
         letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
-     
-        /* font-size: 28px;
-        font-size: 1.75rem;  
-        font-size: calc(1.1vw + 1.1vh + 1.1vmin); */
 
         opacity: 0.75;
 
         border: none;
         transition: none;
-        padding: 0
-    }
 
+        padding: 0 25px;
+        padding: 0 1.5625rem;
+        padding: 0 calc(0.7vw + 0.7vh + 0.7vmin);
+
+        font-size: 18px;
+        font-size: 1.125rem;
+        font-size: calc(0.6vw + 0.6vh + 0.6vmin);
+        font-size: 28px;
+        font-size: 1.75rem;  
+        font-size: calc(1.1vw + 1.1vh + 1.1vmin);
+
+        display: block;
+        margin-top: 1rem;
+    }
     
     .navbar-link-right button:hover,
     .navbar-link-right button.active {
@@ -419,29 +503,17 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         background-color: transparent;
         transition: none;
     }
+   
+    
+    .social-icon {
+        /* display: inline-flex; */
+        /* margin-left: 0; */
 
-    /* .social-icon {
-        margin-top: 5rem;
-        gap: 1rem;
-    }
+        /* margin: auto; */
 
-    .social-icon a {
-        width: 44px;
-        width: 2.725rem;
-        width: calc(1.7vw + 1.7vh + 1.7vmin);
-    
-        height: 44px;
-        height: 2.725rem;
-        height: calc(1.7vw + 1.7vh + 1.7vmin);
+        /* z-index: 2; */
+
+        margin-top: 6rem;
+        gap: 0.5rem;
     }
-    
-    .social-icon a::before {
-        width: 44px;
-        width: 2.725rem;
-        width: calc(1.7vw + 1.7vh + 1.7vmin);
-    
-        height: 44px;
-        width: 2.725rem;
-        height: calc(1.7vw + 1.7vh + 1.7vmin);
-    } */
 }
