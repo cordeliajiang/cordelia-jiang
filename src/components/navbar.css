@@ -42,6 +42,7 @@ nav.navbar.scrolled {
     min-width: calc(4.3vw + 4.3vh + 4.3vmin);
 
     position: relative;
+    margin-right: 0 !important;
 }
 
 .burger-navbar-logo { 
@@ -113,7 +114,9 @@ span.navbar-link-right {
     align-items: center;
     justify-content: center;
     line-height: 1;
+
     border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 0.1vw solid rgba(255, 255, 255, 0.5);
 
     width: 42px;
     width: 2.625rem;
@@ -294,20 +297,17 @@ nav.navbar .navbar-toggler-icon:before {
     transition: all 300ms linear;
 }
 
-
 /* positioning of middle bar of burger icon */
 nav.navbar .navbar-toggler-icon::before {
-    /* margin-top: calc(0.35vw + 0.35vh + 0.35vmin); */
-    /* margin-bottom: calc(0.35vw + 0.35vh + 0.35vmin); */
     margin-bottom: 33.33%;
 }
 
+/* positioning of bottom bar of burger icon */
 nav.navbar .navbar-toggler-icon::after {
-    /* margin-bottom: calc(0.35vw + 0.35vh + 0.35vmin); */
     margin-bottom: 33.33%;
-    /* margin-bottom: calc(0.35vw + 0.35vh + 0.35vmin); */
 }
 
+/* cross on burger menu */
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
     transform: rotate(45deg);
     background-color: #fff;
@@ -319,7 +319,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
     left: -30%;
 
     margin: 0.6rem -0.55rem;
-    margin: calc(-0.07vw + -0.07vh + -0.07vmin) calc(-0.35vw + -0.35vh + -0.35vmin);
+    margin: calc(-0.055vw + -0.055vh + -0.055vmin) calc(-0.35vw + -0.35vh + -0.35vmin);
 }
 
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
@@ -408,28 +408,35 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     .navbar-brand {
         display: flex;
 
-        margin: 0 !important;
-        margin: 1rem 0 2rem 0 !important;
-        
-        width: 10rem;
+        width: 8.125rem; 
+        width: calc(7vw + 7vh + 7vmin);
+        min-width: 8.125rem;
+        min-width: calc(7vw + 7vh + 7vmin);
+
+        margin: 1rem 0 2rem 0;
+        margin: calc(1vw + 1vh + 1vmin) 0 calc(1.7vw + 1.7vh + 1.7vmin) 0;
 
         pointer-events: none;
+
+        padding: 0 !important;
     }
 
     span.navbar-link-left {
-        /* height: 50vh; */
+        height: 42.5vh;
         
         position: relative;
-        height: auto;
+        /* height: auto; */
         width: 50%;
         left: 0;
 
         flex-direction: column;
+        justify-content: flex-end;
         flex-wrap: nowrap !important;
 
         margin: 0 auto;
 
         gap: 1rem;
+        gap: 2vh;
     }
 
     /* Burger Menu: Home, Skills, Projects Button */
@@ -437,6 +444,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         font-weight: 400;
         color: #fff !important;
         letter-spacing: 0.8px;
+        letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
         
         padding: 0 25px;
         padding: 0 1.563rem;
@@ -448,14 +456,16 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         opacity: 0.75;
         /* margin-top: 2rem; */
     }
+    
 
     span.navbar-link-right {
-        /* height: 50vh; */
+        height: 42.5vh;
         position: relative;
-        height: auto;
+        /* height: auto; */
         width: 50%;
         left: 0;
         flex-flow: column-reverse;
+        justify-content: flex-end;
 
         margin: 0 auto;
 
@@ -491,7 +501,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         font-size: calc(1.1vw + 1.1vh + 1.1vmin);
 
         display: block;
+        
         margin-top: 1rem;
+        margin-top: 2vh;
     }
     
     .navbar-link-right button:hover,
@@ -514,6 +526,32 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         /* z-index: 2; */
 
         margin-top: 6rem;
+        margin-top: calc(4vw + 4vh + 4vmin);
+
         gap: 0.5rem;
+        gap: 1vw;
+    }
+
+    .social-icon a {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border: 0.15vw solid rgba(255, 255, 255, 0.5);
+    
+        width: 42px;
+        width: 2.625rem;
+        width: calc(1.7vw + 1.7vh + 1.7vmin);
+    
+        height: 42px;
+        height: 2.625rem;
+        height: calc(1.7vw + 1.7vh + 1.7vmin);
+    }
+
+    .social-icon a::before {
+        width: 42px;
+        width: 2.625rem;
+        width: calc(1.7vw + 1.7vh + 1.7vmin);
+    
+        height: 42px;
+        height: 2.625rem;
+        height: calc(1.7vw + 1.7vh + 1.7vmin);
     }
 }
