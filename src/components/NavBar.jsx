@@ -47,43 +47,50 @@ export const NavBar = ({ scrollLocked, setScrollLocked }) => {
   }
   )
 
+  const mediaQuery = '(max-width: 9999px)'   
+
   return (
     /* expand = "lg" sets burger icon appears on 991px */
-    <Navbar variant="dark" expand="lg" expanded = {navbarToggled} className = {scrolled ? "scrolled": ''}>
+    <Navbar expand= {mediaQuery} expanded = {navbarToggled} className = {scrolled ? "scrolled": ''}>
       <Container>
-        <div className="burger-navbar-logo-container">
-          <div className="burger-navbar-logo">
-            <a href="#home"><img src={logo} alt="Burger Navbar Logo"/></a>
-          </div>
+        <div className="navbar-brand-container">
+          <Navbar.Brand href="#home">
+            <img src={logo} alt="Brand Logo on Navbar"/>
+          </Navbar.Brand>
         </div>
-        <div className="burger-menu-icon-container">
+        <div className="menu-icon-container">
           <Navbar.Toggle onClick={handleNavbarCollapse} aria-expanded={!navbarToggled ? false : true}/>
         </div>
+        
         <Navbar.Collapse>
-          <Nav>
-            {/* if a link is clicked, highlight it and update the state, otherwise leave it as is */}
-            {/* since react doesn't reload the page the nav remains open */}
-            <span className="navbar-link-left">  
-              <Navbar.Brand href="#home">
-                <img src={logo} alt="Navbar Logo"/>
-              </Navbar.Brand>
-              <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('home')} }>Home</Nav.Link>
-              <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('skills')} }>Skills</Nav.Link>
-              <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('projects')} } >Projects</Nav.Link>
-            </span>
-            <span className="navbar-link-right">
+          <div className="nav-menu-overlay">
+            <Nav>
+              {/* since react doesn't reload the page, the nav remains open */}
+              {/* <span className="navbar-link-left">   */}
+                <div className="menu-logo">
+                  <a href="#home"><img src={logo} alt="Brand Logo on Menu"/></a>
+                </div>
+                <div className="nav-links">
+                  <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('home')} }>Home</Nav.Link>
+                  <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('skills')} }>Skills</Nav.Link>
+                  <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('projects')} } >Projects</Nav.Link>
+                {/* </span> */}
+                {/* <span className="navbar-link-right"> */}
+                    {/* <a href="#connect" onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('connect')} }>
+                      <button className="vvd">
+                        <span>Contact</span>
+                      </button>
+                    </a> */}
+                  <Nav.Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('connect')} } >Contact</Nav.Link>                
+                </div>
                 <div className="social-icon">
                   <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer"><img src={navLinkedinIcon} alt="replace with github url:xxxx"/></a>
                   <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer"><img src={navGithubIcon} alt=""/></a>
                   <a href="mailto:jiangcordelia@gmail.com"><img src={navEmailIcon} alt=""/></a>
                 </div>
-                <a href="#connect" onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('connect')} }>
-                  <button className="vvd">
-                    <span>Contact</span>
-                  </button>
-                </a>
-            </span>
-          </Nav>
+              {/* </span> */}
+            </Nav>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
