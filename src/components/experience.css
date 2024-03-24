@@ -1,4 +1,4 @@
-.skills-wrapper {
+.skills {
     margin-top: calc(4vw + 4vh + 4vmin);
 }
 
@@ -8,21 +8,7 @@
     width: 100%;
     max-width: 100%;
     max-height: 100vh;
-    background-image: url('../assets/img/skill-background2.png'); 
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.skills {
-    /* width: 100%;
-    max-width: 100%;
-    min-height: 100vh;
-    background-image: url('../assets/img/skill-background2.png'); 
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat; */
-    /* margin: calc(4vw + 4vh + 4vmin) auto; */
+    background: url('../assets/img/skill-background2.png') center/cover no-repeat;
 }
 
 .spotlight {
@@ -36,55 +22,20 @@
     z-index: 9999;
 }
 
-.square {
-    position: absolute;
-    background-color: #1a1a1a;
-    z-index: -1;
-    width: calc(25vw + 25vh + 25vmin);
-    width: 70%;
-
-    height: calc(33vw + 33vh + 33vmin);
-    height: 100%;
-
-    /* border-radius: 64px;
-    border-radius: calc(0.8vw + 0.8vw + 0.8vmin); */
-
-    /* top: 50%; /* Position the shape at the vertical center of its container */
-    left: 50%; /* Position the shape at the horizontal center of its container */
-    /* transform: translate(-50%, -50%); /* Move the shape back by half of its width and height */
-
-    /* max-width: none !important; */
-
-    /* top: 48%;
-    top: calc(11.7vw + 11.7vh + 11.7vmin);
-
-    left: 50%; */
-    /* left: calc(19.4vw + 19.4vh + 19.4vmin); */
-
-    /* transform: translate(-50%, -50%); */
-}
-
 .experience-container {
     position: absolute;
-    
-    /* text-align: center; */
-    
-    /* justify-content: center; */
-    /* height: 95vh; */
 
     display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
     display: -ms-flexbox;  /* TWEENER - IE 10 */
     display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
     display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
 
-    /* flex-wrap: wrap; */
     flex-direction: column;
 
     left: 0;
     right: 0;
 
     gap: calc(2vw + 2vh + 2vmin);
-    /* margin: calc(4vw + 4vh + 4vmin) auto; */
 }
 
 .experience-content {
@@ -93,11 +44,9 @@
     margin: 0 auto;
     background: var(--color-bg-variant);
 
-    /* border-radius: 2rem; */
     border: 1px solid transparent;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: repeat(auto-fit, minmax(calc(4vw + 4vh + 4vmin), 0fr));
 
     justify-content: center;
@@ -123,14 +72,12 @@
     justify-content: center;
 
     margin: 0 auto;
-    /* padding-top: calc(3vw + 3vh + 3vmin); */
-    /* padding-top: 6.5%; */
 }
 
 .experience-content h5 {
     font-size: 1.2rem;
     font-size: calc(0.55vw + 0.55vh + 0.55vmin);
-    /* margin: 0 auto; */
+
     max-width: fit-content;
     text-align: center;
 
@@ -146,37 +93,15 @@
 }
 
 .experience-details-icon {
-    color: var(--color-primary);
-
-    height: 3em;
-    height: calc(1.3vw + 1.3vh + 1.3vmin); /* change this can resolve the one column problem when resizing down from 9999px, but try see what else can resolve this */
-
-    width: 3em;
-    width: calc(1.3vw + 1.3vh + 1.3vmin);
-
-    /* margin-bottom: 10px;
-    margin-bottom: calc(0.3vw + 0.3vh + 0.3vmin); */
-    /* margin: 0 auto; */
-
     align-self: center;
 }
 
-.background-image-left {
-    /* top: 25%; */
-    transform: translate(-40%, 50%);
-    /* position: absolute; */
-    bottom: 0;
-    width: 40%;
-    z-index: -2;
-}
+.experience-details svg {
+    color: var(--color-primary);
 
-@media screen and (max-width: 213px) {
-    .skills {
-        min-height: 125vh;
-    }
-    
-    .experience-container {
-        height: 125vh;
-        max-height: 125vh;
-    }
-  }
+    height: 3em;
+    height: calc(1.3vw + 1.3vh + 1.3vmin);
+
+    width: 3em;
+    width: calc(1.3vw + 1.3vh + 1.3vmin);
+}
