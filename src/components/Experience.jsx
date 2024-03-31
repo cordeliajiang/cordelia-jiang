@@ -9,7 +9,7 @@ import { TbBrandThreejs } from 'react-icons/tb';
 
 export const Experience = () => {
     const [containerHeight, setContainerHeight] = useState('auto');
-    const [sectionBackgroundHeight, setSectionBackgroundHeight] = useState('auto');
+    const [skillsHeight, setSkillsHeight] = useState('auto');
     const experienceContentRef = useRef(null);
 
     useEffect(() => {
@@ -24,8 +24,8 @@ export const Experience = () => {
             const heightDiff = contentHeight - containerHeight;
             setContainerHeight(contentHeight > containerHeight ? containerHeight + heightDiff : 'auto');
 
-            // update section-background div's height to match with the updated height of experience-container div
-            setSectionBackgroundHeight(containerHeight);
+            // update skills div's height to match with the updated height of experience-container div
+            setSkillsHeight(containerHeight);
         };
 
         window.addEventListener('resize', updateHeights);
@@ -35,10 +35,10 @@ export const Experience = () => {
     }, []); // run only once on component mount
 
     return (
-        <section className="skills" id="skills">
-            <div className="section-background" style={{ minHeight: sectionBackgroundHeight }}></div>
+        <section className="skills" id="skills" style={{ minHeight: skillsHeight }}>
+            <div className="section-background"></div>
             <div className="experience-container" style={{ minHeight: containerHeight }}>
-                <h2>Skills</h2>
+                <h2>Programming & Design Skills</h2>
                 <div className='experience-content' ref={experienceContentRef}>
                     <SkillItem icon={<FaReact />} title="ReactJS" />
                     <SkillItem icon={<TbBrandThreejs />} title="ThreeJS" />

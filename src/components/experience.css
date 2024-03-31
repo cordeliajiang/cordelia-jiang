@@ -1,13 +1,15 @@
 .skills {
-    margin-top: calc(4vw + 4vh + 4vmin);
+    margin: calc(4vw + 4vh + 4vmin) auto;
+    position: relative;
 }
 
 .section-background {
-    margin-top: calc(4vw + 4vh + 4vmin);
     position: absolute;
-    width: 100%;
-    max-width: 100%;
-    max-height: 100vh;
+    top: calc(-4vw - 4vh - 4vmin); 
+    left: calc(-4vw - 4vh - 4vmin); 
+    width: calc(100% + 4vw + 4vh + 4vmin); 
+    height: calc(100% + 8vw + 8vh + 8vmin); 
+    z-index: -1;
     background: url('../assets/img/skill-background2.png') center/cover no-repeat;
 }
 
