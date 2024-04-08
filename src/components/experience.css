@@ -3,7 +3,7 @@
     position: relative;
 }
 
-.section-background {
+.skills-background {
     position: absolute;
     top: calc(-4vw - 4vh - 4vmin); 
     left: calc(-4vw - 4vh - 4vmin); 
@@ -49,7 +49,7 @@
     border: 1px solid transparent;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(4vw + 4vh + 4vmin), 0fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(4.5vw + 4.5vh + 4.5vmin), 0fr));
 
     justify-content: center;
 
