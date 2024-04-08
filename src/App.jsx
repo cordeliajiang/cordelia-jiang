@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import React, { useEffect, useState } from 'react'; // import useEffect, so the API can be called just when the page loads
-import './App.css';
+import './app.css';
 import { NavBar } from './components/NavBar';
 import { Banner } from './components/Banner';
 // import { Skills } from './components/Skills';
