@@ -20,16 +20,23 @@ function App() {
     .then((data) => { console.log(data) })
   }, []);
 
+  var pos = document.documentElement;
+  pos.addEventListener('mousemove', e => {
+      pos.style.setProperty('--x', e.clientX + 'px')
+      pos.style.setProperty('--y', e.clientY + 'px')
+  })
+
 
   return (
     <div className={`${scrollLocked ? "scrollLocked": ''} ${"App"}`}>
+      <div className="spotlight"></div>
       <NavBar scrollLocked = {scrollLocked} setScrollLocked = {setScrollLocked}/>
       <Banner/>
       {/* <Skills/> */}
       <Experience/>
       <Projects/>
-      <Contact/>
-      <Footer/>
+      {/* <Contact/> */}
+      {/* <Footer/> */}
     </div>
   );
 }

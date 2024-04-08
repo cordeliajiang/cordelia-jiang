@@ -13,17 +13,6 @@
     background: url('../assets/img/skill-background2.png') center/cover no-repeat;
 }
 
-.spotlight {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: radial-gradient(circle at var(--x) var(--y), rgba(157, 195, 224, 0.15), transparent 10%);
-    z-index: 9999;
-}
-
 .experience-container {
     position: absolute;
 

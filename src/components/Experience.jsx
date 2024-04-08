@@ -36,7 +36,7 @@ export const Experience = () => {
 
     return (
         <section className="skills" id="skills" style={{ minHeight: skillsHeight }}>
-            <div className="section-background"></div>
+            <div className="skills-background"></div>
             <div className="experience-container" style={{ minHeight: containerHeight }}>
                 <h2>Programming & Design Skills</h2>
                 <div className='experience-content' ref={experienceContentRef}>
