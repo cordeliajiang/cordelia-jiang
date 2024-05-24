@@ -1,0 +1,126 @@
+.projects-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(17vw + 17vh + 17vmin), 0fr));
+    justify-content: center;
+    gap: calc(1vw + 1vh + 1vmin);
+    margin: auto calc(2vw + 2vh + 2vmin);
+}
+
+.projects-card-container {
+    position: relative;
+    
+    border-radius: 30px;
+    border-radius: calc(1vw + 1vh + 1vmin);
+
+    overflow: hidden;
+
+    margin: 0 auto 1.5rem auto; 
+    margin: 0 auto calc(0.8vw + 0.8vh + 0.8vmin) auto; 
+
+    width: 26rem; 
+    width: calc(17vw + 17vh + 17vmin);
+
+    display: flex;
+    justify-content: center;
+
+    height: 19rem;
+    height: auto;
+}
+
+.projects-card-container::before {
+    content: "";
+    background: linear-gradient(90.21deg, #6c9dbd -5.91%, #151c27 111.58%);
+    opacity: 0.85;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    transition: 0.4s ease-in-out;
+}
+
+.projects-card-container:hover::before {
+    height: 100%;
+}
+
+.projects-info {
+    position: absolute;
+    text-align: center;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s ease-in-out;
+    opacity: 0;
+    width: 80%;
+    height: auto;
+}
+
+.projects-card-container:hover .projects-info {
+    top: 50%;
+    opacity: 1;
+}
+
+.projects-btn{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.projects-btn a {
+    background-color: transparent;
+    border-radius: 0;
+    transition: 0.3s ease-in-out;
+
+    border: 1px solid white;
+    border: calc(0.05vw + 0.05vh + 0.05vmin) solid white;
+
+    margin: 2rem 0.5rem 0 0.5rem;
+    margin: calc(1.16vw + 1.16vh + 1.16vmin) calc(0.285vw + 0.285vh + 0.285vmin) 0 calc(0.285vw + 0.285vh + 0.285vmin);
+
+    font-weight: bold;
+
+    line-height: 2rem;
+    line-height: calc(1.16vw + 1.16vh + 1.16vmin);
+
+    width: 9rem;
+    width: calc(5.15vw + 5.15vh + 5.15vmin);
+
+    font-size: 16px;
+    font-size: 1rem; 
+    font-size: calc(0.57vw + 0.57vh + 0.57vmin);
+}
+
+.projects-btn a:hover {
+    border-color: white;
+    background-color: white;
+    color: #191f29;
+
+    border-radius: 50px;
+    border-radius: calc(1.5vw + 1.5vh + 1.5vmin);
+}
+
+.projects-info h4 {
+    font-size: 30px;
+    font-size: calc(1.07vw + 1.07vh + 1.07vmin);
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+    letter-spacing: 0.05rem;
+    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+
+    line-height: 2.25rem;
+    line-height: calc(1.3vw + 1.3vh + 1.3vmin);
+
+    margin-bottom: 1rem;
+    margin-bottom: calc(0.57vw + 0.57vh + 0.57vmin);
+}
+
+.projects-info span {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
+
+    letter-spacing: 0.8px;
+    letter-spacing: 0.05rem;
+    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+}
