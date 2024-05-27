@@ -79,7 +79,16 @@ const Projects = () => {
                     </Nav>
                     <Tab.Content>
                         {tabs.map((tab, index) => (
-                            <ProjectCards key={index} title={tab} projects={projects[tab]} />
+                            <Tab.Pane key={index} eventKey={tab.toLowerCase()}>
+                                <div className='projects-cards' ref={projectsContentReference}>
+                                    {/* Render individual project cards */}
+                                    {projects[tab].map((project, idx) => (
+                                        <div key={idx}>
+                                            <ProjectCard {...project} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </Tab.Pane>
                         ))}
                     </Tab.Content>
                 </Tab.Container>
