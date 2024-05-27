@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './projectcards.css';
+import './projectcard.css';
 
 // Component to display individual project details
 const ProjectCard = ({ title, description, coverImg, website, github, brochure }) => (
