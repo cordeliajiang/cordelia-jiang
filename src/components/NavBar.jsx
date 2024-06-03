@@ -83,10 +83,17 @@ import navEmailIcon from '../assets/img/nav-email-icon.svg';
                     </a> */}
                   <Nav.Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('connect')} } >Contact</Nav.Link>                
                 </div>
-                <div className="social-icon">
-                  <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer"><img src={navLinkedinIcon} alt="replace with github url:xxxx"/></a>
-                  <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer"><img src={navGithubIcon} alt=""/></a>
-                  <a href="mailto:jiangcordelia@gmail.com"><img src={navEmailIcon} alt=""/></a>
+              <div className="social-icons">
+                {/* Render social icons */}
+                <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer">
+                  <img src={navLinkedinIcon} alt="LinkedIn" className="social-icon" />
+                </a>
+                <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer">
+                  <img src={navGithubIcon} alt="GitHub" className="social-icon" />
+                </a>
+                <a href="mailto:jiangcordelia@gmail.com">
+                  <img src={navEmailIcon} alt="Email" className="social-icon" />
+                </a>
                 </div>
               {/* </span> */}
             </Nav>
