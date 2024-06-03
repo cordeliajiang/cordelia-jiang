@@ -6,16 +6,16 @@ import navLinkedinIcon from '../assets/img/nav-linkedin-icon.svg';
 import navGithubIcon from '../assets/img/nav-github-icon.svg';
 import navEmailIcon from '../assets/img/nav-email-icon.svg';
 
-// passed two variables from App Component for locking scrolling functionality after opened burger menu
-export const NavBar = ({ scrollLocked, setScrollLocked }) => {
-  const [activeLink, setActiveLink] = useState('home');
-  const [scrolled, setScrolled] = useState(false);
-  const [navbarToggled, setNavbarToggled] = useState(false);
-  // const [scrollLocked, setScrollLocked] = useState(false);
-  const handleNavbarCollapse = () => setNavbarToggled(!navbarToggled);
-
+  // Add scroll event listener and clean it up on unmount
   useEffect(() => {
-    setScrollLocked(scrollLocked);
+    const onScroll = () => {
+      // Set the state based on whether the user has scrolled more than 50 pixels
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', onScroll);
+
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // scroll condition based on scroll Y
