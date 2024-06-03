@@ -71,17 +71,18 @@ import navEmailIcon from '../assets/img/nav-email-icon.svg';
                   <a href="#home"><img src={logo} alt="Brand Logo on Menu"/></a>
                 </div>
                 <div className="nav-links">
-                  <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('home')} }>Home</Nav.Link>
-                  <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('skills')} }>Skills</Nav.Link>
-                  <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('projects')} } >Projects</Nav.Link>
-                {/* </span> */}
-                {/* <span className="navbar-link-right"> */}
-                    {/* <a href="#connect" onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('connect')} }>
-                      <button className="vvd">
-                        <span>Contact</span>
-                      </button>
-                    </a> */}
-                  <Nav.Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link' : 'navbar-link'} onClick={() => { setScrollLocked(false); setNavbarToggled(false); onUpdateActiveLink('connect')} } >Contact</Nav.Link>                
+                {/* Render Nav.Links for each section */}
+                {['home', 'skills', 'projects', 'connect'].map((value) => (
+                  <Nav.Link
+                    key={value}
+                    href={`#${value}`}
+                    className={activeLink === value ? 'active navbar-link' : 'navbar-link'}
+                    onClick={() => onUpdateActiveLink(value)}
+                  >
+                    {/* Capitalize the first letter of the section name */}
+                    {value.charAt(0).toUpperCase() + value.slice(1)}
+                  </Nav.Link>
+                ))}
                 </div>
               <div className="social-icons">
                 {/* Render social icons */}
