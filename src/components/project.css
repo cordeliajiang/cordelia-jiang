@@ -1,16 +1,6 @@
 .projects {
-    background-color: black;
     position: relative;
-}
-
-.projects-background {
-    position: absolute;
-    top: calc(-4vw - 4vh - 4vmin); 
-    left: calc(-4vw - 4vh - 4vmin); 
-    width: calc(100% + 4vw + 4vh + 4vmin); 
-    height: calc(100% + 8vw + 8vh + 8vmin); 
-    z-index: -1;
-    background: url('../assets/img/project-background.png') top/contain no-repeat;
+    background: url('../assets/img/projects-background.png') center/cover no-repeat;
 }
 
 .projects-container {
@@ -29,6 +19,8 @@
     gap: calc(2vw + 2vh + 2vmin);
 
     margin: calc(4vw + 4vh + 4vmin) auto;
+    background: url('../assets/img/projects-background.png') center/cover no-repeat;
+
 }
 
 .projects h2 {

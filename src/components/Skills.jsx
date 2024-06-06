@@ -36,7 +36,6 @@ export const Skills = () => {
 
     return (
         <section className="skills" id="skills" style={{ minHeight: heightState }}>
-            <div className="skills-background"></div>
             <div className="skills-container" ref={containerRef}>
                 <h2>Programming & Design Skills</h2>
                 <div className='skills-content' ref={contentRef}>

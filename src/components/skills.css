@@ -1,16 +1,6 @@
 .skills {
-    margin: calc(4vw + 4vh + 4vmin) auto;
     position: relative;
-}
-
-.skills-background {
-    position: absolute;
-    top: calc(-4vw - 4vh - 4vmin); 
-    left: calc(-4vw - 4vh - 4vmin); 
-    width: calc(100% + 4vw + 4vh + 4vmin); 
-    height: calc(100% + 8vw + 8vh + 8vmin); 
-    z-index: -1;
-    background: url('../assets/img/skill-background2.png') center/cover no-repeat;
+    background: url('../assets/img/skills-background.png') center/cover no-repeat;
 }
 
 .skills-container {
@@ -26,6 +16,7 @@
     left: 0;
     right: 0;
 
+    margin: calc(4vw + 4vh + 4vmin) auto;
     gap: calc(2vw + 2vh + 2vmin);
 }
 

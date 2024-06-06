@@ -81,7 +81,6 @@ const Projects = () => {
 
                 {/* Render tabs for different project categories */}
                 <Tab.Container id="projects-tabs" defaultActiveKey="programming" activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
-                    <div className="projects-background"></div>
                     <Nav variant="pills" className="nav-pills" id="pill-tabs">
                         {tabs.map((tab, index) => (
                             <Nav.Item key={index}>
