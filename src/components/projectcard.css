@@ -1,29 +1,83 @@
+:root {
+    --gap: calc(1vw + 1vh + 1vmin);
+    --gap-rem: 1rem;
+    --gap-px: 16px;
+
+    --margin: calc(2vw + 2vh + 2vmin);
+    --margin-rem: 2rem;
+    --margin-px: 32px;
+
+    --small-margin: calc(0.8vw + 0.8vh + 0.8vmin);
+    --small-margin-rem: 0.75rem;
+    --small-margin-px: 12px;
+
+    --border-radius: calc(1vw + 1vh + 1vmin);
+    --border-radius-rem: 1rem;
+    --border-radius-px: 16px;
+
+    --hover-border-radius: calc(1.5vw + 1.5vh + 1.5vmin);
+    --hover-border-radius-rem: 1.5rem;
+    --hover-border-radius-px: 24px;
+
+    --border: calc(0.05vw + 0.05vh + 0.05vmin) solid white;
+    --border-rem: 0.0625rem solid white;
+    --border-px: 1px solid white;
+
+    --button-margin-top: calc(1.16vw + 1.16vh + 1.16vmin);
+    --button-margin-top-rem: 1.125rem;
+    --button-margin-top-px: 18px;
+
+    --button-margin-left-right: calc(0.285vw + 0.285vh + 0.285vmin);
+    --button-margin-left-right-rem: 0.25rem;
+    --button-margin-left-right-px: 4px;
+
+    --button-width: calc(5.15vw + 5.15vh + 5.15vmin);
+    --button-width-rem: 5.625rem;
+    --button-width-px: 90px;
+
+    --button-height: calc(1.5vw + 1.5vh + 1.5vmin);
+    --button-height-rem: 1rem;
+    --button-height-px: 16px;
+
+    --font-size: calc(0.57vw + 0.57vh + 0.57vmin);
+    --font-size-rem: 1rem;
+    --font-size-px: 16px;
+
+    --h4-font-size: calc(1.07vw + 1.07vh + 1.07vmin);
+    --h4-font-size-rem: 1.875rem;
+    --h4-font-size-px: 30px;
+
+    --line-height: calc(1.3vw + 1.3vh + 1.3vmin);
+    --line-height-rem: 2.25rem;
+    --line-height-px: 36px;
+
+    --letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+    --letter-spacing-rem: 0.0625rem;
+    --letter-spacing-px: 1px;
+
+    --span-font-size: calc(0.5vw + 0.5vh + 0.5vmin);
+    --span-font-size-rem: 0.875rem;
+    --span-font-size-px: 14px;
+
+    --grid-template-columns-min: calc(17vw + 17vh + 17vmin);
+}
+
 .projects-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(17vw + 17vh + 17vmin), 0fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-template-columns-min), 0fr));
     justify-content: center;
     align-content: center;
+    gap: var(--gap, var(--gap-rem), var(--gap-px));
+    margin: auto var(--margin, var(--margin-rem), var(--margin-px));
 }
 
 .projects-card-container {
     position: relative;
-    
-    border-radius: 30px;
-    border-radius: calc(1vw + 1vh + 1vmin);
-
+    border-radius: var(--border-radius, var(--border-radius-rem), var(--border-radius-px));
     overflow: hidden;
-
-    margin: 0 auto 1.5rem auto; 
-    margin: 0 auto calc(0.8vw + 0.8vh + 0.8vmin) auto; 
-
-    width: 26rem; 
-    width: calc(17vw + 17vh + 17vmin);
-
+    margin: 0 auto var(--small-margin, var(--small-margin-rem), var(--small-margin-px)) auto;
     display: flex;
     justify-content: center;
-
-    height: 19rem;
-    height: auto;
 }
 
 .projects-card-container::before {
@@ -33,7 +87,7 @@
     position: absolute;
     width: 100%;
     height: 0;
-    transition: 0.4s ease-in-out;
+    transition: 0.5s ease-in-out;
 }
 
 .projects-card-container:hover::before {
@@ -48,18 +102,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: 0.5s ease-in-out;
+    transition: 0.4s ease-in-out;
     opacity: 0;
     width: 80%;
     height: auto;
 }
 
 .projects-card-container:hover .projects-info {
-    top: 50%;
     opacity: 1;
 }
 
-.projects-btn{
+.projects-btn {
     margin-top: var(--button-margin-top, var(--button-margin-top-rem), var(--button-margin-top-px));
     display: flex;
     justify-content: center;
@@ -72,44 +125,33 @@
     color: white;
     background-color: transparent;
     border-radius: 0;
+    transition: 0.3s ease-in-out;
+    border: var(--border, var(--border-rem), var(--border-px));
     margin: var(--button-margin-left-right, var(--button-margin-left-right-rem), var(--button-margin-left-right-px));
     font-weight: bold;
+    width: var(--button-width, var(--button-width-rem), var(--button-width-px));
     height: var(--button-height, var(--button-height-rem), var(--button-height-px));
+    font-size: var(--font-size, var(--font-size-rem), var(--font-size-px));
 }
 
 .projects-btn a:hover {
     border-color: white;
     background-color: white;
     color: #191f29;
-
-    border-radius: 50px;
-    border-radius: calc(1.5vw + 1.5vh + 1.5vmin);
+    border-radius: var(--hover-border-radius, var(--hover-border-radius-rem), var(--hover-border-radius-px));
 }
 
 .projects-info h4 {
-    font-size: 30px;
-    font-size: calc(1.07vw + 1.07vh + 1.07vmin);
-
+    font-size: var(--h4-font-size, var(--h4-font-size-rem), var(--h4-font-size-px));
     font-weight: 700;
-
-    letter-spacing: 0.8px;
-    letter-spacing: 0.05rem;
-    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
-
-    line-height: 2.25rem;
-    line-height: calc(1.3vw + 1.3vh + 1.3vmin);
-
-    margin-bottom: 1rem;
-    margin-bottom: calc(0.57vw + 0.57vh + 0.57vmin);
+    letter-spacing: var(--letter-spacing, var(--letter-spacing-rem), var(--letter-spacing-px));
+    line-height: var(--line-height, var(--line-height-rem), var(--line-height-px));
+    margin-bottom: var(--font-size, var(--font-size-rem), var(--font-size-px));
 }
 
 .projects-info span {
     font-style: italic;
     font-weight: 400;
-    font-size: 14px;
-    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
-
-    letter-spacing: 0.8px;
-    letter-spacing: 0.05rem;
-    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+    font-size: var(--span-font-size, var(--span-font-size-rem), var(--span-font-size-px));
+    letter-spacing: var(--letter-spacing, var(--letter-spacing-rem), var(--letter-spacing-px));
 }
