@@ -2,38 +2,35 @@ import PropTypes from 'prop-types';
 import './projectcard.css';
 
 // Component to display individual project details
-const ProjectCard = ({ title, description, coverImg, website, github, brochure }) => (
-    <div className="projects-card-container">
-        <img src={coverImg} alt="coverImg" />
-        <div className="projects-info">
-            <h4>{title}</h4>
-            <span>{description}</span>
-            <div className="projects-btn">
-                {website && (
-                    <button>
-                        <a className="btn btn-primary" href={website} target="_blank" rel="noopener noreferrer">
-                            Visit Website
-                        </a>
-                    </button>
-                )}
-                {brochure && (
-                    <button>
-                        <a className="btn btn-primary" href={brochure} target="_blank" rel="noopener noreferrer">
-                            View Brochure
-                        </a>
-                    </button>
-                )}
-                {github && (
-                    <button>
-                        <a className="btn btn-primary" href={github} target="_blank" rel="noopener noreferrer">
-                            View Github
-                        </a>
-                    </button>
-                )}
+const ProjectCard = ({ title, description, coverImg, website, github, brochure }) => {
+    const links = [
+        { href: website, text: 'Visit Website' },
+        { href: brochure, text: 'View Brochure' },
+        { href: github, text: 'View Github' },
+    ];
+
+    return (
+        <div className="projects-card-container">
+            <img src={coverImg} alt="coverImg" />
+            <div className="projects-info">
+                <h4>{title}</h4>
+                <span>{description}</span>
+                <div className="projects-btn">
+                    {links.map(
+                        link =>
+                            link.href && (
+                                <button key={link.text}>
+                                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                                        {link.text}
+                                    </a>
+                                </button>
+                            )
+                    )}
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 ProjectCard.propTypes = {
     title: PropTypes.string.isRequired,
