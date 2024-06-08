@@ -2,8 +2,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(calc(17vw + 17vh + 17vmin), 0fr));
     justify-content: center;
-    gap: calc(1vw + 1vh + 1vmin);
-    margin: auto calc(2vw + 2vh + 2vmin);
+    align-content: center;
 }
 
 .projects-card-container {
@@ -44,7 +43,9 @@
 .projects-info {
     position: absolute;
     text-align: center;
-    top: 65%;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: 0.5s ease-in-out;
@@ -59,33 +60,21 @@
 }
 
 .projects-btn{
-    margin: auto;
+    margin-top: var(--button-margin-top, var(--button-margin-top-rem), var(--button-margin-top-px));
     display: flex;
     justify-content: center;
 }
 
 .projects-btn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
     background-color: transparent;
     border-radius: 0;
-    transition: 0.3s ease-in-out;
-
-    border: 1px solid white;
-    border: calc(0.05vw + 0.05vh + 0.05vmin) solid white;
-
-    margin: 2rem 0.5rem 0 0.5rem;
-    margin: calc(1.16vw + 1.16vh + 1.16vmin) calc(0.285vw + 0.285vh + 0.285vmin) 0 calc(0.285vw + 0.285vh + 0.285vmin);
-
+    margin: var(--button-margin-left-right, var(--button-margin-left-right-rem), var(--button-margin-left-right-px));
     font-weight: bold;
-
-    line-height: 2rem;
-    line-height: calc(1.16vw + 1.16vh + 1.16vmin);
-
-    width: 9rem;
-    width: calc(5.15vw + 5.15vh + 5.15vmin);
-
-    font-size: 16px;
-    font-size: 1rem; 
-    font-size: calc(0.57vw + 0.57vh + 0.57vmin);
+    height: var(--button-height, var(--button-height-rem), var(--button-height-px));
 }
 
 .projects-btn a:hover {
