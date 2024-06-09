@@ -5,53 +5,39 @@
 
 .projects-container {
     position: absolute;
-
-    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox;  /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-
+    display: flex;
     flex-direction: column;
-
     left: 0;
     right: 0;
-
-    gap: calc(2vw + 2vh + 2vmin);
-
     margin: calc(4vw + 4vh + 4vmin) auto;
-    background: url('../assets/img/projects-background.png') center/cover no-repeat;
 
+    gap: 2rem;
+    gap: calc(2vw + 2vh + 2vmin);
 }
 
 .projects h2 {
     display: flex;
     flex-wrap: nowrap !important;
-
     width: 50%;
-    
     color: var(--color-primary);
+    font-weight: 700;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
 
     font-size: 2.8rem;
     font-size: calc(1.5vw + 1.5vh + 1.5vmin);
-
-	font-weight: 700;
-    text-align: center;
-    justify-content: center;
-
-    margin: 0 auto;
 }
 
 /* Project Tabs */
 .projects .nav.nav-pills {
     width: 82%;
     max-width: calc(35vw + 35vh + 35vmin);
-
     margin: 0 auto;
-
-    border-radius: 50px;
-    border-radius: calc(1.5vw + 1.5vh + 1.5vmin);
-
     overflow: hidden;
+
+    border-radius: 2.8rem;
+    border-radius: calc(1.5vw + 1.5vh + 1.5vmin);
 }
 
 .projects .nav.nav-pills .nav-item {
@@ -61,25 +47,20 @@
 .projects .nav.nav-pills .nav-link {
     background-color: transparent;
     border-radius: 0;
-    
-    padding: 17px 0;
-    padding: 1.0625rem 0;
-    padding: calc(0.58vw + 0.58vh + 0.58vmin) 0;
-
     color: #fff;
     width: 100%;
-    
-    letter-spacing: 0.8px;
-    letter-spacing: 0.05rem;
-    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
-
     font-weight: 500;
     position: relative;
     transition: 0.3s ease-in-out;
     text-align: center;
     z-index: 0;
 
-    font-size: 17px;
+    padding: 1.0625rem 0;
+    padding: calc(0.58vw + 0.58vh + 0.58vmin) 0;
+
+    letter-spacing: 0.05rem;
+    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+
     font-size: 1.0625rem;
     font-size: calc(0.6vw + 0.6vh + 0.6vmin);
 }
@@ -97,37 +78,34 @@
 }
 
 .projects .nav.nav-pills .nav-link#projects-tabs-tab-programming.active::before {
-    width: 100% !important;
-    border-radius: 55px 0px 0px 55px;
+    width: 100%;
     border-radius: 3.4375rem 0rem 0rem 3.4375rem;
     border-radius: calc(1.2vw + 1.2vh + 1.2vmin) 0rem 0rem calc(1.2vw + 1.2vh + 1.2vmin);
 }
 
 .projects .nav.nav-pills .nav-link#projects-tabs-tab-design.active::before {
-    width: 100% !important;
-    border-radius: 0 55px 55px 0;
+    width: 100%;
     border-radius: 0 3.4375rem 3.4375rem 0rem;
     border-radius: 0 calc(1.2vw + 1.2vh + 1.2vmin) calc(1.2vw + 1.2vh + 1.2vmin) 0rem;
 }
 
 .projects .nav.nav-pills .nav-link.active {
     border: 0.0625rem solid rgba(255, 255, 255, 1);
+    border: calc(0.020vw + 0.020vh + 0.020vmin) solid rgba(255, 255, 255, 1);
 }
 
 .nav-link#projects-tabs-tab-programming {
     border: 0.0625rem solid rgba(255, 255, 255, 0.5);
     border: calc(0.020vw + 0.020vh + 0.020vmin) solid rgba(255, 255, 255, 0.5);
 
-    border-radius: 55px 0px 0px 55px;
     border-radius: 3.4375rem 0rem 0rem 3.4375rem;
-    border-radius: calc(1.2vw + 1.2vh + 1.2vmin) 0rem 0rem calc(1.2vw + 1.2vh + 1.2vmin);
+    border-radius: calc(1.2vw + 1.2vh + 1.2vmin) 0rem 0rem calc(1.2vw + 1.2vh + 1.2vmin);    
 }
 
 .nav-link#projects-tabs-tab-design {
     border: 0.0625rem solid rgba(255, 255, 255, 0.5);
     border: calc(0.020vw + 0.020vh + 0.020vmin) solid rgba(255, 255, 255, 0.5);
 
-    border-radius: 0 55px 55px 0;
     border-radius: 0 3.4375rem 3.4375rem 0rem;
     border-radius: 0 calc(1.2vw + 1.2vh + 1.2vmin) calc(1.2vw + 1.2vh + 1.2vmin) 0rem;
 }
