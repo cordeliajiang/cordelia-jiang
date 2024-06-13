@@ -1,324 +1,326 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import './contact.css';
 import { Canvas } from "@react-three/fiber";
 import { FadingImageDisplacement } from "./FadingImageDisplacement";
 import { useForm } from "react-hook-form";
 import { BiSolidErrorCircle } from 'react-icons/bi';
+import useAutoHeight from './useAutoHeight';
 
-export const Contact = () => {
-    const ref = useRef(null); // use useRef to access the DOM
+const Contact = () => {
+    const { heightState, contentRef, containerRef } = useAutoHeight();
+    const ref = useRef(null);
 
-    // useEffect is used as it runs as soon as the DOM has rendered / reloads.
-    // without using useEffect, canvas.height and canvas.width will return null, as they are evaluated before DOM is rendered/loaded.
-    // canvas is a DOM element, DOM elements cannot be accessed untill DOM is loaded.
     useEffect(() => {
-        var canvas = ref.current; // use ref instead of document.getElementById as ref is considered a better react practice
-        var heightRatio = 1.78; // height of img 3616 / width of img 2032
-        canvas.height = 200 + canvas.width * heightRatio; // add 200: larger min canvas.width.
+        const canvas = ref.current;
+        canvas.height = 200 + canvas.width * 1.78;
     }, []);
 
-
-    /*************************** FORM ***************************/
-    // original form details from user input, used to compare with sanitized form details for displaying error messages
-    const [formDetails, setFormDetails] = useState({
-        fullName: '',
-        email: '',
-        message: ''
-    });
-
-    /* only updates the value user entered for its related category, leaving other form details untouched. */
-    /* e.target.name are the category, e.target.value is entered by users */
-    const onFormUpdate = (e) => {
-        setFormDetails({
-            ...formDetails,
-            [e.target.name]: e.target.value
-        })
-    }
-
+    const [formDetails, setFormDetails] = useState({ fullName: '', email: '', message: '' });
     const [buttonTxt, setButtonTxt] = useState('Send');
     const [status, setStatus] = useState({});
+    const [inputErrors, setInputErrors] = useState({ fullName: '', email: '', message: '' });
+
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+
+    // const sanitizeInput = (value, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage) => {
+    //     const containsSpecialCharacters = regex.test(value);
+    //     const containsConsecutiveSpaces = spaceRegex.test(value);
+    //     const startsWithSpace = value.startsWith(' ');
+
+    //     let sanitizedValue = value.replace(regex, '').replace(spaceRegex, ' ');
+
+    //     let error = '';
+    //     if (containsSpecialCharacters) {
+    //         error = errorMessage;
+    //     } else if (containsConsecutiveSpaces) {
+    //         error = spaceErrorMessage;
+    //     } else if (startsWithSpace) {
+    //         error = firstCharErrorMessage;
+    //     }
+
+    //     return { sanitizedValue: sanitizedValue.trimStart(), error };
+    // };
+
+    // const handleSanitization = (e, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage) => {
+    //     const { name, value } = e.target;
+    //     const { sanitizedValue, error } = sanitizeInput(value, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage);
+
+    //     setInputErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+    //     setFormDetails((prevDetails) => ({ ...prevDetails, [name]: sanitizedValue }));
+    //     setValue(name, sanitizedValue, { shouldValidate: true });
+    // };
+
+    // const handleEmailChange = (e) => {
+    //     const { value, selectionStart } = e.target;
+    //     const sanitizedValue = value.replace(/[^-@.a-zA-Z0-9]/g, '');
+    //     const cursorPosition = selectionStart - (value.slice(0, selectionStart).match(/[^-@.a-zA-Z0-9]/g) || []).length;
+
+    //     setFormDetails((prevDetails) => ({ ...prevDetails, email: sanitizedValue }));
+    //     setValue('email', sanitizedValue, { shouldValidate: true });
+
+    //     // Manually update the input value and restore the cursor position
+    //     e.target.value = sanitizedValue;
+    //     e.target.setSelectionRange(cursorPosition, cursorPosition);
+
+    //     // Set error if special characters are present
+    //     const error = value !== sanitizedValue ? 'Email cannot contain special characters.' : '';
+    //     setInputErrors((prevErrors) => ({ ...prevErrors, email: error }));
+    // };
 
 
-    /*************************** INPUT SANITIZATION ***************************/
-    const [sanitizedFullName, setSanitizedFullName] = useState('');
-    const [sanitizedEmail, setSanitizedEmail] = useState('');
-    const [sanitizedMessage, setSanitizedMessage] = useState('');
+    // const sanitizeInput = (value, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage) => {
+    //     let error = '';
 
-    const [fullNameError, setFullNameError] = useState(false);
-    const [emailError, setEmailError] = useState(false);
-    const [messageError, setMessageError] = useState(false);
+    //     if (regex.test(value)) {
+    //         error = errorMessage;
+    //     } else if (spaceRegex.test(value)) {
+    //         error = spaceErrorMessage;
+    //     } else if (value.startsWith(' ')) {
+    //         error = firstCharErrorMessage;
+    //     }
 
-    const [fullNameSpaceError, setFullNameSpaceError] = useState(false);
-    const [messageSpaceNewLineError, setMessageSpaceNewLineError] = useState(false);
+    //     const sanitizedValue = value.replace(regex, '').replace(spaceRegex, ' ').trimStart();
+    //     return { sanitizedValue, error };
+    // };
 
-    const [invalidInputStatus, setInvalidInputStatus] = useState(false);
-    const [invalidInputSpaceNewLineStatus, setInvalidInputSpaceNewLineStatus] = useState(false);
+    // const handleSanitization = (e, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage) => {
+    //     const { name, value } = e.target;
+    //     const { sanitizedValue, error } = sanitizeInput(value, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage);
 
-    const sanitizeFullName = (e) => {
-        const sanitizedFullName = e.target.value;
-        const fullNameRegex = /[^-.a-zA-Z\s]/g; // a regex used to remove special chars (except for lower and upper case letters, - . and whitespace (\s))
-        const oneSpaceOnlyRegex = /  +/g;
-        const sanitizedFullNameValue = sanitizedFullName.replace(fullNameRegex, '');
-        const sanitizedFullNameValueLimitSpace = sanitizedFullNameValue.replace(oneSpaceOnlyRegex, " ");
+    //     setInputErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+    //     setFormDetails((prevDetails) => ({ ...prevDetails, [name]: sanitizedValue }));
+    //     setValue(name, sanitizedValue, { shouldValidate: true });
+    // };
 
-        // value displayed on full name input field
-        setSanitizedFullName(sanitizedFullNameValue);
+    // const handleEmailChange = (e) => {
+    //     const { value, selectionStart } = e.target;
+    //     const regex = /[^-@.\sa-zA-Z0-9]/g;
+    //     const spaceRegex = /\s{2,}/g;
 
-        // form details display on email sent
-        setFormDetails({
-            ...formDetails,
-            [e.target.name]: sanitizedFullNameValue
-        })
+    //     const { sanitizedValue, error } = sanitizeInput(
+    //         value,
+    //         regex,
+    //         'Email cannot contain special characters.',
+    //         spaceRegex,
+    //         'Email cannot contain consecutive spaces.',
+    //         'Email cannot start with a space.'
+    //     );
 
-        // display error message if the original input value differs from the sanitized value
-        if (sanitizedFullName !== sanitizedFullNameValue) {
-            setFullNameError(true);
-            setInvalidInputStatus({ invalidFullName: true, invalidFullNameMessage: "Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = [ ] \\ ; ' , / ~ ! @ # $ % ^ & * ( ) _ + { } | : \" < > ?" }); /* \ backslash used to escape characters */
-        } else {
-            setFullNameError(false);
-            setInvalidInputStatus({ invalidFullName: false });
+    //     const cursorPosition = selectionStart - (value.slice(0, selectionStart).match(regex) || []).length;
+
+    //     setFormDetails((prevDetails) => ({ ...prevDetails, email: sanitizedValue }));
+    //     setInputErrors((prevErrors) => ({ ...prevErrors, email: error }));
+    //     setValue('email', sanitizedValue, { shouldValidate: true });
+
+    //     // Manually update the input value and restore the cursor position
+    //     e.target.value = sanitizedValue;
+    //     e.target.setSelectionRange(cursorPosition, cursorPosition);
+    // };
+
+
+    const sanitizeInput = (value, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage) => {
+        let error = '';
+
+        if (regex.test(value)) {
+            error = errorMessage;
+        } else if (spaceRegex.test(value)) {
+            error = spaceErrorMessage;
+        } else if (value.startsWith(' ')) {
+            error = firstCharErrorMessage;
         }
 
-        // display error message if there are 2 or more consecutive spaces in sanitized full name
-        if (sanitizedFullNameValue !== sanitizedFullNameValueLimitSpace) {
-            setFullNameSpaceError(true);
-            setInvalidInputSpaceNewLineStatus({ invalidFullNameSpace: true, invalidFullNameSpaceMessage: "Full name cannot contain 2 or more consecutive spaces." });
-            setSanitizedFullName(sanitizedFullNameValueLimitSpace);
-        } else {
-            setFullNameSpaceError(false);
-            setInvalidInputSpaceNewLineStatus({ invalidFullNameSpace: false });
-        }
+        const sanitizedValue = value.replace(regex, '').replace(spaceRegex, ' ').trimStart();
+        return { sanitizedValue, error };
     };
 
-    const sanitizeEmail = (e) => {
-        const sanitizedEmail = e.target.value;
-        const emailRegex = /[^-@.A-Za-z0-9]/g; // a regex used to remove special chars (except for lower and upper case letters, numbers, and - @ .)
-        const oneSpaceOnlyRegex = /\s\s+/g;
-        const sanitizedEmailValue = sanitizedEmail.replace(emailRegex, '').replace(oneSpaceOnlyRegex, " "); 
+    const handleSanitization = (e, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage) => {
+        const { name, value } = e.target;
+        const { sanitizedValue, error } = sanitizeInput(value, regex, errorMessage, spaceRegex, spaceErrorMessage, firstCharErrorMessage);
 
-        // value displayed on email input field
-        setSanitizedEmail(sanitizedEmailValue);
-
-        // form details display on email sent
-        setFormDetails({
-            ...formDetails,
-            [e.target.name]: sanitizedEmailValue
-        })
-
-        // display error message if the original value differs from the sanitized value
-        if (sanitizedEmail !== sanitizedEmailValue) {
-            setEmailError(true);
-            setInvalidInputStatus({ invalidEmail: true, invalidEmailMessage: "Email cannot contain any of the following: ` = [ ] \\ ; ' , / ~ ! # $ % ^ & * ( ) _ + { } | : \" < > ?" });
-        } else {
-            setEmailError(false);
-            setInvalidInputStatus({ invalidEmail: false });
-        }
+        setInputErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+        setFormDetails((prevDetails) => ({ ...prevDetails, [name]: sanitizedValue }));
+        setValue(name, sanitizedValue, { shouldValidate: true });
     };
 
-    const sanitizeMessage = (e) => {
-        const sanitizedMessage = e.target.value;
-        const messageRegex = /[^-@?!':/,.a-zA-Z0-9\s]/g; // a regex used to remove special chars (except for lower and upper case letters, numbers, - @ ? ! ' : / , . and whitespace (\s))
-        const twoSpaceNewLineOnlyRegex = /\s{4,}/g;
-        const sanitizedMessageValue = sanitizedMessage.replace(messageRegex, '')
-        const sanitizedMessageValueLimitSpaceNewLine = sanitizedMessageValue.replace(twoSpaceNewLineOnlyRegex, ' '); 
+    const handleEmailChange = (e) => {
+        const { value, selectionStart } = e.target;
+        const regex = /[^-@.\sa-zA-Z0-9]/g;
+        const spaceRegex = /\s{2,}/g;
 
-        // value displayed on email input field
-        setSanitizedMessage(sanitizedMessageValue);
+        const { sanitizedValue, error } = sanitizeInput(
+            value,
+            regex,
+            'Email cannot contain special characters.',
+            spaceRegex,
+            'Email cannot contain consecutive spaces.',
+            'Email cannot start with a space.'
+        );
 
-        // form details display on email sent
-        setFormDetails({
-            ...formDetails,
-            [e.target.name]: sanitizedMessageValue
-        })
+        const cursorPosition = selectionStart - (value.slice(0, selectionStart).match(regex) || []).length;
 
-        // display error message if the original value differs from the sanitized value
-        if (sanitizedMessage !== sanitizedMessageValue) {
-            setMessageError(true);
-            setInvalidInputStatus({ invalidMessage: true, invalidMessageMessage: "Message cannot contain any of the following: ` = [ ] \\ ; ' , / ~ ! # $ % ^ & * ( ) _ + { } | : \" < > ?" });
-        } else {
-            setMessageError(false);
-            setInvalidInputStatus({ invalidMessage: false });
-        }
+        setFormDetails((prevDetails) => ({ ...prevDetails, email: sanitizedValue }));
+        setInputErrors((prevErrors) => ({ ...prevErrors, email: error }));
+        setValue('email', sanitizedValue, { shouldValidate: true });
 
-        // display error message if there are more than 3 consecutive spaces or more than 3 consecutive new lines (enter/return key)
-        if (sanitizedMessageValue !== sanitizedMessageValueLimitSpaceNewLine) {
-            setMessageSpaceNewLineError(true);
-            setInvalidInputSpaceNewLineStatus({ invalidMessageSpaceNewLine: true, invalidMessageSpaceNewLineMessage: "Message cannot contain more than 3 consecutive spaces or more than 3 consecutive new lines ( enter / return key )." });
-            setSanitizedMessage(sanitizedMessageValueLimitSpaceNewLine);
-        } else {
-            setMessageSpaceNewLineError(false);
-            setInvalidInputSpaceNewLineStatus({ invalidMessageSpaceNewLine: false });
-        }
+        // Manually update the input value and restore the cursor position
+        e.target.value = sanitizedValue;
+        e.target.setSelectionRange(cursorPosition, cursorPosition);
     };
 
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-
-    /* async() as making request to API */
-    const submitHandler = async (e) => {
+    const submitHandler = async () => {
         setButtonTxt('Sending...');
-
-        let response = await fetch("/api/contact", {
+        const response = await fetch("/api/contact", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
+            headers: { "Content-Type": "application/json;charset=utf-8" },
             body: JSON.stringify(formDetails)
         });
 
         setButtonTxt("Send");
-        let result = await response.json();
+        const result = await response.json();
+
+        setStatus({
+            success: result.code === 200,
+            message: result.code === 200 ? "Message Sent Successfully." : "Something Went Wrong, Please Try Again Later."
+        });
 
         if (result.code === 200) {
-            setStatus({ success: true, message: "Message Sent Successfully." });
-
-            // clear sanitized form inputs and related error messages
-            setSanitizedFullName("");
-            setSanitizedEmail("");
-            setSanitizedMessage("")
-            setFullNameError(false);
-            setEmailError(false);
-            setMessageError(false);
-            setFullNameSpaceError(false);
-            setMessageSpaceNewLineError(false);
-            setInvalidInputStatus(false);
-            setInvalidInputSpaceNewLineStatus(false);
-        } else {
-            setStatus({ success: false, message: "Something Went Wrong, Please Try Again Later." });
+            setFormDetails({ fullName: '', email: '', message: '' });
+            setInputErrors({ fullName: '', email: '', message: '' });
         }
-
-        return false; // do not want page reloaded when user submits the form
-    }
+    };
 
     return (
-        <section className="contact" id="connect">
-            <Container>
-                <div className="contact-container">
-                    <div className="canvas-container">
-                        <Canvas ref={ref} camera={{ position: [0, 0, 5], fov: 40 }}>
-                            <FadingImageDisplacement />
-                        </Canvas>
-                    </div>
-                    <div className="contact-content">
-                        <h2>Get In Touch</h2>
-                        <form onSubmit={handleSubmit(submitHandler)}>
-                            <Row>
-                                {/* full name */}
-                                <Col sm={12} className="px-1">
-                                    <input
-                                        className= {`${errors.sanitizedFullName?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidFullName === true ? "invalidInput" : ""} ${invalidInputSpaceNewLineStatus.invalidFullNameSpace === true ? "invalidInput" : ""}`}
-                                        type="text"
-                                        name="sanitizedFullName"
-                                        placeholder="Full Name"
-                                        {...register("sanitizedFullName", {
-                                            required: "Full name is required.",
-                                            minLength: {
-                                                value: 4,
-                                                message: 'Full name needs 4 or more characters.',
-                                            },
-                                            maxLength: {
-                                                value: 128,
-                                                message: 'Full name cannot exceed 128 characters.',
-                                            }
-                                        })
-                                        }
-                                        value={sanitizedFullName}
-                                        onChange={(e) => {
-                                            onFormUpdate(e);
-                                            sanitizeFullName(e);
-                                        }}
-                                    />
-                                    {/* HTML ESCAPE CHARACTER CODES: 
-                                        &#91; is [ , &#93; is ]
-                                        &#40; is ( , &#41; is )
-                                        &#123; is { , &#125; is }
-                                        &lt; is < , &gt; is > 
-                                    */}
-                                    {/* Full name cannot contain any of the following: 0 1 2 3 4 5 6 7 8 9 ` = &#91; &#93; \ ; ' , / ~ ! @ # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
-                                    {errors.sanitizedFullName && <p className="danger">{errors.sanitizedFullName?.message}</p>} {/* check message only when fullName exists */}
-                                    {fullNameError && <p className="danger">{invalidInputStatus.invalidFullNameMessage}</p>}
-                                    {fullNameSpaceError && <p className="danger">{invalidInputSpaceNewLineStatus.invalidFullNameSpaceMessage}</p>}
-                                </Col>
-                                {/* email */}
-                                <Col sm={12} className="px-1">
-                                    <input
-                                        className={ `${errors.sanitizedEmail?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidEmail === true ? "invalidInput" : ""} `}
-                                        name="sanitizedEmail"
-                                        {...register("sanitizedEmail", {
-                                            required: "Email address is required.",
-                                            maxLength: {
-                                                value: 254,
-                                                message: 'Email address cannot exceed 254 characters.',
-                                            },
-                                            pattern: {
-                                                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                                message: "Please enter your email address in format e.g. yourname@domain.com"
-                                            },
-                                        })}
-                                        placeholder="Email Address"
-                                        value={sanitizedEmail}
-                                        onChange={(e) => {
-                                            onFormUpdate(e);
-                                            sanitizeEmail(e);
-                                        }}
-                                    />
-                                    {/* Email cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
-                                    <BiSolidErrorCircle className="error-icon" /> 
-                                    {errors.sanitizedEmail && <p className="danger">{errors.sanitizedEmail?.message}</p>}
-                                    {emailError && <p className="danger">{invalidInputStatus.invalidEmailMessage}</p>}
-                                </Col>
-                                {/* message */}
-                                <Col sm={12} className="px-1">
-                                    <textarea
-                                        className={`${errors.sanitizedMessage?.message ? "invalidInput" : ""} ${invalidInputStatus.invalidMessage === true ? "invalidInput" : ""} ${invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLine === true ? "invalidInput" : "" }`}
-                                        rows="6"
-                                        name="sanitizedMessage"
-                                        {...register("sanitizedMessage", {
-                                            required: "Message is required.",
-                                            minLength: {
-                                                value: 5,
-                                                message: 'Message needs 5 or more characters.',
-                                            },
-                                            maxLength: {
-                                                value: 250,
-                                                message: 'Message cannot exceed 250 characters.',
-                                            }
-                                        })
-                                        }
-                                        placeholder="Message"
-                                        value={sanitizedMessage}
-                                        onChange={(e) => {
-                                            onFormUpdate(e);
-                                            sanitizeMessage(e);
-                                        }}
-                                    />
-                                    {/* HTML ESCAPE CHARACTER CODES:
-                                        &#40; is ( , &#41; is )
-                                    */}
-                                    {/* Message cannot contain any of the following: ` = &#91; &#93; \ ; ' , / ~ ! # $ % ^ & * &#40; &#41; _ + &#123; &#125; | : " &lt; &gt; ? */}
-                                    {/* Message cannot contain more than 3 consecutive spaces or more than 3 consecutive new lines &#40; enter / return key &#41;. */}
-                                    {errors.sanitizedMessage && <p className="danger">{errors.sanitizedMessage?.message}</p>}
-                                    {messageError && <p className="danger">{invalidInputStatus.invalidMessageMessage}</p>}
-                                    {messageSpaceNewLineError && <p className="danger">{invalidInputSpaceNewLineStatus.invalidMessageSpaceNewLineMessage}</p>}
-                                </Col>
-                                {/* submit button */}
-                                <Col sm={12} className="px-1">
-                                    <button type="submit"><span>{buttonTxt}</span></button>
-                                    {status.message && (
-                                        <div className="row">
-                                            <p className={status.success === false ? "danger" : "success"}>
-                                                {status.message}
-                                            </p>
-                                        </div>
-                                    )}
-                                </Col>
-                            </Row>
-                        </form>
-                    </div>
+        <section className="contact" id="connect" style={{ minHeight: heightState }}>
+            <div className="contact-container" ref={containerRef}>
+                <div className="canvas-container">
+                    <Canvas ref={ref}>
+                        <FadingImageDisplacement />
+                    </Canvas>
                 </div>
-            </Container>
+                <div className="contact-content" ref={contentRef}>
+                    <h2>Get In Touch</h2>
+                    <form onSubmit={handleSubmit(submitHandler)}>
+                        <Row>
+                            {['fullName', 'email', 'message'].map((field, idx) => (
+                                <Col key={idx} sm={12} className="px-1">
+                                    {field === 'message' ? (
+                                        <textarea
+                                            className={` ${errors[field]?.message ? "invalidInput" : ""} ${inputErrors[field] ? "invalidInput" : ""}`}
+                                            rows="6"
+                                            name={field}
+                                            placeholder={field === 'message' ? 'Message' : `Full ${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                                            {...register(field, {
+                                                required: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
+                                                minLength: { value: field === 'message' ? 5 : 4, message: `${field.charAt(0).toUpperCase() + field.slice(1)} needs ${field === 'message' ? 5 : 4} or more characters.` },
+                                                maxLength: { value: field === 'message' ? 250 : 128, message: `${field.charAt(0).toUpperCase() + field.slice(1)} cannot exceed ${field === 'message' ? 250 : 128} characters.` },
+                                                // pattern: field === 'email' ? {
+                                                //     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                //     message: "Please enter a valid email address."
+                                                // } : undefined
+                                            })}
+                                            value={formDetails[field]}
+                                            onChange={(e) => {
+                                                setFormDetails((prevDetails) => ({ ...prevDetails, [field]: e.target.value }));
+                                                handleSanitization(e, field === 'fullName' ? /[^a-zA-Z\s]/g : (field === 'email' ? /[^\-@.\s]/g : /[^-@?!':/,.a-zA-Z0-9\s]/g), `${field.charAt(0).toUpperCase() + field.slice(1)} cannot contain special characters.`, /\s{2,}/g, `${field.charAt(0).toUpperCase() + field.slice(1)} cannot contain consecutive spaces.`, `${field.charAt(0).toUpperCase() + field.slice(1)} cannot start with a space.`);
+                                            }}
+                                        />
+                                    ) : (
+                                        <input
+                                            className={` ${errors[field]?.message ? "invalidInput" : ""} ${inputErrors[field] ? "invalidInput" : ""}`}
+                                            type={field === 'email' ? 'text' : 'text'} // Change email input type to text
+                                            name={field}
+                                            placeholder={field === 'fullName' ? 'Name' : `${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                                            {...register(field, {
+                                                required: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
+                                                minLength: { value: 4, message: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} needs 4 or more characters.` },
+                                                maxLength: { value: 128, message: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot exceed 128 characters.` },
+                                                pattern: field === 'email' ? {
+                                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                    message: "Please enter a valid email address."
+                                                } : field === 'fullName' ? {
+                                                    value: /^[a-zA-Z ]*$/,
+                                                    message: "Full Name cannot contain special characters."
+                                                } : undefined
+                                            })}
+                                            value={formDetails[field]}
+                                            // onChange={(e) => {
+                                            //     setFormDetails((prevDetails) => ({ ...prevDetails, [field]: e.target.value }));
+                                            //     // handleSanitization(e, field === 'email' ? /[^-@.\sa-zA-Z0-9]/g : (field === 'fullName' ? /[^a-zA-Z\s]/g : /[^-@.\sa-zA-Z0-9]/g), `${field.charAt(0).toUpperCase() + field.slice(1)} cannot contain special characters.`, /\s{2,}/g, `${field.charAt(0).toUpperCase() + field.slice(1)} cannot contain consecutive spaces.`, `${field.charAt(0).toUpperCase() + field.slice(1)} cannot start with a space.`);
+                                            //     handleSanitization(e, field === 'email' ? /[^-@.\sa-zA-Z0-9]/g : /[^a-zA-Z\s]/g, `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot contain special characters.`, /\s{2,}/g, `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot contain consecutive spaces.`, `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot start with a space.`);
+
+                                            //     // if (field === 'email') {
+                                            //     //     handleEmailChange(e);
+                                            //     // } else {
+                                            //     //     handleSanitization(e, field === 'fullName' ? /[^a-zA-Z\s]/g : /[^-@.\sa-zA-Z0-9]/g, `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot contain special characters.`, /\s{2,}/g, `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot contain consecutive spaces.`, `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot start with a space.`);
+                                            //     // }
+                                            // }}
+
+                                            // onChange={(e) => {
+                                            //     const { name, value } = e.target;
+                                            //     setFormDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+
+                                            //     if (name === 'email') {
+                                            //         handleEmailChange(e);
+                                            //     } else {
+                                            //         handleSanitization(
+                                            //             e,
+                                            //             name === 'fullName' ? /[^a-zA-Z\s]/g : /[^-@.\sa-zA-Z0-9]/g,
+                                            //             name === 'fullName' ? 'Full Name cannot contain special characters.' : `${name.charAt(0).toUpperCase() + name.slice(1)} cannot contain special characters.`,
+                                            //             /\s{2,}/g,
+                                            //             name === 'fullName' ? 'Full Name cannot contain consecutive spaces.' : `${name.charAt(0).toUpperCase() + name.slice(1)} cannot contain consecutive spaces.`,
+                                            //             name === 'fullName' ? 'Full Name cannot start with a space.' : `${name.charAt(0).toUpperCase() + name.slice(1)} cannot start with a space.`
+                                            //         );
+                                            //     }
+                                            // }}
+
+                                            onChange={(e) => {
+                                                const { name, value } = e.target;
+                                                setFormDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+
+                                                if (name === 'email') {
+                                                    handleEmailChange(e);
+                                                } else if (name === 'fullName') {
+                                                    handleSanitization(
+                                                        e,
+                                                        /[^a-zA-Z\s]/g,
+                                                        'Full Name cannot contain special characters.',
+                                                        /\s{2,}/g,
+                                                        'Full Name cannot contain consecutive spaces.',
+                                                        'Full Name cannot start with a space.'
+                                                    );
+                                                } else {
+                                                    handleSanitization(
+                                                        e,
+                                                        /[^-@.\sa-zA-Z0-9]/g,
+                                                        `${name.charAt(0).toUpperCase() + name.slice(1)} cannot contain special characters.`,
+                                                        /\s{2,}/g,
+                                                        `${name.charAt(0).toUpperCase() + name.slice(1)} cannot contain consecutive spaces.`,
+                                                        `${name.charAt(0).toUpperCase() + name.slice(1)} cannot start with a space.`
+                                                    );
+                                                }
+                                            }}
+                                        />
+                                    )}
+                                    {errors[field] && <p className="danger"><BiSolidErrorCircle /> {errors[field].message}</p>}
+                                    {inputErrors[field] && <p className="danger"><BiSolidErrorCircle /> {inputErrors[field]}</p>}
+                                </Col>
+                            ))}
+                            <Col sm={12} className="px-1">
+                                <button type="submit"><span>{buttonTxt}</span></button>
+                                {status.message && (
+                                    <div className="row">
+                                        <p className={status.success ? "success" : "danger"}>{status.message}</p>
+                                    </div>
+                                )}
+                            </Col>
+                        </Row>
+                    </form>
+                </div>
+            </div>
         </section>
-    )
-}
+    );
+};
+
+export default Contact;
