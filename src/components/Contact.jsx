@@ -147,27 +147,60 @@ const Contact = () => {
         const { value, selectionStart } = e.target;
         const regex = /[^-@.\sa-zA-Z0-9]/g;
         const spaceRegex = /\s{2,}/g;
-
-        const { sanitizedValue, error } = sanitizeInput(
-            value,
-            regex,
-            'Email cannot contain special characters.',
-            spaceRegex,
-            'Email cannot contain consecutive spaces.',
-            'Email cannot start with a space.'
-        );
-
-        const cursorPosition = selectionStart - (value.slice(0, selectionStart).match(regex) || []).length;
-
-        setFormDetails((prevDetails) => ({ ...prevDetails, email: sanitizedValue }));
-        setInputErrors((prevErrors) => ({ ...prevErrors, email: error }));
-        setValue('email', sanitizedValue, { shouldValidate: true });
-
-        // Manually update the input value and restore the cursor position
-        e.target.value = sanitizedValue;
-        e.target.setSelectionRange(cursorPosition, cursorPosition);
+    const handleMessageChange = (e) => {
+        const { name, value } = e.target;
+        const specialCharRegex = /[`[\]\\/;~^_{}|<>]/g;
+        const consecutiveSpaceRegex = / {2,}/g;
+        const consecutiveNewLineRegex = /\n{3,}/g;
+        const consecutiveSpecialCharRegex = /([-]{2,})|([.]{2,})/g;
+    
+        const errorMessage = 'Message cannot contain the following special characters: ` [ ] \\ ; ~ ^ _ { } | < > ';
+        const spaceErrorMessage = 'Message cannot contain consecutive space or more than 2 consecutive new lines (enter / return key).';
+        const consecutiveSpecialCharErrorMessage = 'Message cannot contain consecutive hyphens (-) or periods (.).';
+        const firstCharErrorMessage = 'Message cannot start with a space.';
+    
+        let sanitizedValue = value;
+        let error = '';
+    
+        // Check for special characters
+        if (specialCharRegex.test(value)) {
+            error = errorMessage;
+            sanitizedValue = sanitizedValue.replace(specialCharRegex, '');
+        }
+    
+        // Replace more than 2 consecutive new lines with exactly 2 new lines
+        if (consecutiveNewLineRegex.test(sanitizedValue)) {
+            sanitizedValue = sanitizedValue.replace(consecutiveNewLineRegex, '\n\n');
+            error = spaceErrorMessage;
+        }
+    
+        // Replace consecutive space with a single space
+        if (consecutiveSpaceRegex.test(sanitizedValue)) {
+            sanitizedValue = sanitizedValue.replace(consecutiveSpaceRegex, ' ');
+            error = spaceErrorMessage;
+        }
+    
+        // Replace consecutive hyphens or periods with a single instance
+        if (consecutiveSpecialCharRegex.test(sanitizedValue)) {
+            sanitizedValue = sanitizedValue.replace(consecutiveSpecialCharRegex, match => match[0]);
+            error = consecutiveSpecialCharErrorMessage;
+        }
+    
+        // Check if the first character is a space
+        if (sanitizedValue.startsWith(' ')) {
+            sanitizedValue = sanitizedValue.trimStart();
+            error = firstCharErrorMessage;
+        }
+    
+        // Ensure that spaces and new lines are allowed after each other
+        // Allow single space followed by a new line or a new line followed by a single space
+        sanitizedValue = sanitizedValue.replace(/(\s\n|\n\s)/g, match => match);
+    
+        // Set errors and form details
+        setInputErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+        setFormDetails((prevDetails) => ({ ...prevDetails, [name]: sanitizedValue }));
+        setValue(name, sanitizedValue, { shouldValidate: true });
     };
-
 
     const submitHandler = async () => {
         setButtonTxt('Sending...');
