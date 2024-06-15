@@ -146,7 +146,49 @@ const Contact = () => {
     const handleEmailChange = (e) => {
         const { value, selectionStart } = e.target;
         const regex = /[^-@.\sa-zA-Z0-9]/g;
-        const spaceRegex = /\s{2,}/g;
+    const handleNameChange = (e) => {
+        const { name, value } = e.target;
+        const specialCharRegex = /[^-. \sa-zA-Z\s]/g;
+        const consecutiveSpaceRegex = / {2,}/g;
+        const consecutiveAdjacentHyphenPeriodRegex = /[-.]{2,}/g; // No hyphen and no period can sit adjacent to each other
+    
+        const specialCharErrorMessage = 'Full Name cannot contain special characters except for hyphens (-) and periods (.).';
+        const consecutiveSpaceErrorMessage = 'Full Name cannot contain consecutive spaces.';
+        const consecutiveAdjacentHyphenPeriodRegexErrorMessage = 'Full Name cannot contain consecutive or adjacent hyphens (-) or periods (.).';
+        const firstCharSpaceErrorMessage = 'Full Name cannot start with a space.';
+    
+        let sanitizedValue = value;
+        let error = '';
+    
+        // Check for special characters
+        if (specialCharRegex.test(value)) {
+            error = specialCharErrorMessage;
+            sanitizedValue = sanitizedValue.replace(specialCharRegex, '');
+        }
+    
+        // Replace consecutive space with a single space
+        if (consecutiveSpaceRegex.test(sanitizedValue)) {
+            sanitizedValue = sanitizedValue.replace(consecutiveSpaceRegex, ' ');
+            error = consecutiveSpaceErrorMessage;
+        }
+    
+        // Replace consecutive hyphens or periods with a single instance
+        if (consecutiveAdjacentHyphenPeriodRegex.test(sanitizedValue)) {
+            sanitizedValue = sanitizedValue.replace(consecutiveAdjacentHyphenPeriodRegex, match => match[0]);
+            error = consecutiveAdjacentHyphenPeriodRegexErrorMessage;
+        }
+    
+        // Check if the first character is a space
+        if (sanitizedValue.startsWith(' ')) {
+            sanitizedValue = sanitizedValue.trimStart();
+            error = firstCharSpaceErrorMessage;
+        }
+    
+        // Set errors and form details
+        setInputErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+        setFormDetails((prevDetails) => ({ ...prevDetails, [name]: sanitizedValue }));
+        setValue(name, sanitizedValue, { shouldValidate: true });
+    };    
     const handleMessageChange = (e) => {
         const { name, value } = e.target;
         const specialCharRegex = /[`[\]\\/;~^_{}|<>]/g;
