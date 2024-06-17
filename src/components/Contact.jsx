@@ -144,8 +144,55 @@ const Contact = () => {
     };
 
     const handleEmailChange = (e) => {
-        const { value, selectionStart } = e.target;
-        const regex = /[^-@.\sa-zA-Z0-9]/g;
+        const { name, value, selectionStart } = e.target;
+        const specialCharRegex = /[^-_@.\sa-zA-Z0-9]/g;
+        const noSpaceRegex = /\s+/g;
+        const consecutiveAdjacentSpecialCharRegex = /[-_.@]{2,}/g; // No hyphen, underscore, period, and at signs can sit adjacent to each other
+        const invalidStartCharRegex = /^[-_.@]/g;
+
+        const specialCharErrorMessage = 'Email cannot contain special characters except for hyphens (-), underscores (_), periods (.), and at signs (@).';
+        const noSpaceErrorMessage = 'Email cannot contain spaces.';
+        const consecutiveAdjacentSpecialCharErrorMessage = 'Email cannot contain consecutive or adjacent hyphen (-), underscore (_), period (.), and at sign (@).';
+        const invalidStartCharErrorMessage = 'Email cannot start with a hyphen (-), underscore (_), period (.), and at sign (@).'
+
+        let sanitizedValue = value;
+        let error = '';
+
+        // Check for special characters
+        if (specialCharRegex.test(sanitizedValue)) {
+            error = specialCharErrorMessage;
+            sanitizedValue = sanitizedValue.replace(specialCharRegex, '');
+        }
+
+        // Remove spaces
+        if (noSpaceRegex.test(sanitizedValue)) {
+            error = noSpaceErrorMessage;
+            sanitizedValue = sanitizedValue.replace(noSpaceRegex, '');
+        }
+
+        // Replace consecutive hyphens or periods with a single instance
+        if (consecutiveAdjacentSpecialCharRegex.test(sanitizedValue)) {
+            sanitizedValue = sanitizedValue.replace(consecutiveAdjacentSpecialCharRegex, match => match[0]);
+            error = consecutiveAdjacentSpecialCharErrorMessage;
+        }
+
+        // Check if the first character is a hyphen (-), underscore (_), period (.), or at sign (@)
+        if (invalidStartCharRegex.test(sanitizedValue)) {
+            error = invalidStartCharErrorMessage;
+            sanitizedValue = sanitizedValue.replace(invalidStartCharRegex, '');
+        }
+
+        // Manually update the input value and restore the cursor position
+        e.target.value = sanitizedValue;
+        e.target.setSelectionRange(selectionStart, selectionStart);
+
+        // Set errors and form details
+        setInputErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+        setFormDetails((prevDetails) => ({ ...prevDetails, [name]: sanitizedValue }));
+        setValue(name, sanitizedValue, { shouldValidate: true });
+    };
+
+
     const handleNameChange = (e) => {
         const { name, value } = e.target;
         const specialCharRegex = /[^-. \sa-zA-Z\s]/g;
