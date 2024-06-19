@@ -17,6 +17,13 @@
   font-weight: 400;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
 .spotlight {
   position: fixed;
   top: 0;
@@ -134,25 +141,13 @@ p.danger {
   border: 1.5px solid #ff0000 !important;
 }
 
-/* @media (max-width: 991px) { */
 @media (max-width: 9999px) {
-
-  /* @media screen and (max-width: 4650px){ */
   .scrollLocked {
     position: fixed;
     right: 0;
     left: 0;
   }
 }
-
-
-/* .error-icon {
-  display: none;
-}
-
-.error-icon {
-  display: inline-block;
-} */
 
 /* MEDIA QUERIES (XS DEVICE) */
 @media screen and (max-width: 575px) {
