@@ -118,27 +118,32 @@ select:focus {
   outline: none;
 }
 
-@media (min-width:1700px) {
-  main .container {
-    max-width: 100%;
-    padding: 0 150px;
-  }
-}
-
 p.success {
   color: green;
-  width: 27rem;
+  width: 28rem;
+  width: 100%;
+  width: calc(14vw + 14vh + 14vmin);
+
+  font-size: 0.7rem;
+  font-size: calc(0.38vw + 0.38vh + 0.38vmin);
 }
 
 p.danger {
   color: #ff0000;
-  width: 27rem;
-  font-size: 12px;
+  width: 28rem;
+  width: 100%;
+  width: calc(14vw + 14vh + 14vmin);
+
+  font-size: 0.7rem;
+  font-size: calc(0.38vw + 0.38vh + 0.38vmin);
+
   margin-bottom: 0.3rem;
+  margin-bottom: calc(0.15vw + 0.15vh + 0.15vmin);
 }
 
 .invalidInput {
-  border: 1.5px solid #ff0000 !important;
+  border: 0.0625rem solid #ff0000 !important;
+  border: calc(0.05vw + 0.05vh + 0.05vmin) solid #ff0000 !important;
 }
 
 @media (max-width: 9999px) {
@@ -146,16 +151,5 @@ p.danger {
     position: fixed;
     right: 0;
     left: 0;
-  }
-}
-
-/* MEDIA QUERIES (XS DEVICE) */
-@media screen and (max-width: 575px) {
-  p.success {
-    width: 70vw;
-  }
-
-  p.danger {
-    width: 70vw;
   }
 }
