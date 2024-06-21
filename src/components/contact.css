@@ -43,16 +43,28 @@
 .contact-content form input,
 .contact-content form textarea {
     width: 28rem;
+    width: calc(14vw + 14vh + 14vmin);
+
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.5);
+    border: calc(0.05vw + 0.05vh + 0.05vmin) solid rgba(255, 255, 255, 0.5);
+
+    border-radius: 1rem;
+    border-radius: calc(0.55vw + 0.55vh + 0.55vmin);
+
     color: #fff;
-    margin: 15px 0 10px 0;
-    padding: 1rem 1.5rem;
+    margin: 1rem 0 0.5rem 0;
+    margin: calc(0.55vw + 0.55vh + 0.55vmin) 0 calc(0.3vw + 0.3vh + 0.3vmin) 0;
+
+    padding: 0.5rem 1rem;
+    padding: calc(0.3vw + 0.3vh + 0.3vmin) calc(0.55vw + 0.55vh + 0.55vmin);
+
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.93rem;
+    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
+
     letter-spacing: 0.6px;
-    transition: 0.3s ease-in-out;
+    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
     resize: none;
 }
 
@@ -64,7 +76,10 @@
 
 .contact-content form input::placeholder,
 .contact-content form textarea::placeholder {
-    font-size: 1rem;
+    font-size: 0.93rem;
+    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
+
+
     font-weight: 400;
     color: #fff;
 }
@@ -80,8 +95,14 @@
     color: #000;
     background-color: #fff;
     padding: 0.75rem 3rem;
-    font-size: 1rem;
+    padding: calc(0.41vw + 0.41vh + 0.41vmin) calc(1.625vw + 1.625vh + 1.625vmin);
+
+    font-size: 0.93rem;
+    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
+
     margin-top: 25px;
+    margin-top: calc(0.9vw + 0.9vh + 0.9vmin);
+
     border-radius: 0;
     position: relative;
     transition: 0.3s ease-in-out;
@@ -110,119 +131,4 @@
 
 .contact-content form button:hover::before {
     width: 100%;
-}
-
-/* MEDIA QUERIES (XL DEVICE) */
-@media screen and (max-width: 1399px) {
-    .contact-container {
-        gap: 3rem;
-    }
-
-    .canvas-container {
-        max-height: 730px;
-        margin: 0 0 0 70px;
-    }
-    
-    .contact-content > h2 {
-        font-size: 2.5rem;
-    }
-
-    .contact-content form input,
-    .contact-content form textarea {
-        width: 27.5rem;
-    }
-}
-
-/* MEDIA QUERIES (LG DEVICE) */
-@media screen and (max-width: 1199px) {
-    .contact-content {
-        margin: 120px 0 0 0;
-    }
-
-    .canvas-container {
-        max-height: 700px;
-        margin: 0 0 0 20px;
-    }
-    
-    .contact-content > h2 {
-        font-size: 2.4rem;
-    }
-
-    .contact-content form input,
-    .contact-content form textarea {
-        width: 21.5rem;
-    }
-}
-
-/* MEDIA QUERIES (MD DEVICE) */
-@media screen and (max-width: 991px) {
-    .contact-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .canvas-container {
-        max-height: 600px;
-        margin: 0 0 0 -10px;
-    }
-
-    .contact-content {
-        margin: 0 0 0 125px;
-    }
-
-    .contact-content form input,
-    .contact-content form textarea {
-        width: 29rem;
-    }    
-}
-
-/* MEDIA QUERIES (SM DEVICE) */
-@media screen and (max-width: 767px) {
-    .contact-content {
-        margin: 0 0 0 65px;
-    }
-
-    .contact-content form input,
-    .contact-content form textarea {
-        width: 25rem;
-    }    
-}
-
-/* MEDIA QUERIES (XS DEVICE) */
-@media screen and (max-width: 575px) {
-    .contact-content {
-        margin: 0 0 0 80px;
-    }
-
-    .contact-content form input,
-    .contact-content form textarea {
-        width: 69vw;
-    }
-}
-
-/* MEDIA QUERIES (XSS DEVICE) */
-@media screen and (max-width: 500px) {
-    .contact-content form input,
-    .contact-content form textarea {
-        width: 66vw;
-    }
-}
-
-/* MEDIA QUERIES (MINI DEVICE) */
-@media screen and (max-width: 450px) {
-    .canvas-container {
-        margin: 0 auto;
-        width: 100%;
-        min-width: 50px;
-        max-width: 350px;
-    }
-
-    .contact-content {
-        margin: 0 0 0 17vw;
-    }
-
-    .contact-content h2{
-        font-size: 1.6rem;
-        margin: 0 0;
-    }
 }
