@@ -1,8 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import './contact.css';
-import { Canvas } from "@react-three/fiber";
-import { FadingImageDisplacement } from "./FadingImageDisplacement";
 import { useForm } from "react-hook-form";
 import { BiSolidErrorCircle } from 'react-icons/bi';
 import useAutoHeight from './useAutoHeight';
@@ -42,7 +39,7 @@ const validateInput = (value, type) => {
   let error = '';
   let sanitizedValue = value;
 
-  switch(type) {
+  switch (type) {
     case 'email':
       if (SPECIAL_CHAR_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.email.specialChar;
@@ -111,14 +108,23 @@ const validateInput = (value, type) => {
   return { sanitizedValue, error };
 };
 
-const ContactForm = () => {
+const Contact = () => {
   const { heightState, contentRef, containerRef } = useAutoHeight();
-  const ref = useRef(null);
+  // const [bgOffset, setBgOffset] = useState(12);
 
-  useEffect(() => {
-    const canvas = ref.current;
-    canvas.height = 200 + canvas.width * 1.78;
-  }, []);
+  //   const updateOffsets = () => {
+  //       const windowWidth = window.innerWidth;
+  //       const offset = windowWidth > 575 ? 12 - (12 * (9999 - windowWidth) / (9999 - 576)) : 0;
+  //       setBgOffset(offset);
+  //   };
+
+  //   useEffect(() => {
+  //       window.addEventListener('resize', updateOffsets);
+  //       updateOffsets(); // Initial call on mount
+  //       return () => {
+  //           window.removeEventListener('resize', updateOffsets);
+  //       };
+  //   }, []);
 
   const [formDetails, setFormDetails] = useState({ fullName: '', email: '', message: '' });
   const [buttonText, setButtonText] = useState('Send');
@@ -163,17 +169,15 @@ const ContactForm = () => {
   return (
     <section className="contact" id="connect" style={{ minHeight: heightState }}>
       <div className="contact-container" ref={containerRef}>
-        <div className="canvas-container">
-          <Canvas ref={ref}>
-            <FadingImageDisplacement />
-          </Canvas>
-        </div>
-        <div className="contact-content" ref={contentRef}>
-          <h2>Get In Touch</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Row>
+      {/* <div className="contact-bg" style={{ right: `${bgOffset}%` }}></div> */}
+      <div className="contact-bg"></div>
+      {/* <div className="contact-content-wrapper" style={{ left: `${bgOffset}%` }} ref={contentRef}> */}
+      <div className="contact-content-wrapper" ref={contentRef}>
+          <div className="contact-content">
+            <h2>Contact</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
               {['fullName', 'email', 'message'].map((field, idx) => (
-                <Col key={idx} sm={12} className="px-1">
+                <div key={idx}>
                   {field === 'message' ? (
                     <textarea
                       className={`${errors[field]?.message || inputErrors[field] ? "invalidInput" : ""}`}
@@ -213,22 +217,20 @@ const ContactForm = () => {
                   )}
                   {errors[field] && <p className="danger"><BiSolidErrorCircle /> {errors[field].message}</p>}
                   {inputErrors[field] && <p className="danger"><BiSolidErrorCircle /> {inputErrors[field]}</p>}
-                </Col>
+                </div>
               ))}
-              <Col sm={12} className="px-1">
-                <button type="submit"><span>{buttonText}</span></button>
-                {status.message && (
-                  <div className="row">
-                    <p className={status.success ? "success" : "danger"}>{status.message}</p>
-                  </div>
-                )}
-              </Col>
-            </Row>
-          </form>
+              <button type="submit"><span>{buttonText}</span></button>
+              {status.message && (
+                <div className="row">
+                  <p className={status.success ? "success" : "danger"}>{status.message}</p>
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default ContactForm;
+export default Contact;
