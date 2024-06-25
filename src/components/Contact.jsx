@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './contact.css';
 import { useForm } from "react-hook-form";
 import { BiSolidErrorCircle } from 'react-icons/bi';
 import useAutoHeight from './useAutoHeight';
+import { Canvas } from "@react-three/fiber";
+import { FadingImageDisplacement } from './FadingImageDisplacement';
 
-const SPECIAL_CHAR_REGEX = /[^-_@.\sa-zA-Z0-9]/g;
-const NO_SPACE_REGEX = /\s+/g;
-const CONSECUTIVE_ADJACENT_SPECIAL_CHAR_REGEX = /[-_.@]{2,}/g;
-const INVALID_START_EMAIL_REGEX = /^[-_.@]/g;
-const INVALID_START_NAME_REGEX = /^[ .-]/g;
+const SPECIAL_CHAR_EMAIL_REGEX = /[^-_@.\sa-zA-Z0-9]/g;
+const SPECIAL_CHAR_NAME_REGEX = /[^-.\sa-zA-Z]/g;
 const SPECIAL_CHAR_MESSAGE_REGEX = /[`[\]\\/;~^_{}|<>]/g;
+const CONSECUTIVE_ADJACENT_SPECIAL_CHAR_REGEX = /[-_.@]{2,}/g;
 const CONSECUTIVE_SPACE_REGEX = / {2,}/g;
 const CONSECUTIVE_NEW_LINE_REGEX = /\n{3,}/g;
 const CONSECUTIVE_HYPHEN_PERIOD_REGEX = /([-]{2,})|([.]{2,})/g;
+const INVALID_START_EMAIL_REGEX = /^[-_.@]/g;
+const INVALID_START_NAME_REGEX = /^[ .-]/g;
+const NO_SPACE_REGEX = /\s+/g;
 
 const ERROR_MESSAGES = {
   email: {
@@ -22,7 +25,7 @@ const ERROR_MESSAGES = {
     invalidStart: 'Email cannot start with a hyphen (-), underscore (_), period (.), or at sign (@).'
   },
   fullName: {
-    specialChar: 'Full Name cannot contain special characters except for hyphens (-) and periods (.).',
+    specialChar: 'Full Name cannot contain numbers and special characters except for hyphens (-) and periods (.).',
     consecutiveSpace: 'Full Name cannot contain consecutive spaces.',
     consecutiveSpecialChar: 'Full Name cannot contain consecutive or adjacent hyphens (-) or periods (.).',
     invalidStart: 'Full Name cannot start with a space, hyphen (-), or period (.).'
@@ -41,9 +44,9 @@ const validateInput = (value, type) => {
 
   switch (type) {
     case 'email':
-      if (SPECIAL_CHAR_REGEX.test(sanitizedValue)) {
+      if (SPECIAL_CHAR_EMAIL_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.email.specialChar;
-        sanitizedValue = sanitizedValue.replace(SPECIAL_CHAR_REGEX, '');
+        sanitizedValue = sanitizedValue.replace(SPECIAL_CHAR_EMAIL_REGEX, '');
       }
       if (NO_SPACE_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.email.noSpace;
@@ -60,23 +63,31 @@ const validateInput = (value, type) => {
       break;
 
     case 'fullName':
-      if (SPECIAL_CHAR_REGEX.test(sanitizedValue)) {
+      // Check for special characters except hyphens and periods
+      if (SPECIAL_CHAR_NAME_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.fullName.specialChar;
-        sanitizedValue = sanitizedValue.replace(SPECIAL_CHAR_REGEX, '');
+        sanitizedValue = sanitizedValue.replace(SPECIAL_CHAR_NAME_REGEX, '');
       }
+
+      // Check for consecutive spaces
       if (CONSECUTIVE_SPACE_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.fullName.consecutiveSpace;
         sanitizedValue = sanitizedValue.replace(CONSECUTIVE_SPACE_REGEX, ' ');
       }
+
+      // Check for consecutive special characters
       if (CONSECUTIVE_ADJACENT_SPECIAL_CHAR_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.fullName.consecutiveSpecialChar;
         sanitizedValue = sanitizedValue.replace(CONSECUTIVE_ADJACENT_SPECIAL_CHAR_REGEX, match => match[0]);
       }
+
+      // Check for invalid starting characters
       if (INVALID_START_NAME_REGEX.test(sanitizedValue)) {
         error = ERROR_MESSAGES.fullName.invalidStart;
         sanitizedValue = sanitizedValue.replace(INVALID_START_NAME_REGEX, '');
       }
       break;
+
 
     case 'message':
       if (SPECIAL_CHAR_MESSAGE_REGEX.test(sanitizedValue)) {
@@ -110,21 +121,6 @@ const validateInput = (value, type) => {
 
 const Contact = () => {
   const { heightState, contentRef, containerRef } = useAutoHeight();
-  // const [bgOffset, setBgOffset] = useState(12);
-
-  //   const updateOffsets = () => {
-  //       const windowWidth = window.innerWidth;
-  //       const offset = windowWidth > 575 ? 12 - (12 * (9999 - windowWidth) / (9999 - 576)) : 0;
-  //       setBgOffset(offset);
-  //   };
-
-  //   useEffect(() => {
-  //       window.addEventListener('resize', updateOffsets);
-  //       updateOffsets(); // Initial call on mount
-  //       return () => {
-  //           window.removeEventListener('resize', updateOffsets);
-  //       };
-  //   }, []);
 
   const [formDetails, setFormDetails] = useState({ fullName: '', email: '', message: '' });
   const [buttonText, setButtonText] = useState('Send');
@@ -134,8 +130,16 @@ const Contact = () => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   const handleInputChange = (e) => {
+    // const { name, value } = e.target;
+    // const { sanitizedValue, error } = validateInput(value, name);
+
     const { name, value } = e.target;
-    const { sanitizedValue, error } = validateInput(value, name);
+    let { sanitizedValue, error } = validateInput(value, name); // Problematic line
+
+    // // Additional validation for 'fullName' field (no numbers and '@' symbol)
+    // if (name === 'fullName') {
+    //   sanitizedValue = sanitizedValue.replace(/[@\d]/g, ''); // Remove '@' symbol and digits
+    // }
 
     e.target.value = sanitizedValue;
 
@@ -167,12 +171,13 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact" id="connect" style={{ minHeight: heightState }}>
+    <section className="contact" id="connect" style={{ height: heightState }}>
       <div className="contact-container" ref={containerRef}>
-      {/* <div className="contact-bg" style={{ right: `${bgOffset}%` }}></div> */}
-      <div className="contact-bg"></div>
-      {/* <div className="contact-content-wrapper" style={{ left: `${bgOffset}%` }} ref={contentRef}> */}
-      <div className="contact-content-wrapper" ref={contentRef}>
+        {/* <div className="contact-bg"></div> */}
+        <Canvas className="contact-bg">
+          <FadingImageDisplacement />
+        </Canvas>
+        <div className="contact-content-wrapper" ref={containerRef}>
           <div className="contact-content">
             <h2>Contact</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
