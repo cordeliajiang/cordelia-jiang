@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const SkillItem = ({ icon, title }) => (
     <article className='skills-details'>
         <div className="skills-details-icon">{icon}</div>
-        <h5>{title}</h5>
+        <h5 className="open-sans-regular">{title}</h5>
     </article>
 );
 

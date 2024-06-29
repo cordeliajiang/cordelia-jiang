@@ -91,7 +91,7 @@ export const NavBar = ({ setScrollLocked }) => {
               <div className="menu-logo">
                 <a href="#home"><img src={logo} alt="Menu Brand Logo" /></a>
               </div>
-              <div className="nav-links">
+              <div className="open-sans-regular nav-links">
                 {/* Render Nav.Links for each section */}
                 {['home', 'skills', 'projects', 'connect'].map((value) => (
                   <Nav.Link

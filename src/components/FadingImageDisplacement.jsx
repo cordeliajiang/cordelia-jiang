@@ -1,9 +1,7 @@
 import { shaderMaterial, useTexture } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
-// import * as THREE from "three";
 import { easing, geometry } from "maath";
-// import { hover } from "@testing-library/user-event/dist/hover";
 
 // shaderMaterial is a THREE.js material
 export const ImageFadeMaterial = shaderMaterial(
@@ -64,7 +62,7 @@ export const FadingImageDisplacement = () => {
 
   return (
       <mesh onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
-        <roundedPlaneGeometry args = {[2.25, 4]} // 9:16 aspect ratio
+        <roundedPlaneGeometry args = {[5, 9]} // aspect ratio
         />
         <imageFadeMaterial 
           ref={ref} 

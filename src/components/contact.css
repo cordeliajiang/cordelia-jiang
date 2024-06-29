@@ -5,51 +5,33 @@
 .contact-container {
     display: flex;
     width: 100%;
-    height: calc(29vw + 29vh + 29vmin);
+    height: 100vh;
     position: relative;
 }
 
 .contact-bg {
     width: 100%;
-    height: calc(29vw + 29vh + 29vmin);
-    /* background: url('../assets/img/contact-img.png') center center/contain no-repeat; */
+    height: 100%;
     z-index: 1;
     position: absolute;
-    /* right: 12%; */
     left: -12%;
-    overflow: hidden; /* Ensure canvas doesn't overflow its parent */
 }
 
-.contact-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    /* width: 100%; */
-    width: 50%;
-    position: absolute;
-    /* left: 38%; */
-    right: 12%;
-    z-index: 2;
-}
-
-  
 .contact-content {
-    max-width: calc(14vw + 14vh + 14vmin);
+    position: absolute;
+    align-self: center;
+    right: 23%;
+
+    z-index: 2;
     width: 100%;
+    max-width: calc(15vw + 15vh + 15vmin);
     background: rgba(255, 255, 255, 0.05);
+
     padding: 2rem;
     padding: calc(1vw + 1vh + 1vmin);
+
     border-radius: 1rem;
     border-radius: calc(0.55vw + 0.55vh + 0.55vmin);
-}
-
-.contact-content>h2 {
-    color: var(--color-primary);
-    font-weight: 700;
-
-    font-size: 2.8rem;
-    font-size: calc(1.5vw + 1.5vh + 1.5vmin);
 }
 
 
@@ -58,57 +40,43 @@ p.success {
     color: green;
     width: 28rem;
     width: 100%;
-    /* width: calc(14vw + 14vh + 14vmin); */
-  
-    font-size: 0.7rem;
-    font-size: calc(0.38vw + 0.38vh + 0.38vmin);
-  }
-  
-  p.danger {
+}
+
+p.danger {
     color: #ff0000;
     width: 28rem;
     width: 100%;
-    /* width: calc(14vw + 14vh + 14vmin); */
-  
-    font-size: 0.7rem;
-    font-size: calc(0.38vw + 0.38vh + 0.38vmin);
-  
+
     margin-bottom: 0.3rem;
     margin-bottom: calc(0.15vw + 0.15vh + 0.15vmin);
-  }
-  
-  .invalidInput {
+}
+
+.invalidInput {
     border: 0.0625rem solid #ff0000 !important;
     border: calc(0.05vw + 0.05vh + 0.05vmin) solid #ff0000 !important;
-  }
-  
+}
+
 .contact-content form input,
 .contact-content form textarea {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    resize: none;
+
     width: 28rem;
     width: 100%;
     min-width: calc(5vw + 5vh + 5vmin);
 
-    background: rgba(255, 255, 255, 0.1);
     border: 0.0625rem solid rgba(255, 255, 255, 0.5);
     border: calc(0.05vw + 0.05vh + 0.05vmin) solid rgba(255, 255, 255, 0.5);
 
     border-radius: 1rem;
     border-radius: calc(0.55vw + 0.55vh + 0.55vmin);
 
-    color: #fff;
     margin: 1rem 0 0.5rem 0;
     margin: calc(0.55vw + 0.55vh + 0.55vmin) 0 calc(0.3vw + 0.3vh + 0.3vmin) 0;
 
     padding: 0.5rem 1rem;
     padding: calc(0.3vw + 0.3vh + 0.3vmin) calc(0.55vw + 0.55vh + 0.55vmin);
-
-    font-weight: 500;
-    font-size: 0.93rem;
-    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
-
-    letter-spacing: 0.6px;
-    letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
-    resize: none;
 }
 
 .contact-content form input:focus,
@@ -119,11 +87,6 @@ p.success {
 
 .contact-content form input::placeholder,
 .contact-content form textarea::placeholder {
-    font-size: 0.93rem;
-    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
-
-
-    font-weight: 400;
     color: #fff;
 }
 
@@ -134,21 +97,20 @@ p.success {
 }
 
 .contact-content form button {
-    font-weight: 700;
     color: #000;
     background-color: #fff;
-    padding: 0.75rem 3rem;
-    padding: calc(0.41vw + 0.41vh + 0.41vmin) calc(1.625vw + 1.625vh + 1.625vmin);
-
-    font-size: 0.93rem;
-    font-size: calc(0.5vw + 0.5vh + 0.5vmin);
-
-    margin-top: 25px;
-    margin-top: calc(0.9vw + 0.9vh + 0.9vmin);
-
     border-radius: 0;
     position: relative;
     transition: 0.3s ease-in-out;
+
+    width: 5.625rem;
+    width: calc(5.15vw + 5.15vh + 5.15vmin);
+    
+    height: 1rem;
+    height: calc(1.5vw + 1.5vh + 1.5vmin);
+
+    margin-top: 25px;
+    margin-top: calc(0.9vw + 0.9vh + 0.9vmin);
 }
 
 .contact-content form button span {
@@ -169,7 +131,7 @@ p.success {
     top: 0;
     left: 0;
     z-index: 0;
-    transition: 0.3s ease-in-out;
+    transition: 0.4s ease-in-out;
 }
 
 .contact-content form button:hover::before {
@@ -183,6 +145,6 @@ p.success {
     }
 
     .contact-content-wrapper {
-        right: 25%;
+        right: 0;
     }
 }

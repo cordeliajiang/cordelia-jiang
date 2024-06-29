@@ -130,16 +130,8 @@ const Contact = () => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   const handleInputChange = (e) => {
-    // const { name, value } = e.target;
-    // const { sanitizedValue, error } = validateInput(value, name);
-
     const { name, value } = e.target;
-    let { sanitizedValue, error } = validateInput(value, name); // Problematic line
-
-    // // Additional validation for 'fullName' field (no numbers and '@' symbol)
-    // if (name === 'fullName') {
-    //   sanitizedValue = sanitizedValue.replace(/[@\d]/g, ''); // Remove '@' symbol and digits
-    // }
+    const { sanitizedValue, error } = validateInput(value, name);
 
     e.target.value = sanitizedValue;
 
@@ -173,65 +165,62 @@ const Contact = () => {
   return (
     <section className="contact" id="connect" style={{ height: heightState }}>
       <div className="contact-container" ref={containerRef}>
-        {/* <div className="contact-bg"></div> */}
         <Canvas className="contact-bg">
           <FadingImageDisplacement />
         </Canvas>
-        <div className="contact-content-wrapper" ref={containerRef}>
-          <div className="contact-content">
-            <h2>Contact</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {['fullName', 'email', 'message'].map((field, idx) => (
-                <div key={idx}>
-                  {field === 'message' ? (
-                    <textarea
-                      className={`${errors[field]?.message || inputErrors[field] ? "invalidInput" : ""}`}
-                      rows="6"
-                      name={field}
-                      placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                      {...register(field, {
-                        required: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
-                        minLength: { value: field === 'message' ? 5 : 4, message: `${field.charAt(0).toUpperCase() + field.slice(1)} needs ${field === 'message' ? 5 : 4} or more characters.` },
-                        maxLength: { value: field === 'message' ? 250 : 128, message: `${field.charAt(0).toUpperCase() + field.slice(1)} cannot exceed ${field === 'message' ? 250 : 128} characters.` },
-                        pattern: field === 'email' ? {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                          message: "Please enter a valid email address (e.g. abc@abc.com)."
-                        } : undefined
-                      })}
-                      value={formDetails[field]}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <input
-                      className={`${errors[field]?.message || inputErrors[field] ? "invalidInput" : ""}`}
-                      type="text"
-                      name={field}
-                      placeholder={field === 'fullName' ? 'Name' : `${field.charAt(0).toUpperCase() + field.slice(1)}`}
-                      {...register(field, {
-                        required: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
-                        minLength: { value: 4, message: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} needs 4 or more characters.` },
-                        maxLength: { value: 128, message: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot exceed 128 characters.` },
-                        pattern: field === 'email' ? {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                          message: "Please enter a valid email address (e.g. abc@abc.com)."
-                        } : undefined
-                      })}
-                      value={formDetails[field]}
-                      onChange={handleInputChange}
-                    />
-                  )}
-                  {errors[field] && <p className="danger"><BiSolidErrorCircle /> {errors[field].message}</p>}
-                  {inputErrors[field] && <p className="danger"><BiSolidErrorCircle /> {inputErrors[field]}</p>}
-                </div>
-              ))}
-              <button type="submit"><span>{buttonText}</span></button>
-              {status.message && (
-                <div className="row">
-                  <p className={status.success ? "success" : "danger"}>{status.message}</p>
-                </div>
-              )}
-            </form>
-          </div>
+        <div className="contact-content" ref={contentRef}>
+          <h2 className="old-standard-tt-bold">Contact</h2>
+          <form className="open-sans-regular" onSubmit={handleSubmit(onSubmit)}>
+            {['fullName', 'email', 'message'].map((field, idx) => (
+              <div key={idx}>
+                {field === 'message' ? (
+                  <textarea
+                    className={`${errors[field]?.message || inputErrors[field] ? "invalidInput" : ""}`}
+                    rows="6"
+                    name={field}
+                    placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                    {...register(field, {
+                      required: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
+                      minLength: { value: field === 'message' ? 5 : 4, message: `${field.charAt(0).toUpperCase() + field.slice(1)} needs ${field === 'message' ? 5 : 4} or more characters.` },
+                      maxLength: { value: field === 'message' ? 250 : 128, message: `${field.charAt(0).toUpperCase() + field.slice(1)} cannot exceed ${field === 'message' ? 250 : 128} characters.` },
+                      pattern: field === 'email' ? {
+                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Please enter a valid email address (e.g. abc@abc.com)."
+                      } : undefined
+                    })}
+                    value={formDetails[field]}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <input
+                    className={`${errors[field]?.message || inputErrors[field] ? "invalidInput" : ""}`}
+                    type="text"
+                    name={field}
+                    placeholder={field === 'fullName' ? 'Name' : `${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                    {...register(field, {
+                      required: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
+                      minLength: { value: 4, message: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} needs 4 or more characters.` },
+                      maxLength: { value: 128, message: `${field === 'fullName' ? 'Full Name' : field.charAt(0).toUpperCase() + field.slice(1)} cannot exceed 128 characters.` },
+                      pattern: field === 'email' ? {
+                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Please enter a valid email address (e.g. abc@abc.com)."
+                      } : undefined
+                    })}
+                    value={formDetails[field]}
+                    onChange={handleInputChange}
+                  />
+                )}
+                {errors[field] && <p className="danger"><BiSolidErrorCircle /> {errors[field].message}</p>}
+                {inputErrors[field] && <p className="danger"><BiSolidErrorCircle /> {inputErrors[field]}</p>}
+              </div>
+            ))}
+            <button className="open-sans-bold" type="submit"><span>{buttonText}</span></button>
+            {status.message && (
+              <div className="row">
+                <p className={status.success ? "success" : "danger"}>{status.message}</p>
+              </div>
+            )}
+          </form>
         </div>
       </div>
     </section>

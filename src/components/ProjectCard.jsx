@@ -13,14 +13,14 @@ const ProjectCard = ({ title, description, coverImg, website, github, brochure }
         <div className="projects-card-container">
             <img src={coverImg} alt="coverImg" />
             <div className="projects-info">
-                <h4>{title}</h4>
-                <span>{description}</span>
+                <h4 className="old-standard-tt-bold">{title}</h4>
+                <h5 className="open-sans-italic">{description}</h5>
                 <div className="projects-btn">
                     {links.map(
                         link =>
                             link.href && (
                                 <button key={link.text}>
-                                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                                    <a className="open-sans-bold" href={link.href} target="_blank" rel="noopener noreferrer">
                                         {link.text}
                                     </a>
                                 </button>

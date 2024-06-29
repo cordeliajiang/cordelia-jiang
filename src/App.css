@@ -1,22 +1,3 @@
-/* Custom Fonts */
-@font-face {
-  font-family: Centra;
-  src: url('./assets/font/CentraNo2-Bold.ttf');
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: Centra;
-  src: url('./assets/font/CentraNo2-Medium.ttf');
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: Centra;
-  src: url('./assets/font/CentraNo2-Book.ttf');
-  font-weight: 400;
-}
-
 .App {
   display: flex;
   flex-direction: column;
@@ -75,13 +56,45 @@ h6 {
 /* vmin is viewport minimum, it's based on the smaller dimension of the viewport. 
 if vh < vw, value of 2vmin = 2% of the vh. if vw < vh, value of 2vmin = 2% of the vw */
 h1 {
-  font-size: 4.063rem !important;
-  font-size: calc(2.3vw + 2.3vh + 2.3vmin) !important;
+  font-size: 4.7rem !important;
+  font-size: calc(2.5vw + 2.5vh + 2.5vmin) !important;
+  letter-spacing: 0.05rem;
+  letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+}
+
+h2 {
+  font-size: 3rem !important;
+  font-size: calc(1.6vw + 1.6vh + 1.6vmin) !important;
+  letter-spacing: 0.05rem;
+  letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
 }
 
 h3 {
-  font-size: 1.625rem !important;
-  font-size: calc(0.9vw + 0.9vh + 0.9vmin) !important;
+  font-size: 2.8rem !important;
+  font-size: calc(1.5vw + 1.5vh + 1.5vmin) !important;
+  letter-spacing: 0.19rem;
+  letter-spacing: calc(0.1vw + 0.1vh + 0.1vmin);
+}
+
+h4 {
+  font-size: 1.875rem !important;
+  font-size: calc(1.07vw + 1.07vh + 1.07vmin) !important;
+  letter-spacing: 0.0625rem;
+  letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+}
+
+h5, form, input, textarea {
+  font-size: 1.1rem !important;
+  font-size: calc(0.6vw + 0.6vh + 0.6vmin) !important;
+  letter-spacing: 0.0625rem;
+  letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+}
+
+p {
+  font-size: 0.73rem !important;
+  font-size: calc(0.4vw + 0.4vh + 0.4vmin) !important;
+  letter-spacing: 0.6px;
+  letter-spacing: calc(0.02vw + 0.02vh + 0.02vmin);
 }
 
 p,
@@ -116,34 +129,6 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-}
-
-p.success {
-  color: green;
-  width: 28rem;
-  width: 100%;
-  width: calc(14vw + 14vh + 14vmin);
-
-  font-size: 0.7rem;
-  font-size: calc(0.38vw + 0.38vh + 0.38vmin);
-}
-
-p.danger {
-  color: #ff0000;
-  width: 28rem;
-  width: 100%;
-  width: calc(14vw + 14vh + 14vmin);
-
-  font-size: 0.7rem;
-  font-size: calc(0.38vw + 0.38vh + 0.38vmin);
-
-  margin-bottom: 0.3rem;
-  margin-bottom: calc(0.15vw + 0.15vh + 0.15vmin);
-}
-
-.invalidInput {
-  border: 0.0625rem solid #ff0000 !important;
-  border: calc(0.05vw + 0.05vh + 0.05vmin) solid #ff0000 !important;
 }
 
 @media (max-width: 9999px) {

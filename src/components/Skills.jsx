@@ -31,13 +31,12 @@ export const Skills = () => {
         { icon: <SiAdobephotoshop />, title: "Photoshop" },
         { icon: <SiAdobeillustrator />, title: "Illustrator" },
         { icon: <SiAdobeindesign />, title: "Indesign" },
-        { icon: <SiArchicad />, title: "ArchiCad" }
     ];
 
     return (
         <section className="skills" id="skills" style={{ minHeight: heightState }}>
             <div className="skills-container" ref={containerRef}>
-                <h2>Programming & Design Skills</h2>
+                <h2 className="old-standard-tt-bold">Programming & Design Skills</h2>
                 <div className='skills-content' ref={contentRef}>
                     {skills.map((skill, index) => (
                         <SkillItem key={index} icon={skill.icon} title={skill.title} />
