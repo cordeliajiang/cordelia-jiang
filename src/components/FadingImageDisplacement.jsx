@@ -51,7 +51,7 @@ export const FadingImageDisplacement = () => {
   const [texture1, texture2, dispTexture] = useTexture([
     "/img/contact-img.png", 
     "/img/contact-img.png", 
-    "/img/overlay.png"
+    "/img/overlay.png",
   ]);
 
   const [hovered, setHover] = useState(false);

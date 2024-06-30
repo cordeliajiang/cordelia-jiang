@@ -70,8 +70,8 @@ h2 {
 }
 
 h3 {
-  font-size: 2.8rem !important;
-  font-size: calc(1.5vw + 1.5vh + 1.5vmin) !important;
+  font-size: 1.8rem !important;
+  font-size: calc(1vw + 1vh + 1vmin) !important;
   letter-spacing: 0.19rem;
   letter-spacing: calc(0.1vw + 0.1vh + 0.1vmin);
 }

@@ -14,28 +14,9 @@
 /* Old Standard TT font */
 @font-face {
   font-family: 'Old Standard TT';
-  src: url('./assets/font/OldStandardTT-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Old Standard TT';
   src: url('./assets/font/OldStandardTT-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'Old Standard TT';
-  src: url('./assets/font/OldStandardTT-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-}
-
-.old-standard-tt-regular {
-  font-family: 'Old Standard TT', serif;
-  font-weight: 400;
 }
 
 .old-standard-tt-bold {
@@ -43,20 +24,8 @@
   font-weight: 700;
 }
 
-.old-standard-tt-italic {
-  font-family: 'Old Standard TT', serif;
-  font-style: italic;
-}
-
 
 /* Open Sans font */
-@font-face {
-  font-family: 'Open Sans';
-  src: url('./assets/font/OpenSans-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
 @font-face {
   font-family: 'Open Sans';
   src: url('./assets/font/OpenSans-Regular.ttf') format('truetype');
@@ -73,21 +42,16 @@
 
 @font-face {
   font-family: 'Open Sans';
-  src: url('./assets/font/OpenSans-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
   src: url('./assets/font/OpenSans-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
-.open-sans-light {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/font/OpenSans-SemiBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
 
 .open-sans-regular {
@@ -101,49 +65,14 @@
   font-style: italic;
 }
 
-.open-sans-semibold {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
-}
-
 .open-sans-bold {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
 
-
-/* Centra font */
-@font-face {
-  font-family: 'Centra';
-  src: url('./assets/font/CentraNo2-Book.ttf') format('truetype');
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: 'Centra';
-  src: url('./assets/font/CentraNo2-Medium.ttf') format('truetype');
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: 'Centra';
-  src: url('./assets/font/CentraNo2-Bold.ttf') format('truetype');
-  font-weight: 700;
-}
-
-.centra-book {
-  font-family: 'Centra';
-  font-weight: 400;
-}
-
-.centra-medium {
-  font-family: 'Centra';
-  font-weight: 500;
-}
-
-.centra-bold {
-  font-family: 'Centra';
-  font-weight: 700;
+.open-sans-semibold {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
 }
 
 

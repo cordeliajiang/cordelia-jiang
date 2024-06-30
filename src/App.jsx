@@ -14,8 +14,14 @@ function App() {
     setScrollLocked(value);
   };
 
+  // useEffect(() => {
+  //   fetch("/api")
+  //     .then((res) => res.json())
+  //     .then((data) => { console.log(data) });
+  // }, []);
+  
   useEffect(() => {
-    fetch("/api")
+    fetch("/.netlify/functions/emailServer/api")
       .then((res) => res.json())
       .then((data) => { console.log(data) });
   }, []);

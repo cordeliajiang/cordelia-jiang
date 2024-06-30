@@ -26,6 +26,8 @@ nav.navbar {
 
 nav.navbar.scrolled {
     backdrop-filter: blur(5px);
+    backdrop-filter: blur(calc(0.135vw + 0.135vh + 0.135vmin));
+
     height: 13vh;
 }
 
