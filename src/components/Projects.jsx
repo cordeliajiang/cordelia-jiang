@@ -5,7 +5,6 @@ import 'animate.css';
 import './project.css';
 import ProjectCard from './ProjectCard';
 import useAutoHeight from './useAutoHeight';
-import projImg2 from "../assets/img/project-img2.png";
 import programmingImg1 from "../assets/img/programming-img1.png";
 import designImg1 from "../assets/img/design-img1.png";
 import designImg2 from "../assets/img/design-img2.png";
@@ -21,7 +20,7 @@ const projects = {
             title: "Personal Portfolio, 2023",
             description: "ReactJS, ThreeJS, JavaScript, Bootstrap, CSS, HTML, Nodemailer, Git",
             coverImg: programmingImg1,
-            website: "https://github.com/cordeliajiang/react-portfolio",
+            github: "https://github.com/cordeliajiang/react-portfolio",
         },
     ],
     Design: [

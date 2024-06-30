@@ -93,7 +93,7 @@ export const NavBar = ({ setScrollLocked }) => {
               </div>
               <div className="open-sans-regular nav-links">
                 {/* Render Nav.Links for each section */}
-                {['home', 'skills', 'projects', 'connect'].map((value) => (
+                {['home', 'skills', 'projects', 'contact'].map((value) => (
                   <Nav.Link
                     key={value}
                     href={`#${value}`}

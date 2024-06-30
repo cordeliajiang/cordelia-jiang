@@ -163,13 +163,13 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact" id="connect" style={{ height: heightState }}>
+    <section className="contact" id="contact" style={{ height: heightState }}>
       <div className="contact-container" ref={containerRef}>
         <Canvas className="contact-bg">
           <FadingImageDisplacement />
         </Canvas>
         <div className="contact-content" ref={contentRef}>
-          <h2 className="old-standard-tt-bold">Contact</h2>
+          <h2 className="old-standard-tt-bold">Get In Touch</h2>
           <form className="open-sans-regular" onSubmit={handleSubmit(onSubmit)}>
             {['fullName', 'email', 'message'].map((field, idx) => (
               <div key={idx}>
