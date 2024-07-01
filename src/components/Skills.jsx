@@ -4,7 +4,7 @@ import { IoLogoHtml5, IoLogoCss3 } from 'react-icons/io';
 import { DiJavascript } from 'react-icons/di';
 import { BsGit } from 'react-icons/bs';
 import { FaReact, FaNodeJs, FaPython, FaLaravel } from 'react-icons/fa';
-import { SiBootstrap, SiPhp, SiMysql, SiSqlite, SiPostman, SiAdobexd, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign, SiArchicad } from 'react-icons/si';
+import { SiBootstrap, SiPhp, SiMysql, SiSqlite, SiPostman, SiAdobexd, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign } from 'react-icons/si';
 import { TbBrandThreejs } from 'react-icons/tb';
 import SkillItem from './SkillItem';
 import useAutoHeight from './useAutoHeight';
