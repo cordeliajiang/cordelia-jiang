@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './app.css';
 import { NavBar } from './components/NavBar';
 import { Banner } from './components/Banner';
@@ -8,51 +8,43 @@ import Contact from './components/Contact';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const hasFetched = useRef(false);
+
+useEffect(() => {
+  const abortController = new AbortController();
+  const signal = abortController.signal;
+
+  if (hasFetched.current) return; // Prevent unnecessary fetches. If data has already been fetched, return early
+
+  const fetchApiData = async () => {
+    try {
+      const response = await fetch("/api", { signal });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      // Process response if fetch is successful
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      hasFetched.current = true;
+    }
+  };
+
+  fetchApiData();
+
+  return () => {
+    abortController.abort(); // Cleanup: Abort the fetch request on component unmount
+  };
+}, []);
+  
+
   const [scrollLocked, setScrollLocked] = useState(false);
 
   const handleScrollLock = (value) => {
     setScrollLocked(value);
   };
-
-  // useEffect(() => {
-  //   fetch("/api")
-  //     .then((res) => res.json())
-  //     .then((data) => { console.log(data) });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch("/.netlify/functions/server/api")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data))
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch("/.netlify/functions/server/api")
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => console.log(data))
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
-  
-
-  useEffect(() => {
-    fetch("http://localhost:9999/.netlify/functions/server/api")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return res.json();
-      })
-      .then((data) => console.log(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-  
-
 
   useEffect(() => {
     const pos = document.documentElement;
