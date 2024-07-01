@@ -142,23 +142,32 @@ const Contact = () => {
 
   const onSubmit = async () => {
     setButtonText('Sending...');
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json;charset=utf-8" },
-      body: JSON.stringify(formDetails)
-    });
-
-    setButtonText("Send");
-    const result = await response.json();
-
-    setStatus({
-      success: result.code === 200,
-      message: result.code === 200 ? "Message Sent Successfully." : "Something Went Wrong, Please Try Again Later."
-    });
-
-    if (result.code === 200) {
-      setFormDetails({ fullName: '', email: '', message: '' });
-      setInputErrors({ fullName: '', email: '', message: '' });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json;charset=utf-8" },
+        body: JSON.stringify(formDetails)
+      });
+  
+      setButtonText("Send");
+      const result = await response.json();
+  
+      setStatus({
+        success: response.ok && result.code === 200,
+        message: response.ok && result.code === 200 ? "Message Sent Successfully." : "Something Went Wrong, Please Try Again Later."
+      });
+  
+      if (result.code === 200) {
+        setFormDetails({ fullName: '', email: '', message: '' });
+        setInputErrors({ fullName: '', email: '', message: '' });
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setStatus({
+        success: false,
+        message: "Something Went Wrong, Please Try Again Later."
+      });
+      setButtonText("Send");
     }
   };
 

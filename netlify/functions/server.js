@@ -22,7 +22,7 @@ const contactEmail = nodemailer.createTransport({
 
 contactEmail.verify((error) => {
   if (error) {
-    console.error(error);
+    console.error('Error setting up email:', error);
   } else {
     console.log("Ready to send emails!");
   }
