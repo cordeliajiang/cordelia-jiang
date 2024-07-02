@@ -10,7 +10,7 @@ import SkillItem from './SkillItem';
 import useAutoHeight from './useAutoHeight';
 
 export const Skills = () => {
-    const { heightState, contentRef, containerRef } = useAutoHeight();
+    const { heightState, containerRef } = useAutoHeight();
 
     const skills = [
         { icon: <FaReact />, title: "ReactJS" },
@@ -37,7 +37,7 @@ export const Skills = () => {
         <section className="skills" id="skills" style={{ minHeight: heightState }}>
             <div className="skills-container" ref={containerRef}>
                 <h2 className="old-standard-tt-bold">Programming & Design Skills</h2>
-                <div className='skills-content' ref={contentRef}>
+                <div className='skills-content'>
                     {skills.map((skill, index) => (
                         <SkillItem key={index} icon={skill.icon} title={skill.title} />
                     ))}

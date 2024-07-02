@@ -1,22 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 
-// Custom hook to adjust the height of a container based on its content and margins.
+// Custom hook to adjust the total height of a section based on its container and margins.
 const useAutoHeight = () => {
     const [heightState, setHeightState] = useState('auto'); // Holds the calculated height
-    const contentRef = useRef(null); // Ref for the content element
     const containerRef = useRef(null); // Ref for the container element
 
-    // Updates the height based on content and container dimensions
+    // Updates the height based on container dimensions
     const updateHeights = () => {
-        // Ensure both refs are assigned to DOM elements before proceeding
-        if (contentRef.current && containerRef.current) {
-            const contentHeight = contentRef.current.clientHeight;
+        // Ensure ref is assigned to DOM elements before proceeding
+        if (containerRef.current) {
             const containerHeight = containerRef.current.clientHeight;
             const containerStyles = getComputedStyle(containerRef.current);
             const marginHeight = parseFloat(containerStyles.marginTop) + parseFloat(containerStyles.marginBottom);
 
-            // Calculate the total height considering content, container, and margins
-            const totalHeight = Math.max(contentHeight, containerHeight) + marginHeight;
+            // Calculate the total height considering container and margins
+            const totalHeight = containerHeight + marginHeight;
+
             setHeightState(totalHeight);
         }
     };
@@ -43,7 +42,8 @@ const useAutoHeight = () => {
         });
     }, [heightState]);
 
-    return { heightState, contentRef, containerRef, updateHeights };
+    return { heightState, containerRef, updateHeights };
+
 };
 
 export default useAutoHeight;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import './contact.css';
 import { useForm } from "react-hook-form";
 import { BiSolidErrorCircle } from 'react-icons/bi';
-import useAutoHeight from './useAutoHeight';
 import { Canvas } from "@react-three/fiber";
 import { FadingImageDisplacement } from './FadingImageDisplacement';
 
@@ -120,8 +119,6 @@ const validateInput = (value, type) => {
 };
 
 const Contact = () => {
-  const { heightState, contentRef, containerRef } = useAutoHeight();
-
   const [formDetails, setFormDetails] = useState({ fullName: '', email: '', message: '' });
   const [buttonText, setButtonText] = useState('Send');
   const [status, setStatus] = useState({});
@@ -172,12 +169,12 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact" id="contact" style={{ height: heightState }}>
-      <div className="contact-container" ref={containerRef}>
+    <section className="contact" id="contact">
+      <div className="contact-container">
         <Canvas className="contact-bg">
           <FadingImageDisplacement />
         </Canvas>
-        <div className="contact-content" ref={contentRef}>
+        <div className="contact-content">
           <h2 className="old-standard-tt-bold">Get In Touch</h2>
           <form className="open-sans-regular" onSubmit={handleSubmit(onSubmit)}>
             {['fullName', 'email', 'message'].map((field, idx) => (

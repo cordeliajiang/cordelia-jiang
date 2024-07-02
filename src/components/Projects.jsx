@@ -42,7 +42,7 @@ const projects = {
 };
 
 const Projects = () => {
-    const { heightState, contentRef, containerRef, updateHeights } = useAutoHeight();
+    const { updateHeights } = useAutoHeight();
     const [activeTab, setActiveTab] = useState('programming');
 
     // Update heights when the active tab changes
@@ -51,8 +51,8 @@ const Projects = () => {
     }, [activeTab, updateHeights]);
 
     return (
-        <section className="projects" id="projects" style={{ minHeight: heightState }}>
-            <div className="projects-container" ref={containerRef}>
+        <section className="projects" id="projects">
+            <div className="projects-container">
                 <TrackVisibility>
                     {({ isVisible }) =>
                         <div className={isVisible ? "animate__animated animate__slideInUp" : ""}>
@@ -74,7 +74,7 @@ const Projects = () => {
                     <Tab.Content>
                         {tabs.map((tab, index) => (
                             <Tab.Pane key={index} eventKey={tab.toLowerCase()}>
-                                <div className='projects-cards' ref={contentRef}>
+                                <div className='projects-cards'>
                                     {projects[tab].map((project, idx) => (
                                         <div key={idx}>
                                             <ProjectCard {...project} />

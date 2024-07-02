@@ -10,35 +10,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const hasFetched = useRef(false);
 
-useEffect(() => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
 
-  if (hasFetched.current) return; // Prevent unnecessary fetches. If data has already been fetched, return early
+    if (hasFetched.current) return; // Prevent unnecessary fetches. If data has already been fetched, return early
 
-  const fetchApiData = async () => {
-    try {
-      const response = await fetch("/api", { signal });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+    const fetchApiData = async () => {
+      try {
+        const response = await fetch("/api", { signal });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Process response if fetch is successful
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        hasFetched.current = true;
       }
-      // Process response if fetch is successful
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      hasFetched.current = true;
-    }
-  };
+    };
 
-  fetchApiData();
+    fetchApiData();
 
-  return () => {
-    abortController.abort(); // Cleanup: Abort the fetch request on component unmount
-  };
-}, []);
-  
+    return () => {
+      abortController.abort(); // Cleanup: Abort the fetch request on component unmount
+    };
+  }, []);
+
 
   const [scrollLocked, setScrollLocked] = useState(false);
 
