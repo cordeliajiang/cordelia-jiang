@@ -4,7 +4,6 @@
 }
 
 .projects-container {
-    position: absolute;
     display: flex;
     flex-direction: column;
     left: 0;
