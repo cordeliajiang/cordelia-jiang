@@ -1,7 +1,7 @@
 /* Great Vibes font */
 @font-face {
   font-family: 'Great Vibes';
-  src: url('./assets/font/GreatVibes-Regular.ttf') format('truetype');
+  src: url('./assets/font/GreatVibes-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 /* Old Standard TT font */
 @font-face {
   font-family: 'Old Standard TT';
-  src: url('./assets/font/OldStandardTT-Bold.ttf') format('truetype');
+  src: url('./assets/font/OldStandardTT-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
@@ -28,28 +28,28 @@
 /* Open Sans font */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./assets/font/OpenSans-Regular.ttf') format('truetype');
+  src: url('./assets/font/OpenSans-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url('./assets/font/OpenSans-Italic.ttf') format('truetype');
+  src: url('./assets/font/OpenSans-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url('./assets/font/OpenSans-Bold.ttf') format('truetype');
+  src: url('./assets/font/OpenSans-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url('./assets/font/OpenSans-SemiBold.ttf') format('truetype');
+  src: url('./assets/font/OpenSans-SemiBold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
