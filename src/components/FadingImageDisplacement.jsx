@@ -45,9 +45,9 @@ extend({ ImageFadeMaterial, RoundedPlaneGeometry: geometry.RoundedPlaneGeometry 
 export const FadingImageDisplacement = () => {
   const ref = useRef();
   const [texture1, texture2, dispTexture] = useTexture([
-    "/img/contact-img.png", 
-    "/img/contact-img.png", 
-    "/img/overlay.png",
+    "/img/contact-img.webp", 
+    "/img/contact-img.webp", 
+    "/img/overlay.webp",
   ]);
 
   const [hovered, setHover] = useState(false);

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import './navbar.css';
-import logo from '../assets/img/logo.png';
+import logo from '../assets/img/logo.webp';
 import navLinkedinIcon from '../assets/img/nav-linkedin-icon.svg';
 import navGithubIcon from '../assets/img/nav-github-icon.svg';
 import navEmailIcon from '../assets/img/nav-email-icon.svg';
 
 // NavBar component to handle navbar functionalities
 // Takes setScrollLocked as a prop to control scroll locking
-export const NavBar = ({ setScrollLocked }) => {
+const NavBar = ({ setScrollLocked }) => {
   const [activeLink, setActiveLink] = useState('home'); // Currently active link
   const [scrolled, setScrolled] = useState(false); // Whether the user has scrolled
   const [navbarToggled, setNavbarToggled] = useState(false); // Whether the navbar is toggled
@@ -124,3 +124,5 @@ export const NavBar = ({ setScrollLocked }) => {
     </Navbar>
   );
 };
+
+export default NavBar;

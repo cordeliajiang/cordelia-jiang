@@ -1,11 +1,11 @@
 import { React } from "react";
 import { ArrowRightCircle } from "react-bootstrap-icons";
-import headerImg from '../assets/img/header-img.png';
+import headerImg from '../assets/img/header-img.webp'; 
 import 'animate.css';
 import './banner.css';
 import TrackVisibility from "react-on-screen";
 
-export const Banner = () => {
+const Banner = () => {
     return (
         <section className="banner" id="home">
             <div className="banner-container">
@@ -26,3 +26,5 @@ export const Banner = () => {
         </section>
     )
 }
+
+export default Banner;

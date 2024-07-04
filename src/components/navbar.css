@@ -143,7 +143,7 @@ nav.navbar .navbar-toggler-icon::after {
 .navbar-collapse {    
     position: fixed;
     text-align: center;
-    background-image: url('../assets/img/banner-bg.png');
+    background-image: url('../assets/img/banner-bg.webp');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;

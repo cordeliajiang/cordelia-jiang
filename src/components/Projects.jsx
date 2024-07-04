@@ -5,9 +5,9 @@ import 'animate.css';
 import './project.css';
 import ProjectCard from './ProjectCard';
 import useAutoHeight from './useAutoHeight';
-import programmingImg1 from "../assets/img/programming-img1.png";
-import designImg1 from "../assets/img/design-img1.png";
-import designImg2 from "../assets/img/design-img2.png";
+import programmingImg1 from "../assets/img/programming-img1.webp";
+import designImg1 from "../assets/img/design-img1.webp";
+import designImg2 from "../assets/img/design-img2.webp";
 import designBrochure1 from '../assets/pdf/design-brochure1.pdf';
 import designBrochure2 from '../assets/pdf/design-brochure2.pdf';
 

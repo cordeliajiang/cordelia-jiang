@@ -6,10 +6,11 @@ import { BsGit } from 'react-icons/bs';
 import { FaReact, FaNodeJs, FaPython, FaLaravel } from 'react-icons/fa';
 import { SiBootstrap, SiPhp, SiMysql, SiSqlite, SiPostman, SiAdobexd, SiAdobephotoshop, SiAdobeillustrator, SiAdobeindesign } from 'react-icons/si';
 import { TbBrandThreejs } from 'react-icons/tb';
+import { GiMagickTrick } from "react-icons/gi";
 import SkillItem from './SkillItem';
 import useAutoHeight from './useAutoHeight';
 
-export const Skills = () => {
+const Skills = () => {
     const { heightState, containerRef } = useAutoHeight();
 
     const skills = [
@@ -27,6 +28,7 @@ export const Skills = () => {
         { icon: <SiSqlite />, title: "SQLite" },
         { icon: <BsGit />, title: "Git" },
         { icon: <SiPostman />, title: "Postman" },
+        { icon: <GiMagickTrick />, title: "ImageMagick" },
         { icon: <SiAdobexd />, title: "Adobe XD" },
         { icon: <SiAdobephotoshop />, title: "Photoshop" },
         { icon: <SiAdobeillustrator />, title: "Illustrator" },
@@ -46,3 +48,5 @@ export const Skills = () => {
         </section>
     );
 };
+
+export default Skills;
