@@ -1,19 +1,21 @@
 [build]
-  publish = "build"
-  functions = "netlify/functions"
+  publish = "build"                # Directory to publish for deployment
+  functions = "netlify/functions"  # Directory for serverless functions
 
 [dev]
-  framework = "create-react-app"
-  targetPort = 3000  # Assuming your React app runs on port 3000
-  port = 8888  # Port used by Netlify Dev
+  framework = "create-react-app"   # Framework being used for development
+  targetPort = 3000                # Port where the React app runs
+  port = 8888                      # Port used by Netlify Dev
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/server/:splat"
+  from = "/api/*"                  # Redirect all API requests
+  to = "/.netlify/functions/server/:splat"  # to the serverless function handler
   status = 200
-  
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  from = "/*"                      # Redirect all other requests
+  to = "/index.html"               # to the React app entry point (single-page app)
+  status = 200
+
+[context.production.environment]
+  NODE_ENV = "production"          # Set NODE_ENV to 'production' for optimized builds
