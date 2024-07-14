@@ -14,7 +14,7 @@ const Banner = () => {
                         {({ isVisible }) =>
                             <div className={isVisible ? "animate__animated animate__fadeIn custom-fade-in" : "" }>
                                 <h1 className="old-standard-tt-bold">{"Cordelia Jiang "}</h1>
-                                <h3 className="great-vibes-regular">Front-end Developer</h3>
+                                <h3 className="great-vibes-regular">Full Stack Developer</h3>
                                 <a href="mailto:jiangcordelia@gmail.com"><button className="open-sans-semibold">Let's Connect<ArrowRightCircle size={25} /></button></a>
                             </div>}
                     </TrackVisibility>
