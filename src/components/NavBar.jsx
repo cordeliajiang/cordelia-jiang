@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import './navbar.css';
 import logo from '../assets/img/logo.webp';
-import navLinkedinIcon from '../assets/img/nav-linkedin-icon.svg';
-import navGithubIcon from '../assets/img/nav-github-icon.svg';
-import navEmailIcon from '../assets/img/nav-email-icon.svg';
 
 // NavBar component to handle navbar functionalities
 // Takes setScrollLocked as a prop to control scroll locking
@@ -104,18 +101,6 @@ const NavBar = ({ setScrollLocked }) => {
                     {value.charAt(0).toUpperCase() + value.slice(1)}
                   </Nav.Link>
                 ))}
-              </div>
-              <div className="social-icons">
-                {/* Render social icons */}
-                <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer">
-                  <img src={navLinkedinIcon} alt="LinkedIn" className="social-icon" />
-                </a>
-                <a href="https://github.com/cordeliajiang" target="_blank" rel="noopener noreferrer">
-                  <img src={navGithubIcon} alt="GitHub" className="social-icon" />
-                </a>
-                <a href="mailto:jiangcordelia@gmail.com">
-                  <img src={navEmailIcon} alt="Email" className="social-icon" />
-                </a>
               </div>
             </Nav>
           </div>
