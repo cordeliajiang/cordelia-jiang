@@ -71,14 +71,15 @@ h2 {
 
 h3 {
   font-size: 2rem !important;
-  font-size: calc(1.3vw + 1.3vh + 1.3vmin) !important;
+  font-size: calc(1vw + 1vh + 1vmin) !important;
   letter-spacing: 0.28rem;
   letter-spacing: calc(0.15vw + 0.15vh + 0.15vmin);
+  text-wrap: nowrap;
 }
 
 h4 {
   font-size: 1.875rem !important;
-  font-size: calc(1.07vw + 1.07vh + 1.07vmin) !important;
+  font-size: calc(1.05vw + 1.05vh + 1.05vmin) !important;
   letter-spacing: 0.0625rem;
   letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
 }
@@ -88,6 +89,15 @@ h5, form, input, textarea {
   font-size: calc(0.6vw + 0.6vh + 0.6vmin) !important;
   letter-spacing: 0.0625rem;
   letter-spacing: calc(0.03vw + 0.03vh + 0.03vmin);
+}
+
+h6 {
+  font-size: 1rem !important;
+  font-size: calc(0.51vw + 0.51vh + 0.51vmin) !important;
+  letter-spacing: 0.0625rem;
+  letter-spacing: calc(0.035vw + 0.035vh + 0.035vmin);
+  line-height: 2rem !important;
+  line-height: calc(0.9vw + 0.9vh + 0.9vmin) !important;
 }
 
 p {

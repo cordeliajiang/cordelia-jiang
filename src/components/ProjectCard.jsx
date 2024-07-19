@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import './projectcard.css';
 
 // Component to display individual project details
-const ProjectCard = ({ title, description, coverImg, website, github, brochure }) => {
+const ProjectCard = ({ title, description, coverImg, website, github, brochure, plan, execution, practice }) => {
     const links = [
         { href: website, text: 'Visit Website' },
         { href: brochure, text: 'View Brochure' },
         { href: github, text: 'View Github' },
+        { href: plan, text: 'View Plan' },
+        { href: execution, text: 'View Execution' },
+        { href: practice, text: 'View Practice' },
     ];
 
     return (
@@ -14,7 +17,7 @@ const ProjectCard = ({ title, description, coverImg, website, github, brochure }
             <img src={coverImg} alt="coverImg" />
             <div className="projects-info">
                 <h4 className="old-standard-tt-bold">{title}</h4>
-                <h5 className="open-sans-italic">{description}</h5>
+                <h6 className="open-sans-regular">{description}</h6>
                 <div className="projects-btn">
                     {links.map(
                         link =>
@@ -39,6 +42,9 @@ ProjectCard.propTypes = {
     website: PropTypes.string,
     github: PropTypes.string,
     brochure: PropTypes.string,
+    plan: PropTypes.string,
+    execution: PropTypes.string,
+    practice: PropTypes.string,
 };
 
 export default ProjectCard;
