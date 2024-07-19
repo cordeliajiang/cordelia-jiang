@@ -1,6 +1,6 @@
 .projects-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(17vw + 17vh + 17vmin), 0fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(20vw + 20vh + 20vmin), 0fr));
     justify-content: center;
     align-content: center;
 
@@ -27,7 +27,7 @@
 .projects-card-container::before {
     content: "";
     background: linear-gradient(90.21deg, #6c9dbd -5.91%, #151c27 111.58%);
-    opacity: 0.85;
+    opacity: 0.9;
     position: absolute;
     width: 100%;
     height: 0;
@@ -103,9 +103,4 @@
 
     line-height: 2.25rem;
     line-height: calc(1.3vw + 1.3vh + 1.3vmin);
-}
-
-.projects-info h5 {
-    line-height: 2rem;
-    line-height: calc(1vw + 1vh + 1vmin);
 }

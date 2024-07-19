@@ -27,7 +27,7 @@
 /* Project Tabs */
 .projects .nav.nav-pills {
     width: 82%;
-    max-width: calc(35vw + 35vh + 35vmin);
+    max-width: calc(40vw + 40vh + 40vmin);
     margin: 0 auto;
     overflow: hidden;
 

@@ -5,11 +5,22 @@ import 'animate.css';
 import './project.css';
 import ProjectCard from './ProjectCard';
 import useAutoHeight from './useAutoHeight';
-import programmingImg1 from "../assets/img/programming-img1.webp";
+import reactPortfolioCover from "../assets/img/reactPortfolioCover.webp";
+import SQLDatabaseInjectionPreventionCover from "../assets/img/SQLDatabaseInjectionPreventionCover.webp";
+import computerNetworkingCover from "../assets/img/computerNetworkingCover.webp";
+import pythonAlgorithmPracticeCover from "../assets/img/pythonAlgorithmPracticeCover.webp";
+import laravelAlcoholReviewWebsiteCover from "../assets/img/laravelAlcoholReviewWebsiteCover.webp";
+
+
 import designImg1 from "../assets/img/design-img1.webp";
 import designImg2 from "../assets/img/design-img2.webp";
+
 import designBrochure1 from '../assets/pdf/design-brochure1.pdf';
 import designBrochure2 from '../assets/pdf/design-brochure2.pdf';
+import plan1 from '../assets/pdf/ITSecurityPlanRiskAssessment.pdf';
+import execution1 from '../assets/pdf/SQLDatabaseInjectionPrevention.pdf';
+import practice1 from '../assets/pdf/computerNetworkingPrac.pdf';
+
 
 // Define project categories and respective projects outside the component
 const tabs = ['Programming', 'Design'];
@@ -17,10 +28,35 @@ const tabs = ['Programming', 'Design'];
 const projects = {
     Programming: [
         {
-            title: "Personal Portfolio, 2023",
-            description: "ReactJS, ThreeJS, JavaScript, Bootstrap, CSS, HTML, Nodemailer, Git",
-            coverImg: programmingImg1,
+            title: "React Portfolio, 2023",
+            description: "Front-end built with JavaScript, React.js, ThreeJS, React Hook Form. Back-end built with NodeJS, ExpressJS, and Nodemailer. API testing using cURL and Postman. Deployed to Netlify. Optimized performance using Webpack and ImageMagick. Version control using Git.",
+            coverImg: reactPortfolioCover,
             github: "https://github.com/cordeliajiang/react-portfolio",
+        },
+        {
+            title: "SQL Database Injection & Prevention, 2020",
+            description: "Implement, manage, backup, and recover databases; create views, assign user privileges using MySQL. Setup a SQL Injection environment, configure Apache server in VM, perform SQL injections and preventions using UNIX prompt. Review security policies and procedures, identify key assets and set boundaries, conduct risk assessments to prioritize risks, manage access control and implement risk prevention measures.",
+            coverImg: SQLDatabaseInjectionPreventionCover,
+            plan: plan1,
+            execution: execution1,
+        },
+        {
+            title: "Computer Networking, 2021",
+            description: "Calculate IPv4/IPv6 subnets and IP addresses for network topologies. Configure, troubleshoot, and fix network devices using Cisco Packet Tracer.",
+            coverImg: computerNetworkingCover,
+            practice: practice1,
+        },
+        {
+            title: "Python Algorithm, 2021",
+            description: "Explore programming algorithms, and perform data analytics and visualization using Python.",
+            coverImg: pythonAlgorithmPracticeCover,
+            github: "https://github.com/cordeliajiang/python-sqlite-algorithm-prac",
+        },
+        {
+            title: "Laravel Review Website, 2021",
+            description: "Build a database-connected website with Laravel, Blade, PHP, NodeJS, SQLite.",
+            coverImg: laravelAlcoholReviewWebsiteCover,
+            github: "https://github.com/cordeliajiang/alcohol-review-web",
         },
     ],
     Design: [
