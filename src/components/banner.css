@@ -57,7 +57,7 @@
 
 .banner h3 {
   margin-left: 0.5%;
-  margin-left: calc(0.07vw + 0.07vh + 0.07vmin);
+  margin-left: calc(0.15vw + 0.15vh + 0.15vmin);
   
   margin-bottom: auto;
   margin-bottom: 12%;

@@ -17,7 +17,7 @@ const Banner = () => {
                         {({ isVisible }) =>
                             <div className={isVisible ? "animate__animated animate__fadeIn custom-fade-in" : ""}>
                                 <h1 className="old-standard-tt-bold">{"Cordelia Jiang "}</h1>
-                                <h3 className="great-vibes-regular">Graduate Sec DevOps Engineer</h3>
+                                <h3 className="cormorant-garamond-light">Fullstack / DevSecOps Engineer</h3>
                                 <div className="social-icons">
                                     {/* Render social icons */}
                                     <a href="https://www.linkedin.com/in/cordeliajiang/" target="_blank" rel="noopener noreferrer">

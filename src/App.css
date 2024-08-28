@@ -73,8 +73,8 @@ h3 {
   font-size: 2rem !important;
   font-size: calc(1vw + 1vh + 1vmin) !important;
   letter-spacing: 0.28rem;
-  letter-spacing: calc(0.15vw + 0.15vh + 0.15vmin);
-  text-wrap: nowrap;
+  letter-spacing: calc(0.13vw + 0.13vh + 0.13vmin);
+  line-height: calc(1.5vw + 1.5vh + 1.5vmin) !important;
 }
 
 h4 {

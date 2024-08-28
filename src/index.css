@@ -1,14 +1,15 @@
 /* Great Vibes font */
 @font-face {
-  font-family: 'Great Vibes';
-  src: url('./assets/font/GreatVibes-Regular.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'Cormorant Garamond';
+  src: url('./assets/font/CormorantGaramond-Light.woff2') format('woff2');
+}
+
+.cormorant-garamond-light {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
   font-style: normal;
 }
 
-.great-vibes-regular {
-  font-family: 'Great Vibes', cursive;
-}
 
 
 /* Old Standard TT font */
